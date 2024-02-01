@@ -42,13 +42,28 @@ public class PlayerController : MonoBehaviour
             {
                 _heldObj = value;
 
+                Collider collider = _heldObj.GetComponent<Collider>();
+
+                // set the model as the parent of the object so it moves with it
                 _heldObj.transform.parent = model.transform;
-                _heldObj.transform.position = heldItemPos.position;
+
+                // set the rotation back to 0
+                _heldObj.transform.rotation = Quaternion.Euler(Vector3.zero);
+
+                // move the object into position
+                _heldObj.transform.position = heldItemPos.position + heldItemPos.transform.TransformDirection(new Vector3(collider.bounds.size.x/2, 0, 0));
+
+                // set to kinematic so it wont be moved by the physics system
                 _heldObj.GetComponent<Rigidbody>().isKinematic = true;
+
+                // disable the collider so there aren't any weird physics interactions
+                //collider.enabled = false;
             }
             else
             {
+                // set the object back to normal values (inverse of set functions)
                 _heldObj.GetComponent<Rigidbody>().isKinematic = false;
+                //_heldObj.GetComponent<Collider>().enabled = true;
                 _heldObj.transform.parent = null;
                 _heldObj = null;
 
