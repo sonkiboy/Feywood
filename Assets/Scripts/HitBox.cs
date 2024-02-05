@@ -25,7 +25,7 @@ public class Hitbox : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
         //Debug.Log($"{this.name} collided with {collision.gameObject.name}");
-        if(collision.gameObject.tag == "Pickup" || collision.gameObject.tag == "Moveable")
+        if(collision.gameObject.tag == "Pickup" || collision.gameObject.tag == "PushPull")
         TargetObjects.Add(collision.gameObject);
 
 
