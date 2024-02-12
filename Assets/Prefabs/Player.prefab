@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 7959933238773328255}
   - component: {fileID: 2683738000646112046}
   - component: {fileID: 4823807546525184279}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -27,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 1885432276433108442}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.518, y: 0.36, z: 0}
+  m_LocalPosition: {x: 0, y: 0.402, z: 0.493}
   m_LocalScale: {x: 0.23, y: 0.23, z: 0.23}
   m_ConstrainProportionsScale: 1
   m_Children: []
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 6513165966864670803}
   - component: {fileID: 780371197136336398}
   - component: {fileID: 6857910067355344913}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -178,7 +178,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8696086073702501499}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 1510864663754906427}
   - component: {fileID: 4928623129864677648}
   - component: {fileID: 8459022282917449246}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -227,7 +227,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4845297462593337844}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -235,7 +235,7 @@ Transform:
   - {fileID: 6513165966864670803}
   - {fileID: 8696086073702501499}
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1510864663754906427
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -252,6 +252,10 @@ MonoBehaviour:
   Speed: 3
   JumpForce: 3
   isGrounded: 0
+  climbingMask:
+    serializedVersion: 2
+    m_Bits: 0
+  climbingAngleThreshold: 40
 --- !u!54 &4928623129864677648
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -311,7 +315,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3662054888250896226}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: HeldItemPos
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -327,7 +331,7 @@ Transform:
   m_GameObject: {fileID: 5034820904619006688}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.715, y: -0.125, z: 0}
+  m_LocalPosition: {x: 0, y: -0.125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -344,7 +348,7 @@ GameObject:
   - component: {fileID: 1511968020270692913}
   - component: {fileID: 7042910220443924420}
   - component: {fileID: 5801442569107408145}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: ItemHitBox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -360,7 +364,7 @@ Transform:
   m_GameObject: {fileID: 5817135093603195030}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.97, y: -0.37, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -401,3 +405,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TargetObject: {fileID: 0}
   TargetObjects: []
+  CollisionTags: []

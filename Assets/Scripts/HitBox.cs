@@ -10,6 +10,8 @@ public class Hitbox : MonoBehaviour
     
     public List<GameObject> TargetObjects = new List<GameObject>();
 
+    [SerializeField] List<string> CollisionTags;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,8 +27,11 @@ public class Hitbox : MonoBehaviour
     private void OnTriggerEnter(Collider collision)
     {
         //Debug.Log($"{this.name} collided with {collision.gameObject.name}");
-        if(collision.gameObject.tag == "Pickup" || collision.gameObject.tag == "PushPull")
-        TargetObjects.Add(collision.gameObject);
+        if (CollisionTags.Contains(collision.gameObject.tag))
+        {
+            TargetObjects.Add(collision.gameObject);
+        }
+        
 
 
         OnTargetUpdate();

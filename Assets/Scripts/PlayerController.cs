@@ -1,7 +1,9 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
@@ -32,12 +34,13 @@ public class PlayerController : MonoBehaviour
         xOnly,
         zOnly,
         RestrictedDirection,
+        Climbing,
         noMovement
     }
 
     [SerializeField] MovementRestrictions currentRestriction = MovementRestrictions.None;
 
-    [SerializeField] Vector2 restrictedDirection;
+    Vector2 restrictedDirection;
 
     // movement speed
     [SerializeField] float Speed = 3;
@@ -88,6 +91,12 @@ public class PlayerController : MonoBehaviour
 
     GameObject pushingObj;
 
+    GameObject climbingObj;
+
+    [SerializeField] LayerMask climbingMask;
+
+    [SerializeField] float climbingAngleThreshold = 40;
+
     private void Awake()
     {
         // initialize the player actions by creating a new instance
@@ -135,10 +144,13 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.DrawRay(this.transform.position, model.transform.TransformDirection(Vector3.forward),Color.blue);
+
 
         switch (currentRestriction)
         {
-            case MovementRestrictions.None:
+            // default is used in the case of both no restriction and climbing (climbing is checked later on)
+            default:
                 moveDirection = move.ReadValue<Vector2>();
                 break;
 
@@ -163,8 +175,19 @@ public class PlayerController : MonoBehaviour
 
         }
         
-        
+        if(currentRestriction == MovementRestrictions.Climbing)
+        {
+            //Debug.Log($"Current z rotation {model.transform.rotation.eulerAngles.z} vs threshold {climbingAngleThreshold}");
+            // if the player is climbing and they are climbing too low of an angle, then get them out of climbing mode
+            if (model.transform.rotation.eulerAngles.z >= 180 && model.transform.rotation.eulerAngles.z <= 360-climbingAngleThreshold)
+            {
+                Debug.Log("Angle too low, exiting climb mode");
+                //currentRestriction = MovementRestrictions.None;
 
+            }
+            
+        }
+        
         
         
         
@@ -172,7 +195,7 @@ public class PlayerController : MonoBehaviour
         // if the move direction isn't 0,0 (meaning there is input) then update the direction of the model
         if(moveDirection != Vector2.zero && currentRestriction == MovementRestrictions.None)
         {
-            model.transform.rotation = Quaternion.LookRotation(new Vector3(-moveDirection.x, 0, -moveDirection.y));
+            model.transform.rotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0, moveDirection.y));
         }
         
 
@@ -181,9 +204,23 @@ public class PlayerController : MonoBehaviour
 
     private void FixedUpdate()
     {
+        Vector3 newPos = Vector3.zero;
+
+        if (currentRestriction == MovementRestrictions.Climbing)
+        {
+            // calculate the new position based on the direction, speed, and deltatime
+            newPos = new Vector3(moveDirection.x * Speed * Time.deltaTime, moveDirection.y * Speed * Time.deltaTime, 0f);
+            newPos = model.transform.TransformDirection(newPos);
+
+
+        }
+
+        else
+        {
+            // calculate the new position based on the move direction, speed, and delta time
+            newPos = new Vector3(moveDirection.x * Speed * Time.deltaTime, 0f, moveDirection.y * Speed * Time.deltaTime);
+        }
         
-        // calculate the new position based on the move direction, speed, and delta time
-        Vector3 newPos = new Vector3(moveDirection.y * -Speed * Time.deltaTime, 0f, moveDirection.x * Speed * Time.deltaTime);
 
         //Debug.Log(newPos);
 
@@ -194,12 +231,18 @@ public class PlayerController : MonoBehaviour
     void Jump(InputAction.CallbackContext context)
     {
         //Debug.Log("Jump hit");
-        if (isGrounded)
+        if(currentRestriction == MovementRestrictions.Climbing)
+        {
+            currentRestriction = MovementRestrictions.None;
+            isGrounded = false;
+            rb.AddForce(Vector3.up * JumpForce);
+        }
+        else if (isGrounded)
         {
             isGrounded = false;
             rb.AddForce(Vector3.up * JumpForce);
         }
-        
+
     }
 
     void Interact(InputAction.CallbackContext context)
@@ -224,6 +267,11 @@ public class PlayerController : MonoBehaviour
             currentRestriction = MovementRestrictions.None;
 
         }
+        
+        else if(currentRestriction == MovementRestrictions.Climbing)
+        {
+            currentRestriction = MovementRestrictions.None;
+        }
 
 
         // if there is no current object being held and no object being pushed, check if there is an object in the item hitbox
@@ -235,14 +283,20 @@ public class PlayerController : MonoBehaviour
                 GameObject targetObj = itemHitbox.TargetObjects[0];
 
                 // if the target object is a Pickup, then set that to the heldObject
-                if(targetObj.tag == "Pickup")
+                if (targetObj.tag == "Pickup")
                 {
                     heldObject = itemHitbox.TargetObjects[0];
                 }
 
-                else if(targetObj.tag == "PushPull")
+                else if (targetObj.tag == "PushPull")
                 {
                     StartCoroutine(PushPull(targetObj));
+                }
+
+                else if(targetObj.tag == "Climbable")
+                {
+                    currentRestriction = MovementRestrictions.Climbing;
+                    StartCoroutine(Climbing(targetObj));
                 }
             }
         }
@@ -251,7 +305,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator PushPull(GameObject obj)
     {
-        
+        Debug.Log("Hit");
         // save an instance of the pushableObject component
         PushableObject poBehavior = obj.GetComponent<PushableObject>();
 
@@ -302,6 +356,49 @@ public class PlayerController : MonoBehaviour
         currentRestriction = MovementRestrictions.RestrictedDirection;
 
         
+    }
+
+    IEnumerator Climbing(GameObject surface)
+    {
+        climbingObj = surface;
+        RaycastHit hit;
+
+        rb.useGravity = false;
+
+        //Vector3 lookDir = new Vector3();
+
+        while (currentRestriction == MovementRestrictions.Climbing)
+        {
+            //Vector3 dir = climbingObj.transform.position - transform.position;
+            //dir = dir.normalized;
+
+            Vector3 dir = model.transform.TransformDirection(Vector3.forward);
+
+            Debug.DrawRay(model.transform.position, dir, Color.red, 4);
+
+            if (Physics.Raycast(model.transform.position,dir,out hit,1f,climbingMask))
+            {
+                //Debug.Log($"Hit: {hit.collider.gameObject} Normal: {hit.normal}");
+
+                Vector3 lookDir = (this.transform.position - hit.point).normalized;
+
+                
+                model.transform.rotation = Quaternion.LookRotation(-hit.normal);
+
+                
+
+                
+            }
+            else
+            {
+                currentRestriction = MovementRestrictions.None;
+                break;
+            }
+
+            yield return null;
+        }
+
+        rb.useGravity = true;
     }
 
     private void OnCollisionEnter(Collision collision)
