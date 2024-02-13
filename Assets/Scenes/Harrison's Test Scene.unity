@@ -1784,16 +1784,8 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4928623129864677648, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
-      propertyPath: m_Drag
-      value: 1.1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4928623129864677648, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
       propertyPath: m_Constraints
       value: 112
-      objectReference: {fileID: 0}
-    - target: {fileID: 4928623129864677648, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
-      propertyPath: m_IsKinematic
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5801442569107408145, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
       propertyPath: CollisionTags.Array.size

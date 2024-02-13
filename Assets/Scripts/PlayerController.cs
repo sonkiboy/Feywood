@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     GameObject model;
     Rigidbody rb;
     Transform groundCheck;
-    Vector3 groundCheckDimentions = new Vector3(.2f, .2f, .2f);
+    Vector3 groundCheckDimentions = new Vector3(.2f, .5f, .2f);
 
     Transform heldItemPos;
     Hitbox itemHitbox;
@@ -403,6 +403,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
+        Debug.Log("Player collision detected");
         // check if to see if the collision is with ground underneath it
         Collider[] checkCollisions = Physics.OverlapBox(groundCheck.position, groundCheckDimentions);
         if(checkCollisions == null)
