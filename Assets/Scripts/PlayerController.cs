@@ -28,6 +28,18 @@ public class PlayerController : MonoBehaviour
 
     Vector2 moveDirection;
 
+    public enum PlayerStates
+    {
+        Idle,
+        Walking,
+        Running,
+        Climbing,
+        Jumping,
+        Holding,
+        Pushing
+    }
+
+
     public enum MovementRestrictions
     {
         None,
@@ -67,7 +79,7 @@ public class PlayerController : MonoBehaviour
                 _heldObj.transform.rotation = Quaternion.Euler(Vector3.zero);
 
                 // move the object into position
-                _heldObj.transform.position = heldItemPos.position + heldItemPos.transform.TransformDirection(new Vector3(collider.bounds.size.x/2, 0, 0));
+                _heldObj.transform.position = heldItemPos.position + heldItemPos.transform.TransformDirection(new Vector3(0, 0, collider.bounds.size.z / 2));
 
                 // set to kinematic so it wont be moved by the physics system
                 _heldObj.GetComponent<Rigidbody>().isKinematic = true;
@@ -416,7 +428,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("Player collision detected");
+        Debug.Log($"Player collision detected: {collision.gameObject.name}");
         // check if to see if the collision is with ground underneath it
         Collider[] checkCollisions = Physics.OverlapBox(groundCheck.position, groundCheckDimentions);
         if(checkCollisions == null)
