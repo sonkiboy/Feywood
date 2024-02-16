@@ -28,7 +28,7 @@ public class PlayerController : MonoBehaviour
 
     Vector2 moveDirection;
 
-    enum MovementRestrictions
+    public enum MovementRestrictions
     {
         None,
         xOnly,
@@ -38,7 +38,7 @@ public class PlayerController : MonoBehaviour
         noMovement
     }
 
-    [SerializeField] MovementRestrictions currentRestriction = MovementRestrictions.None;
+    [SerializeField] public MovementRestrictions currentRestriction = MovementRestrictions.None;
 
     Vector2 restrictedDirection;
 
@@ -101,6 +101,9 @@ public class PlayerController : MonoBehaviour
     {
         // initialize the player actions by creating a new instance
         playerControls = new FeywoodPlayerActions();
+
+        //Disable UI
+        GetComponentInChildren<CanvasGroup>().alpha = 0;
     }
     private void OnEnable()
     {
@@ -197,9 +200,19 @@ public class PlayerController : MonoBehaviour
         {
             model.transform.rotation = Quaternion.LookRotation(new Vector3(moveDirection.x, 0, moveDirection.y));
         }
-        
+
 
         //Debug.Log($"Move direction = {moveDirection}");
+
+        //If Interactble is in array display UI as well as turning off if currently interacting
+        if(itemHitbox.TargetObjects.Count != 0)
+        {
+            GetComponentInChildren<CanvasGroup>().alpha = 1;
+        }
+        else
+        {
+            GetComponentInChildren<CanvasGroup>().alpha = 0;
+        }
     }
 
     private void FixedUpdate()
