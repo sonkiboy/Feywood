@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Layouts;
 
 public class PlayerController : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class PlayerController : MonoBehaviour
 
     Transform heldItemPos;
     Hitbox itemHitbox;
+
+    SneakUI sneakIcon;
 
     #endregion
 
@@ -58,7 +61,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float Speed = 3;
 
     [SerializeField] float JumpForce = 3;
-    [SerializeField] bool isGrounded = false;
+    bool isGrounded = false;
 
     GameObject _heldObj;
     GameObject heldObject
@@ -109,6 +112,31 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] float climbingAngleThreshold = 40;
 
+    [SerializeField] bool isHidden = false;
+
+    bool IsHidden
+    {
+        get { return isHidden; }
+
+        set
+        {
+            isHidden = value;
+
+            if (sneakIcon != null)
+            {
+                if (isHidden)
+                {
+                    sneakIcon.CurrentState = SneakUI.SneakStates.Hidden;
+                }
+                else
+                {
+                    sneakIcon.CurrentState = SneakUI.SneakStates.Exposed;
+                }
+            }
+
+        }
+    }
+
     private void Awake()
     {
         // initialize the player actions by creating a new instance
@@ -151,6 +179,13 @@ public class PlayerController : MonoBehaviour
         itemHitbox = model.transform.Find("ItemHitBox").GetComponent<Hitbox>();
 
         heldItemPos = model.transform.Find("HeldItemPos");
+
+        if(GameObject.Find("SneakIcon") != null)
+        {
+            Debug.Log("Sneak icon found");
+            sneakIcon = GameObject.Find("SneakIcon").GetComponent<SneakUI>();
+        }
+
         #endregion
 
 
@@ -428,7 +463,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log($"Player collision detected: {collision.gameObject.name}");
+        //Debug.Log($"Player collision detected: {collision.gameObject.name}");
         // check if to see if the collision is with ground underneath it
         Collider[] checkCollisions = Physics.OverlapBox(groundCheck.position, groundCheckDimentions);
         if(checkCollisions == null)
@@ -439,7 +474,33 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = true;
         }
+
+        
     }
 
+    private void OnCollisionExit(Collision collision)
+    {
+        
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        // if the collision is a hidden zone, then the player is hidden
+        if (other.gameObject.tag == "Hidden")
+        {
+            Debug.Log("Hidden");
+
+            IsHidden = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        // if the player is leaving a hidden collision, then they are no longer hidden
+        if (other.gameObject.tag == "Hidden")
+        {
+            Debug.Log("Not hidden");
+            IsHidden = false;
+        }
+    }
 }
