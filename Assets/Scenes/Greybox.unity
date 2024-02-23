@@ -30516,6 +30516,10 @@ PrefabInstance:
       propertyPath: Speed
       value: 4
       objectReference: {fileID: 0}
+    - target: {fileID: 4651039301215687085, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+      propertyPath: message
+      value: BUTTONPROMPT
+      objectReference: {fileID: 0}
     - target: {fileID: 4845297462593337844, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
       propertyPath: m_Name
       value: Player
@@ -30542,12 +30546,28 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5817135093603195030, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
       propertyPath: m_TagString
-      value: PushPull
+      value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 6857910067355344913, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 2ab8149ec4775284bada96c1b85b4a09, type: 2}
+    - target: {fileID: 7346380394993358571, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7346380394993358571, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7346380394993358571, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7346380394993358571, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8459022282917449246, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
       propertyPath: m_Height
       value: 2.0246315
