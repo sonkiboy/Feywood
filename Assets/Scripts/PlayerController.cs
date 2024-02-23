@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
@@ -37,7 +38,7 @@ public class PlayerController : MonoBehaviour
         Walking,
         Running,
         Climbing,
-        Jumping,
+        Jumping, //Jumping is a state that can overlap with holding currently
         Holding,
         Pushing
     }
@@ -54,6 +55,8 @@ public class PlayerController : MonoBehaviour
     }
 
     [SerializeField] public MovementRestrictions currentRestriction = MovementRestrictions.None;
+
+    PlayerStates playerState = PlayerStates.Idle;
 
     Vector2 restrictedDirection;
 
@@ -251,10 +254,29 @@ public class PlayerController : MonoBehaviour
 
         //Debug.Log($"Move direction = {moveDirection}");
 
-        //If Interactble is in array display UI as well as turning off if currently interacting
-        if(itemHitbox.TargetObjects.Count != 0)
+        // If Interactble is in array display UI as well as turning off if currently interacting
+        if (itemHitbox.TargetObjects.Count != 0 && playerState == PlayerStates.Idle)
         {
+            // Enable UI
             GetComponentInChildren<CanvasGroup>().alpha = 1;
+            // save the instance of the target object for easy use
+            GameObject targetObj = itemHitbox.TargetObjects[0];
+
+            // if the target object is a Pickup, then change text to appropiate context
+            if (targetObj.tag == "Pickup")
+            {
+                GetComponentInChildren<TextMeshProUGUI>().text = "Pickup";
+            }
+
+            else if (targetObj.tag == "PushPull")
+            {
+                GetComponentInChildren<TextMeshProUGUI>().text = "Push/Pull";
+            }
+
+            else if (targetObj.tag == "Climbable")
+            {
+                GetComponentInChildren<TextMeshProUGUI>().text = "Climb";
+            }
         }
         else
         {
@@ -290,9 +312,11 @@ public class PlayerController : MonoBehaviour
 
     void Jump(InputAction.CallbackContext context)
     {
+        //playerState = PlayerStates.Jumping;
         //Debug.Log("Jump hit");
         if(currentRestriction == MovementRestrictions.Climbing)
         {
+            playerState = PlayerStates.Idle; //Replace this. Flawed logic
             currentRestriction = MovementRestrictions.None;
             isGrounded = false;
             rb.AddForce(Vector3.up * JumpForce);
@@ -314,12 +338,16 @@ public class PlayerController : MonoBehaviour
         {
             Debug.Log($"Dropping {heldObject.name}");
 
+            playerState = PlayerStates.Idle;
+
             heldObject = null;
             
            
         }
         else if (pushingObj != null)
         {
+            playerState = PlayerStates.Idle;
+
             pushingObj.transform.parent = null;
 
             pushingObj = null;
@@ -330,6 +358,8 @@ public class PlayerController : MonoBehaviour
         
         else if(currentRestriction == MovementRestrictions.Climbing)
         {
+            playerState = PlayerStates.Idle;
+
             currentRestriction = MovementRestrictions.None;
         }
 
@@ -345,16 +375,19 @@ public class PlayerController : MonoBehaviour
                 // if the target object is a Pickup, then set that to the heldObject
                 if (targetObj.tag == "Pickup")
                 {
+                    playerState = PlayerStates.Holding;
                     heldObject = itemHitbox.TargetObjects[0];
                 }
 
                 else if (targetObj.tag == "PushPull")
                 {
+                    playerState = PlayerStates.Pushing;
                     StartCoroutine(PushPull(targetObj));
                 }
 
                 else if(targetObj.tag == "Climbable")
                 {
+                    playerState = PlayerStates.Climbing;
                     currentRestriction = MovementRestrictions.Climbing;
                     StartCoroutine(Climbing(targetObj));
                 }
@@ -414,7 +447,6 @@ public class PlayerController : MonoBehaviour
 
         // set the movement restriction to only follow the saved restricted direction
         currentRestriction = MovementRestrictions.RestrictedDirection;
-
         
     }
 
@@ -451,6 +483,7 @@ public class PlayerController : MonoBehaviour
             }
             else
             {
+                playerState = PlayerStates.Idle;
                 currentRestriction = MovementRestrictions.None;
                 break;
             }
@@ -472,10 +505,9 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            //playerState = PlayerStates.Idle;
             isGrounded = true;
         }
-
-        
     }
 
     private void OnCollisionExit(Collision collision)

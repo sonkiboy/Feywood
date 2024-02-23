@@ -4,8 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace UI 
-{
+
     public static class CompleteTextWithButtonPromptSprite
     {
         public static string ReadAndReplaceBinding(string textToDisplay, InputBinding actionNeeded, TMP_SpriteAsset spriteAsset)
@@ -37,4 +36,4 @@ namespace UI
             return stringButtonName;
         }
     }
-}
+

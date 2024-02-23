@@ -4,13 +4,12 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace UI
-{
+
     [RequireComponent(typeof(TMP_Text))]
     public class SetTextToTextBox : MonoBehaviour
     {
         [TextArea(2, 3)]
-        [SerializeField] private string message = "Press BUTTONPROMPT to interact";
+        [SerializeField] private string message = "BUTTONPROMPT";
 
         [Header("Setup for sprites")]
         [SerializeField] private ListofTmpAssets listOfTmpSpriteAssets;
@@ -53,4 +52,4 @@ namespace UI
             Keyboard =1
         }
     }
-}
+
