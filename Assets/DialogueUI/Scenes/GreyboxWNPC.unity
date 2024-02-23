@@ -30291,6 +30291,10 @@ PrefabInstance:
       propertyPath: m_text
       value: E
       objectReference: {fileID: 0}
+    - target: {fileID: 4651039301215687085, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+      propertyPath: deviceType
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4845297462593337844, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
       propertyPath: m_Name
       value: Player
@@ -43916,6 +43920,10 @@ PrefabInstance:
     - target: {fileID: 3697582438403081915, guid: 6103663166185cd4485e6422193a070f, type: 3}
       propertyPath: m_Name
       value: UIContext
+      objectReference: {fileID: 0}
+    - target: {fileID: 5297498012758427170, guid: 6103663166185cd4485e6422193a070f, type: 3}
+      propertyPath: deviceType
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6907014886517100771, guid: 6103663166185cd4485e6422193a070f, type: 3}
       propertyPath: dialogue.dialogueLines.Array.data[0].line
