@@ -37,10 +37,10 @@ public class PushableObject : MonoBehaviour
         facePoints = new Vector3[4];
 
         // create the points for +x, -x, +z, -z
-        facePoints[0] = new Vector3((colliderSize.x / 2) + pointOffset, 0, 0);
-        facePoints[1] = new Vector3( -(colliderSize.x / 2) - pointOffset, 0, 0);
-        facePoints[2] = new Vector3(0, 0,  (colliderSize.z / 2) + pointOffset);
-        facePoints[3] = new Vector3(0, 0,  -(colliderSize.z / 2) - pointOffset);
+        facePoints[0] = new Vector3((colliderSize.x / 2) + pointOffset, 0, 0) / transform.localScale.x;
+        facePoints[1] = new Vector3( -(colliderSize.x / 2) - pointOffset, 0, 0)/transform.localScale.x;
+        facePoints[2] = new Vector3(0, 0,  (colliderSize.z / 2) + pointOffset) / transform.localScale.z;
+        facePoints[3] = new Vector3(0, 0,  -(colliderSize.z / 2) - pointOffset) / transform.localScale.z;
 
         Debug.Log($"Points before global: 0:{facePoints[0]}, 1:{facePoints[1]}, 2:{facePoints[2]}, 3:{facePoints[3]}");
 

@@ -428,7 +428,7 @@ public class PlayerController : MonoBehaviour
 
         // calculate the direction from the point the player is moving to, to the center of the object they are pushing
         // this will be the axis the player can move along
-        restrictedDirection = new Vector2(-(closestPoint.z - obj.transform.position.z), (closestPoint.x - obj.transform.position.x)).normalized;
+        restrictedDirection = new Vector2( (closestPoint.x - obj.transform.position.x), -(closestPoint.z - obj.transform.position.z)).normalized;
 
         // move the player to the new position
         transform.position = newPos;
