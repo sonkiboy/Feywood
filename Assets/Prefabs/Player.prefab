@@ -402,11 +402,11 @@ MonoBehaviour:
   currentRestriction: 0
   Speed: 3
   JumpForce: 300
-  isGrounded: 0
   climbingMask:
     serializedVersion: 2
     m_Bits: 0
   climbingAngleThreshold: 40
+  isHidden: 0
 --- !u!54 &4928623129864677648
 Rigidbody:
   m_ObjectHideFlags: 0
