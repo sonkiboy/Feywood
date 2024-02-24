@@ -7,7 +7,11 @@ public class Hitbox : MonoBehaviour
 {
     public EventHandler<HitboxUpdateEventArgs> handler;
     public GameObject TargetObject;
+
+    private Collider collider;
     
+    private Collider[] foundColliders = new Collider[0];
+
     public List<GameObject> TargetObjects = new List<GameObject>();
 
     [SerializeField] List<string> CollisionTags;
@@ -15,40 +19,35 @@ public class Hitbox : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        collider = GetComponent<Collider>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        foundColliders = Physics.OverlapBox(collider.bounds.center, collider.bounds.size);
+        TargetObjects.Clear();
 
+        foreach(Collider collider in foundColliders)
+        {
+            if (CollisionTags.Contains(collider.gameObject.tag))
+            {
+                TargetObjects.Add(collider.gameObject);
+            }
+        }
+
+        OnTargetUpdate();
     }
 
     private void OnTriggerEnter(Collider collision)
     {
-        //Debug.Log($"{this.name} collided with {collision.gameObject.name}");
-        if (CollisionTags.Contains(collision.gameObject.tag))
-        {
-            TargetObjects.Add(collision.gameObject);
-        }
         
-
-
-        OnTargetUpdate();
 
     }
 
     private void OnTriggerExit(Collider collision)
     {
-        if (TargetObjects.Contains(collision.gameObject))
-        {
-            TargetObjects.Remove(collision.gameObject);
-        }
         
-
-        
-
-        OnTargetUpdate();
         
     }
 
