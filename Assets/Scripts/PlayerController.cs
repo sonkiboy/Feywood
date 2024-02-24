@@ -496,7 +496,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        //Debug.Log($"Player collision detected: {collision.gameObject.name}");
+        Debug.Log($"Player collision detected: {collision.gameObject.name}");
         // check if to see if the collision is with ground underneath it
         Collider[] checkCollisions = Physics.OverlapBox(groundCheck.position, groundCheckDimentions);
         if(checkCollisions == null)
