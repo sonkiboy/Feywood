@@ -210,7 +210,7 @@ Transform:
   m_GameObject: {fileID: 117006498}
   serializedVersion: 2
   m_LocalRotation: {x: 0.1387073, y: -0.8041516, z: 0.19722621, w: 0.54332525}
-  m_LocalPosition: {x: 31.87, y: 22.51, z: 10.89}
+  m_LocalPosition: {x: 26.91, y: 19.67, z: 8.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1029,6 +1029,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1571190152}
   - component: {fileID: 1571190153}
+  - component: {fileID: 1571190154}
   m_Layer: 0
   m_Name: Post Processing
   m_TagString: Untagged
@@ -1068,6 +1069,23 @@ MonoBehaviour:
   blendDistance: 100
   weight: 1
   sharedProfile: {fileID: 11400000, guid: 8ba16629977067c4694efc9a5a24158c, type: 2}
+--- !u!114 &1571190154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1571190150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 61187787e3e636d48a89021e8ca6d014, type: 2}
 --- !u!1 &1719177419
 GameObject:
   m_ObjectHideFlags: 0

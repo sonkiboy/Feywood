@@ -17,11 +17,11 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   threshold:
-    m_OverrideState: 1
-    m_Value: 0.5
+    m_OverrideState: 0
+    m_Value: 0.6
   intensity:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 2
   scatter:
     m_OverrideState: 0
     m_Value: 0.674
@@ -30,7 +30,7 @@ MonoBehaviour:
     m_Value: 65472
   tint:
     m_OverrideState: 1
-    m_Value: {r: 1, g: 0.85076696, b: 0.3066038, a: 1}
+    m_Value: {r: 1, g: 1, b: 1, a: 1}
   highQualityFiltering:
     m_OverrideState: 0
     m_Value: 0
@@ -62,7 +62,6 @@ MonoBehaviour:
   components:
   - {fileID: -5668517678476805856}
   - {fileID: 1391667437753013660}
-  - {fileID: 2906303991328347532}
 --- !u!114 &1391667437753013660
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -78,48 +77,22 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.6041575, y: 0.74113643, z: 1, w: 0}
+    m_Value: {x: 0.36548072, y: 0.43983027, z: 1, w: 0}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 0.74940705, y: 0.9902389, z: 1, w: 0}
+    m_Value: {x: 0.6094479, y: 1, z: 0.9251988, w: 0}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.778541, z: 0.5320083, w: 0}
+    m_Value: {x: 1, y: 0.8873471, z: 0.65736175, w: 0}
   shadowsStart:
     m_OverrideState: 0
     m_Value: 0
   shadowsEnd:
-    m_OverrideState: 1
-    m_Value: 0.2
+    m_OverrideState: 0
+    m_Value: 0.4
   highlightsStart:
-    m_OverrideState: 1
-    m_Value: 0.1
+    m_OverrideState: 0
+    m_Value: 0.6
   highlightsEnd:
     m_OverrideState: 0
     m_Value: 1
---- !u!114 &2906303991328347532
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e0ede770ec247d49bcb5e1feccd8d03, type: 3}
-  m_Name: ScreenGradient
-  m_EditorClassIdentifier: 
-  active: 1
-  intensity:
-    m_OverrideState: 1
-    m_Value: 1
-  overlayColor:
-    m_OverrideState: 1
-    m_Value: {r: 0.65739584, g: 0.745283, b: 0.745283, a: 1}
-    hdr: 0
-  start:
-    m_OverrideState: 1
-    m_Value: 0.5
-  end:
-    m_OverrideState: 1
-    m_Value: 0
