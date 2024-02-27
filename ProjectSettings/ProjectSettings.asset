@@ -972,7 +972,13 @@ PlayerSettings:
   XboxOneOverrideIdentityPublisher: 
   vrEditorSettings: {}
   cloudServicesEnabled:
+    Build: 0
+    Game Performance: 0
+    Legacy Analytics: 0
+    Purchasing: 0
+    UDP: 0
     UNet: 1
+    Unity Ads: 0
   luminIcon:
     m_Name: 
     m_ModelFolderPath: 
@@ -992,11 +998,11 @@ PlayerSettings:
   apiCompatibilityLevel: 6
   activeInputHandler: 2
   windowsGamepadBackendHint: 0
-  cloudProjectId: d891ab10-254e-4a6b-86fe-1535a04313f3
+  cloudProjectId: 9646d708-c4ff-4ea8-b620-184adf1d0d00
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Feywood
-  organizationId: sonki_boy
+  organizationId: snortablecola
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}
