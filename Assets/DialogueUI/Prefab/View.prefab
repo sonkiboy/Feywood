@@ -426,7 +426,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 2100000, guid: f7b29ac645f23584690bd985a835afe0, type: 2}
   m_Color: {r: 0, g: 0, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -687,6 +687,10 @@ PrefabInstance:
       value: Text_Dialogue
       objectReference: {fileID: 0}
     - target: {fileID: 1877174275964974569, guid: e99452a7cc7286d4dbef798947aab2bf, type: 3}
+      propertyPath: style
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1877174275964974569, guid: e99452a7cc7286d4dbef798947aab2bf, type: 3}
       propertyPath: textData
       value: 
       objectReference: {fileID: 11400000, guid: 0426a97b3cae01149818b6366e1fafd2, type: 2}
@@ -732,6 +736,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3368568104757425351, guid: e99452a7cc7286d4dbef798947aab2bf, type: 3}
       propertyPath: m_HorizontalAlignment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6793386831459104609, guid: e99452a7cc7286d4dbef798947aab2bf, type: 3}
+      propertyPath: m_CullTransparentMesh
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8746395574755749602, guid: e99452a7cc7286d4dbef798947aab2bf, type: 3}
