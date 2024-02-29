@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class AIMovement : MonoBehaviour
+public class MoveTo : MonoBehaviour
 {
     //creating an end goal for the NPC to move to
     public Transform goal;
