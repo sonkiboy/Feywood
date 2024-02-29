@@ -9,6 +9,7 @@ TagManager:
   - Climbable
   - Cutscene
   - Hidden
+  - Enemy
   layers:
   - Default
   - TransparentFX
