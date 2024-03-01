@@ -26,6 +26,8 @@ public class PlayerController : MonoBehaviour
 
     public FeywoodPlayerActions playerControls;
 
+    private InputActionMap actions;
+
     private InputAction move;
     private InputAction jump;
     private InputAction interact;
@@ -198,7 +200,6 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Debug.DrawRay(this.transform.position, model.transform.TransformDirection(Vector3.forward),Color.blue);
-
 
         switch (currentRestriction)
         {

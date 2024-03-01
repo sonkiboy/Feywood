@@ -19,7 +19,6 @@ public class SetTextToTextBox : MonoBehaviour
 
     private FeywoodPlayerActions _playerInput;
     private TMP_Text _textBox;
-
     private void Awake()
     {
         _playerInput = new FeywoodPlayerActions();
@@ -29,6 +28,23 @@ public class SetTextToTextBox : MonoBehaviour
     private void Start()
     {
         SetText();
+    }
+
+    private void Update()
+    {
+        InputSystem.onDeviceChange +=
+        (device, change) =>
+    {
+        switch (change)
+        {
+            case InputDeviceChange.Added:
+                Debug.Log($"Device {device} was added");
+                break;
+            case InputDeviceChange.Removed:
+                Debug.Log($"Device {device} was removed");
+                break;
+        }
+    };
     }
 
     [ContextMenu(itemName: "Set Text")]
