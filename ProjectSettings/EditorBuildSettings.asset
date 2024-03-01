@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/Scenes/Hide&Seek.unity
     guid: 8a37f4f8251df604ea33fd7ef83c2b32
   - enabled: 1
-    path: Assets/Scenes/Greybox.unity
+    path: Assets/Scenes/PreliminaryGrayBox.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/title screen.unity
