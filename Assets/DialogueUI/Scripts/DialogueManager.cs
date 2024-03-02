@@ -31,6 +31,7 @@ namespace DialogueUI
             {
                 GetComponent<CanvasGroup>().alpha = 0;
             }
+
         }
         public void StartDialogue(Dialogue dialogue)
         {
