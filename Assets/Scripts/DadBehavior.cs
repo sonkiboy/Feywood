@@ -37,6 +37,7 @@ public class DadBehavior : MonoBehaviour
 
         StartCoroutine(Monitor());
     }
+   
 
     // Update is called once per frame
     void Update()
@@ -75,6 +76,8 @@ public class DadBehavior : MonoBehaviour
             //Turn
 
             transform.RotateAround(transform.position, transform.up, 180f);
+           // player.GetComponent<PlayerController>().RespawnPlayer(); will respawn player to starting point when caught. 
+           //Debug.Log("Player was caught!");
         }
         
     }

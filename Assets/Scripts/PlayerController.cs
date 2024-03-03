@@ -33,6 +33,7 @@ public class PlayerController : MonoBehaviour
     private InputAction interact;
 
     Vector2 moveDirection;
+    Vector3 startPos;
 
     public enum PlayerStates
     {
@@ -170,6 +171,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         #region Saving Object and Component Refrences
 
         // find the model child object
@@ -192,7 +194,15 @@ public class PlayerController : MonoBehaviour
         }
 
         #endregion
+        startPos = transform.position; 
+        //gets the player's position at the start of the level. 
 
+    }
+    public void RespawnPlayer()
+    {
+        transform.position = startPos;
+        Debug.Log("Player was caught and will respawn");
+        //changes the player's position to their position at the start of the level. Made this public void so it's accessible in the Dad behavior script. 
 
     }
 
