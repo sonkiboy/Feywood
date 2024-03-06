@@ -31,19 +31,20 @@ public class PauseMenu : MonoBehaviour
     public void PauseGame()
     {
         pauseMenu.SetActive(true);
-        Time.timeScale = 0f; 
+       
         isPaused = true;
     }
     public void ResumeGame()
     {
         pauseMenu.SetActive(false);
-        Time.timeScale = 1f;
+    
         isPaused = false;
     }
     public void GoToTitleScreen()
     { 
-    Time.timeScale = 1f;
+  
         SceneManager.LoadScene("TitleScreen");
+        isPaused = false;
     }
 
     public void Quit()
