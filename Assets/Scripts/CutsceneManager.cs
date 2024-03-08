@@ -23,7 +23,7 @@ public class CutsceneManager : MonoBehaviour
     //Update is called once per frame
     void Update()
     {
-        ////checks for player collision with cutscene start
+        //checks for player collision with cutscene start
         if (cutsceneCollider.gameObject.CompareTag("Player")&& !cutsceneTriggered)
         {
             StartCoroutine(CutScene());
