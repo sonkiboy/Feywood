@@ -14,5 +14,11 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/title screen.unity
     guid: cf6ec6bf5a46aae4fa776836f09f9c05
+  - enabled: 1
+    path: Assets/Scenes/Intro_House/Intro_House.unity
+    guid: 5341c5616bb58c546b2f7ffdd80e9fe5
+  - enabled: 1
+    path: Assets/Scenes/Intro_Backyard/Intro_Backyard.unity
+    guid: c465d5998e229af4eb929d8a0f54c1b6
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 842322b50b07abe48855549451bd19f0, type: 2}
