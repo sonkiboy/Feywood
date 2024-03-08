@@ -21,7 +21,7 @@ public class Patrol : MonoBehaviour
         // Disabling auto-braking allows for continuous movement
         // between points (ie, the agent doesn't slow down as it
         // approaches a destination point).
-        agent.autoBraking = true;
+        agent.autoBraking = false;
 
         //if (agentCollider.gameObject.CompareTag("Player"))
         //{
