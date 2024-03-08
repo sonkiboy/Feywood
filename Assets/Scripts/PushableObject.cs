@@ -42,10 +42,10 @@ public class PushableObject : MonoBehaviour
         facePoints[2] = new Vector3(0, 0,  (colliderSize.z / 2) + pointOffset) / transform.localScale.z;
         facePoints[3] = new Vector3(0, 0,  -(colliderSize.z / 2) - pointOffset) / transform.localScale.z;
 
-        Debug.Log($"Points before global: 0:{facePoints[0]}, 1:{facePoints[1]}, 2:{facePoints[2]}, 3:{facePoints[3]}");
+        //Debug.Log($"Points before global: 0:{facePoints[0]}, 1:{facePoints[1]}, 2:{facePoints[2]}, 3:{facePoints[3]}");
 
         transform.TransformPoints(facePoints);
 
-        Debug.Log($"Points after global: 0:{facePoints[0]}, 1:{facePoints[1]}, 2:{facePoints[2]}, 3:{facePoints[3]}");
+        //Debug.Log($"Points after global: 0:{facePoints[0]}, 1:{facePoints[1]}, 2:{facePoints[2]}, 3:{facePoints[3]}");
     }
 }

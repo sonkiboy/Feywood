@@ -16,6 +16,8 @@ using UnityEngine.InputSystem;
                 "BUTTONPROMPT",
                 $"<sprite=\"{spriteAsset.name}\" name=\"{stringButtonName}\">");
 
+            //Debug.Log( textToDisplay );
+
             return textToDisplay;
         }
 

@@ -362,7 +362,7 @@ GameObject:
   - component: {fileID: 1510864663754906427}
   - component: {fileID: 4928623129864677648}
   - component: {fileID: 8459022282917449246}
-  m_Layer: 3
+  m_Layer: 7
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -399,6 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a003844544fbef47b3afe070dc85fa3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  RespawnPos: {x: 0, y: 0, z: 0}
   currentRestriction: 0
   Speed: 3
   JumpForce: 300
