@@ -33,7 +33,8 @@ public class PlayerController : MonoBehaviour
     private InputAction interact;
 
     Vector2 moveDirection;
-    Vector3 startPos;
+
+    public Vector3 RespawnPos;
 
     public enum PlayerStates
     {
@@ -70,7 +71,7 @@ public class PlayerController : MonoBehaviour
     bool isGrounded = false;
 
     GameObject _heldObj;
-    GameObject heldObject
+    public GameObject heldObject
     {
         get { return _heldObj; }
         set
@@ -120,7 +121,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] bool isHidden = false;
 
-    bool IsHidden
+    public bool IsHidden
     {
         get { return isHidden; }
 
@@ -194,13 +195,13 @@ public class PlayerController : MonoBehaviour
         }
 
         #endregion
-        startPos = transform.position; 
+        RespawnPos = transform.position; 
         //gets the player's position at the start of the level. 
 
     }
     public void RespawnPlayer()
     {
-        transform.position = startPos;
+        transform.position = RespawnPos;
         Debug.Log("Player was caught and will respawn");
         //changes the player's position to their position at the start of the level. Made this public void so it's accessible in the Dad behavior script. 
 
@@ -409,7 +410,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator PushPull(GameObject obj)
     {
-        Debug.Log("Hit");
+        //Debug.Log("Hit");
         // save an instance of the pushableObject component
         PushableObject poBehavior = obj.GetComponent<PushableObject>();
 
@@ -507,7 +508,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log($"Player collision detected: {collision.gameObject.name}");
+        //Debug.Log($"Player collision detected: {collision.gameObject.name}");
         // check if to see if the collision is with ground underneath it
         Collider[] checkCollisions = Physics.OverlapBox(groundCheck.position, groundCheckDimentions);
         if(checkCollisions == null)
@@ -531,7 +532,7 @@ public class PlayerController : MonoBehaviour
         // if the collision is a hidden zone, then the player is hidden
         if (other.gameObject.tag == "Hidden")
         {
-            Debug.Log("Hidden");
+            //Debug.Log("Hidden");
 
             IsHidden = true;
         }
@@ -542,7 +543,7 @@ public class PlayerController : MonoBehaviour
         // if the player is leaving a hidden collision, then they are no longer hidden
         if (other.gameObject.tag == "Hidden")
         {
-            Debug.Log("Not hidden");
+            //Debug.Log("Not hidden");
             IsHidden = false;
         }
     }

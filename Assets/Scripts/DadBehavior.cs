@@ -33,7 +33,7 @@ public class DadBehavior : MonoBehaviour
     {
         player = GameObject.Find("Player");
         rb = GetComponent<Rigidbody>();
-        //visionCollider = transform.Find("SightBounds").GetComponent<BoxCollider>();
+        visionCollider = transform.Find("SightBounds").GetComponent<BoxCollider>();
 
         StartCoroutine(Monitor());
     }
@@ -42,7 +42,9 @@ public class DadBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CheckSight();
+
+
     }
 
     IEnumerator Monitor()
@@ -80,5 +82,38 @@ public class DadBehavior : MonoBehaviour
            //Debug.Log("Player was caught!");
         }
         
+    }
+
+    void CheckSight()
+    {
+        Collider[] foundColliders = Physics.OverlapBox(visionCollider.bounds.center, visionCollider.bounds.size,visionCollider.gameObject.transform.rotation,visionCollider.includeLayers);
+
+        //Debug.Log($"Found: {foundColliders.Length}");
+        if(foundColliders.Length > 0)
+        {
+            if (foundColliders[0].gameObject.name == "Player")
+            {
+                Debug.Log($"Player in Dad's sight");
+                PlayerController controller = foundColliders[0].gameObject.GetComponent<PlayerController>();
+
+                if(controller.heldObject != null)
+                {
+                    if (controller.heldObject.name == "Key" && controller.IsHidden == false)
+                    {
+                        CatchPlayer();
+                    }
+                }
+                
+            }
+        }
+        
+    }
+
+    // called when player is caught
+    private void CatchPlayer()
+    {
+        Debug.Log("Dad caught Player!");
+
+        player.GetComponent<PlayerController>().RespawnPlayer();
     }
 }
