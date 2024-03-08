@@ -85,8 +85,8 @@ MonoBehaviour:
     m_Unicode: 65534
     m_GlyphIndex: 0
     m_Scale: 1
-    m_Name: Keyboard_e
-    m_HashCode: -2081430633
+    m_Name: Keyboard_e[Keyboard&Mouse]
+    m_HashCode: -1760309413
   m_SpriteGlyphTable:
   - m_Index: 0
     m_Metrics:

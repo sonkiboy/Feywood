@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -5,6 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.LowLevel;
+using UnityEngine.InputSystem.Users;
 using UnityEngine.InputSystem.XInput;
 
 [RequireComponent(typeof(TMP_Text))]
@@ -18,10 +20,12 @@ public class SetTextToTextBox : MonoBehaviour
     [SerializeField] private DeviceType deviceType;
 
     private FeywoodPlayerActions _playerInput;
+    private PlayerInput _playerInput2;
     private TMP_Text _textBox;
     private void Awake()
     {
         _playerInput = new FeywoodPlayerActions();
+        _playerInput2 = FindObjectOfType<PlayerInput>();
         _textBox = GetComponent<TMP_Text>();
     }
 
@@ -32,25 +36,44 @@ public class SetTextToTextBox : MonoBehaviour
 
     private void Update()
     {
-        InputSystem.onDeviceChange +=
-        (device, change) =>
+        //Debug.Log(_playerInput2.currentControlScheme);
+    }
+    void OnEnable()
     {
-        switch (change)
+        InputUser.onChange += onInputDeviceChange;
+    }
+
+    void OnDisable()
+    {
+        InputUser.onChange -= onInputDeviceChange;
+    }
+
+    void onInputDeviceChange(InputUser user, InputUserChange change, InputDevice device)
+    {
+        if (change == InputUserChange.ControlSchemeChanged)
         {
-            case InputDeviceChange.Added:
-                Debug.Log($"Device {device} was added");
-                break;
-            case InputDeviceChange.Removed:
-                Debug.Log($"Device {device} was removed");
-                break;
+            Debug.Log(user.controlScheme.Value.name);
+            if (user.controlScheme.Value.name.Equals("Keyboard&Mouse"))
+            {
+                //Debug.Log("Device Changed");
+                deviceType = DeviceType.Keyboard;
+                //Debug.Log((int)deviceType);
+            }
+            else if (user.controlScheme.Value.name.Equals("Xbox"))
+            {
+                //Debug.Log("Device Changed");
+                deviceType = DeviceType.XboxController;
+                //Debug.Log((int)deviceType);
+            }
+            SetText();
         }
-    };
     }
 
     [ContextMenu(itemName: "Set Text")]
 
     private void SetText()
     {
+
         if ((int)deviceType > listOfTmpSpriteAssets.SpriteAssets.Count - 1)
         {
             Debug.Log($"Missing Sprite Asset for {deviceType}");
