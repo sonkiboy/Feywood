@@ -10,6 +10,7 @@ TagManager:
   - Cutscene
   - Hidden
   - Enemy
+  - CheckPoint
   layers:
   - Default
   - TransparentFX

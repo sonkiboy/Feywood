@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Layouts;
+using UnityEngine.InputSystem.XR;
 
 public class PlayerController : MonoBehaviour
 {
@@ -167,7 +168,14 @@ public class PlayerController : MonoBehaviour
         interact.performed += Interact;
     }
 
-    
+    private void OnDisable()
+    {
+        move.Disable();
+        jump.Disable();
+        interact.Disable();
+    }
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -195,9 +203,35 @@ public class PlayerController : MonoBehaviour
         }
 
         #endregion
+        CheckForSpawnData();
         RespawnPos = transform.position; 
         //gets the player's position at the start of the level. 
 
+    }
+
+    private void CheckForSpawnData()
+    {
+        GameObject spawn = GameObject.Find(DataManager.SpawnName);
+
+        Debug.Log($"Carrying item: {DataManager.heldObj}");
+
+        // check if the spawn object was found and double check to make sure it is a check point
+        if (spawn != null)
+        {
+            if(spawn.tag == "CheckPoint")
+            {
+                this.transform.position = spawn.transform.GetChild(0).position;
+
+            }
+        }
+        if(DataManager.heldObj != null)
+        {
+            Debug.Log($"Spawning in {DataManager.heldObj.name}");
+
+            heldObject = Instantiate(DataManager.heldObj, this.transform.position, DataManager.heldObj.transform.rotation);
+
+
+        }
     }
     public void RespawnPlayer()
     {
