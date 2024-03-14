@@ -37,6 +37,8 @@ public class PlayerController : MonoBehaviour
 
     public Vector3 RespawnPos;
 
+    public string CurrentRoom;
+
     public enum PlayerStates
     {
         Idle,
@@ -569,6 +571,10 @@ public class PlayerController : MonoBehaviour
             //Debug.Log("Hidden");
 
             IsHidden = true;
+        }
+        else if(other.gameObject.tag == "Room")
+        {
+            CurrentRoom = other.gameObject.name;
         }
     }
 
