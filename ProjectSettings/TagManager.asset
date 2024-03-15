@@ -11,6 +11,7 @@ TagManager:
   - Hidden
   - Enemy
   - CheckPoint
+  - Room
   layers:
   - Default
   - TransparentFX

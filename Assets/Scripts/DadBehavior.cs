@@ -98,7 +98,7 @@ public class DadBehavior : MonoBehaviour
 
                 if(controller.heldObject != null)
                 {
-                    if (controller.heldObject.name == "Key" && controller.IsHidden == false)
+                    if (controller.heldObject.name == "Key" && controller.IsHidden == false && controller.CurrentRoom == "Kitchen")
                     {
                         CatchPlayer();
                     }
