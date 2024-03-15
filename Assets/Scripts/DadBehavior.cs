@@ -23,9 +23,9 @@ public class DadBehavior : MonoBehaviour
     [SerializeField] float waitTime = 3;
 
 
-    [SerializeField] float walkDistance = 5;
+    //[SerializeField] float walkDistance = 5;
 
-    [SerializeField] float walkSpeed = 1;
+    //[SerializeField] float walkSpeed = 1;
 
 
     // Start is called before the first frame update
@@ -54,23 +54,23 @@ public class DadBehavior : MonoBehaviour
         while (true)
         {
             // Walk
-            Vector3 targetPos = this.transform.TransformPoint((Vector3.forward * walkDistance)/2);
+            //Vector3 targetPos = this.transform.TransformPoint((Vector3.forward * walkDistance)/2);
 
             //Debug.Log($"Target Pos: {targetPos} ({Vector3.forward * walkDistance})");
 
-            while(Vector3.Distance(this.transform.position, targetPos) > .1)
-            {
-                Vector3 dir = -(this.transform.position - targetPos).normalized;
+            //while(Vector3.Distance(this.transform.position, targetPos) > .1)
+            //{
+            //    Vector3 dir = -(this.transform.position - targetPos).normalized;
 
-                //Debug.Log($"Driection Pos: {dir}");
+            //    //Debug.Log($"Driection Pos: {dir}");
 
 
-                rb.MovePosition(this.transform.position + (dir * walkSpeed * Time.deltaTime));
+            //    rb.MovePosition(this.transform.position + (dir * walkSpeed * Time.deltaTime));
 
-                yield return new WaitForFixedUpdate();
-            }
+            //    yield return new WaitForFixedUpdate();
+            //}
 
-            rb.MovePosition(targetPos);
+            //rb.MovePosition(targetPos);
 
             // Stop
             yield return new WaitForSeconds(waitTime);

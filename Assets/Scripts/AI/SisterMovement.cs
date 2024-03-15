@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class Patrol : MonoBehaviour
+public class SisterMovement : MonoBehaviour
 {
     public Transform[] points;
     private int destPoint = 0;
@@ -33,7 +33,7 @@ public class Patrol : MonoBehaviour
 
     void GotoNextPoint()
     {
-        // Returns if no points have been set up
+        // Returns if no points have been set upw
         if (points.Length == 0)
             return;
         if (destPoint < points.Length)
@@ -54,7 +54,7 @@ public class Patrol : MonoBehaviour
     {
         // Choose the next destination point when the agent gets
         // close to the current one.
-        if (!agent.pathPending && talkedTo)
+        if (talkedTo)
         {
             GotoNextPoint();
             talkedTo = false;
