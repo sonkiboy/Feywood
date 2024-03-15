@@ -43,8 +43,6 @@ public class DadBehavior : MonoBehaviour
     void Update()
     {
         CheckSight();
-
-
     }
 
     IEnumerator Monitor()
@@ -73,11 +71,11 @@ public class DadBehavior : MonoBehaviour
             //rb.MovePosition(targetPos);
 
             // Stop
-            yield return new WaitForSeconds(waitTime);
+            //yield return new WaitForSeconds(waitTime);
 
             //Turn
 
-            transform.RotateAround(transform.position, transform.up, 180f);
+            //transform.RotateAround(transform.position, transform.up, 180f);
            // player.GetComponent<PlayerController>().RespawnPlayer(); will respawn player to starting point when caught. 
            //Debug.Log("Player was caught!");
         }
@@ -114,6 +112,6 @@ public class DadBehavior : MonoBehaviour
     {
         Debug.Log("Dad caught Player!");
 
-        player.GetComponent<PlayerController>().RespawnPlayer();
+        //player.GetComponent<PlayerController>().RespawnPlayer();
     }
 }
