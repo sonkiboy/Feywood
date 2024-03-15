@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class SceneChange : MonoBehaviour
 {
     public int TargetSceneIndex = 3;
-    public GameObject TransitionComponent;
+    public GameObject TransitionComponent = null;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,11 +20,15 @@ public class SceneChange : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Player") {
-            ScreenTransition transition = TransitionComponent.GetComponent<ScreenTransition>();
+            if (TransitionComponent != null) {
+                ScreenTransition transition = TransitionComponent.GetComponent<ScreenTransition>();
 
-            transition.Play(() => {
+                transition.Out(() => {
+                    SceneManager.LoadScene(TargetSceneIndex);
+                });
+            } else {
                 SceneManager.LoadScene(TargetSceneIndex);
-            });
+            }
         }
     }
 }
