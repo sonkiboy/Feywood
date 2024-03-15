@@ -11,6 +11,7 @@ public class SisterMovement : MonoBehaviour
     private NavMeshAgent agent;
     [SerializeField] Collider agentCollider;
     bool talkedTo = false;
+    
 
 
     void Start()
