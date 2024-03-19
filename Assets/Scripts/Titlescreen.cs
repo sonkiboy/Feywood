@@ -7,7 +7,7 @@ public class Titlescreen : MonoBehaviour
 {
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync("PreliminaryGraybox");
+        SceneManager.LoadSceneAsync("Intro_House");
     
     }
     public void QuitGame()
