@@ -11103,126 +11103,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 36.150406, y: 12.654046, z: 17.794369}
   m_Center: {x: 3.653328, y: -1.0591617, z: 8.397184}
---- !u!1 &510149939
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 510149944}
-  - component: {fileID: 510149943}
-  - component: {fileID: 510149942}
-  - component: {fileID: 510149941}
-  - component: {fileID: 510149940}
-  m_Layer: 0
-  m_Name: ExitHouse
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &510149940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 510149939}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06c0bf9f515170f4ba4b33a610b1aba7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GoToScene: 
-  SpawnPointName: 
-  TransitionComponent: {fileID: 1209255388}
---- !u!65 &510149941
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 510149939}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!23 &510149942
-MeshRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 510149939}
-  m_Enabled: 1
-  m_CastShadows: 1
-  m_ReceiveShadows: 1
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 2
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials: []
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 3
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &510149943
-MeshFilter:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 510149939}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!4 &510149944
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 510149939}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 134.41243, y: -2.9524388, z: -0.9155198}
-  m_LocalScale: {x: 1, y: 12.757615, z: 5.4863}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1323437054}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!43 &520918627
 Mesh:
   m_ObjectHideFlags: 0
@@ -13437,7 +13317,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 822454426}
-  - component: {fileID: 822454425}
   - component: {fileID: 822454427}
   m_Layer: 5
   m_Name: GameManager
@@ -13446,19 +13325,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &822454425
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 822454424}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5208c4f6ab8499e49adfbbb2bf5eb215, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 1313346485}
 --- !u!224 &822454426
 RectTransform:
   m_ObjectHideFlags: 0
@@ -21121,6 +20987,10 @@ PrefabInstance:
       value: Player
       objectReference: {fileID: 0}
     - target: {fileID: 4845297462593337844, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845297462593337844, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
@@ -21573,7 +21443,7 @@ PrefabInstance:
     - target: {fileID: 2834918763405539663, guid: 7387576609a22434d973d37d009d2e1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 822454425}
+      objectReference: {fileID: 0}
     - target: {fileID: 2834918763405539663, guid: 7387576609a22434d973d37d009d2e1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Quit
@@ -21581,7 +21451,7 @@ PrefabInstance:
     - target: {fileID: 3933760654586302478, guid: 7387576609a22434d973d37d009d2e1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 822454425}
+      objectReference: {fileID: 0}
     - target: {fileID: 3933760654586302478, guid: 7387576609a22434d973d37d009d2e1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: GoToTitleScreen
@@ -21589,7 +21459,7 @@ PrefabInstance:
     - target: {fileID: 4152665533207388152, guid: 7387576609a22434d973d37d009d2e1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 822454425}
+      objectReference: {fileID: 0}
     - target: {fileID: 4152665533207388152, guid: 7387576609a22434d973d37d009d2e1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ResumeGame
@@ -21896,7 +21766,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1260755406}
-  - {fileID: 510149944}
   - {fileID: 2032893275}
   - {fileID: 1369129759}
   m_Father: {fileID: 0}
@@ -23517,8 +23386,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.11854478, y: 0.079719365, z: 0.20096084}
-  m_Center: {x: 0.0000000055879354, y: 0.0000000037252903, z: 0}
+  m_Size: {x: 0.11854477, y: 0.05244802, z: 0.20096083}
+  m_Center: {x: 0.0000000051666667, y: -0.013635628, z: -5.896219e-18}
 --- !u!43 &1399984728
 Mesh:
   m_ObjectHideFlags: 0
@@ -33317,6 +33186,7 @@ GameObject:
   - component: {fileID: 1951657080}
   - component: {fileID: 1951657079}
   - component: {fileID: 1951657078}
+  - component: {fileID: 1951657082}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -33410,6 +33280,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1951657082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951657077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5208c4f6ab8499e49adfbbb2bf5eb215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 1313346485}
 --- !u!1 &1963105324
 GameObject:
   m_ObjectHideFlags: 0
@@ -34140,6 +34023,10 @@ PrefabInstance:
       propertyPath: SpawnPointName
       value: Yard_HouseSpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 2699174398056617029, guid: 601da65104e0b6041ab03461a83ccf5f, type: 3}
+      propertyPath: TransitionComponent
+      value: 
+      objectReference: {fileID: 1209255388}
     - target: {fileID: 2872636575569845343, guid: 601da65104e0b6041ab03461a83ccf5f, type: 3}
       propertyPath: m_LocalPosition.x
       value: 127.24243

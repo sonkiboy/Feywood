@@ -177,8 +177,10 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         interact.Disable();
     }
 
-    void LoadData(GameData data)
+    public void LoadData(GameData data)
     {
+        Debug.Log("Player load hit");
+
         GameObject spawn = GameObject.Find(data.SpawnPointName);
 
         //Debug.Log($"Carrying item: {data.heldObj}");
@@ -188,9 +190,14 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         {
             if (spawn.tag == "CheckPoint")
             {
+                Debug.Log($"Spawn found, sending player to {spawn.transform.GetChild(0).position}");
                 this.transform.position = spawn.transform.GetChild(0).position;
 
             }
+        }
+        else
+        {
+            Debug.Log("Spawn not found, starting at normal scene position");
         }
         if (data.heldObj != null)
         {
@@ -202,7 +209,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         }
     }
 
-    void SaveData(ref GameData data)
+    public void SaveData(ref GameData data)
     {
         data.heldObj = heldObject;
     }
@@ -228,13 +235,12 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
         if(GameObject.Find("SneakIcon") != null)
         {
-            Debug.Log("Sneak icon found");
+            //Debug.Log("Sneak icon found");
             sneakIcon = GameObject.Find("SneakIcon").GetComponent<SneakUI>();
         }
 
         #endregion
-        CheckForSpawnData();
-        RespawnPos = transform.position; 
+        
         //gets the player's position at the start of the level. 
 
     }

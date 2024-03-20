@@ -5702,6 +5702,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.x
       value: -0.24
       objectReference: {fileID: 0}
+    - target: {fileID: 6625832686908165580, guid: 26ece06d308f5f8489221899e5c704d5, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.04
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -6242,8 +6246,12 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2699174398056617029, guid: 601da65104e0b6041ab03461a83ccf5f, type: 3}
       propertyPath: SpawnPointName
-      value: House_BackSpawn
+      value: House_YardSpawn
       objectReference: {fileID: 0}
+    - target: {fileID: 2699174398056617029, guid: 601da65104e0b6041ab03461a83ccf5f, type: 3}
+      propertyPath: TransitionComponent
+      value: 
+      objectReference: {fileID: 1938553822}
     - target: {fileID: 2872636575569845343, guid: 601da65104e0b6041ab03461a83ccf5f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -93.99
@@ -7615,7 +7623,7 @@ PrefabInstance:
     - target: {fileID: 2834918763405539663, guid: 7387576609a22434d973d37d009d2e1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1915172788}
+      objectReference: {fileID: 0}
     - target: {fileID: 2834918763405539663, guid: 7387576609a22434d973d37d009d2e1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: Quit
@@ -7623,7 +7631,7 @@ PrefabInstance:
     - target: {fileID: 3933760654586302478, guid: 7387576609a22434d973d37d009d2e1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1915172788}
+      objectReference: {fileID: 0}
     - target: {fileID: 3933760654586302478, guid: 7387576609a22434d973d37d009d2e1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: GoToTitleScreen
@@ -7631,7 +7639,7 @@ PrefabInstance:
     - target: {fileID: 4152665533207388152, guid: 7387576609a22434d973d37d009d2e1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1915172788}
+      objectReference: {fileID: 0}
     - target: {fileID: 4152665533207388152, guid: 7387576609a22434d973d37d009d2e1c, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: ResumeGame
@@ -13505,9 +13513,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06c0bf9f515170f4ba4b33a610b1aba7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GoToScene: Intro_House
-  SpawnPointName: HouseSpawn
-  TransitionComponent: {fileID: 1929398623}
 --- !u!65 &1504936686
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -17059,7 +17064,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1915172789}
-  - component: {fileID: 1915172788}
+  - component: {fileID: 1915172790}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -17067,19 +17072,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1915172788
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1915172787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5208c4f6ab8499e49adfbbb2bf5eb215, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pauseMenu: {fileID: 777474798}
 --- !u!4 &1915172789
 Transform:
   m_ObjectHideFlags: 0
@@ -17095,6 +17087,23 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1915172790
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1915172787}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fc073fd3435a15249a841e18fffc5a7f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Data:
+    CurrentScene: Intro_House
+    SpawnPointName: HouseSpawn
+    heldObj: {fileID: 0}
+    isGateOpen: 0
 --- !u!1001 &1920940873
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17270,7 +17279,7 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3e2d7078a074dd74391b2131125a1238, type: 3}
---- !u!1 &1929398623 stripped
+--- !u!1 &1938553822 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 901045581123726282, guid: 3e2d7078a074dd74391b2131125a1238, type: 3}
   m_PrefabInstance: {fileID: 1929398622}
@@ -17349,6 +17358,7 @@ GameObject:
   - component: {fileID: 1951657080}
   - component: {fileID: 1951657079}
   - component: {fileID: 1951657078}
+  - component: {fileID: 1951657082}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -17440,6 +17450,19 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1951657082
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1951657077}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5208c4f6ab8499e49adfbbb2bf5eb215, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pauseMenu: {fileID: 777474798}
 --- !u!1001 &2029509484
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -18957,6 +18980,7 @@ Mesh:
 SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
+  - {fileID: 1915172789}
   - {fileID: 1274415589}
   - {fileID: 314279587}
   - {fileID: 791637366}
@@ -18978,7 +19002,6 @@ SceneRoots:
   - {fileID: 1504936689}
   - {fileID: 1929398622}
   - {fileID: 777474797}
-  - {fileID: 1915172789}
   - {fileID: 1846192383}
   - {fileID: 1377191536}
   - {fileID: 556581306}
