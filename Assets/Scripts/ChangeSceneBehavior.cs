@@ -16,6 +16,8 @@ public class ChangeSceneBehavior : MonoBehaviour
 
     IEnumerator TransitionScene(PlayerController controller)
     {
+        
+
         if(GoToScene != null && SpawnPointName != null)
         {
             Debug.Log($"Attemping to go to scene {GoToScene} at {SpawnPointName} with object: {controller.heldObject.name}");
@@ -24,7 +26,7 @@ public class ChangeSceneBehavior : MonoBehaviour
 
 
             // put the spawn point name into the data manager script so the player controller can use it
-            DataManager.SpawnName = SpawnPointName;
+            DataManager.instance.Data.SpawnPointName = SpawnPointName;
 
             // if there is an object held, bring it to the next scene
             if(controller.heldObject != null)
@@ -37,14 +39,14 @@ public class ChangeSceneBehavior : MonoBehaviour
                 DontDestroyOnLoad(obj);
 
                 // pass the held object into the data manager so it can be taken into the new scene
-                DataManager.heldObj = obj;
+                DataManager.instance.Data.heldObj = obj;
             }
             
 
             // load the scene
             SceneManager.LoadScene(GoToScene);
 
-            Debug.Log($"Data: held obj {DataManager.heldObj.name}");
+            Debug.Log($"Data: held obj {DataManager.instance.Data.heldObj.name}");
 
         }
         else

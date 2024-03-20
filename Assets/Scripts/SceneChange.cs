@@ -46,8 +46,10 @@ public class SceneChange : MonoBehaviour
     void TransitionScene(PlayerController controller) {
         //Debug.Log($"Attemping to go to scene {GoToScene} at {SpawnPointName} with object: {controller.heldObject.name}");
 
+        //GameData data = GameObject.Find("GameManager").GetComponent<DataManager>().Data;
+
         // put the spawn point name into the data manager script so the player controller can use it
-        DataManager.SpawnName = SpawnPointName;
+        DataManager.instance.Data.SpawnPointName = SpawnPointName;
 
         Debug.Log($"Player controller: {controller}");
 
@@ -61,9 +63,10 @@ public class SceneChange : MonoBehaviour
             DontDestroyOnLoad(obj);
 
             // pass the held object into the data manager so it can be taken into the new scene
-            DataManager.heldObj = obj;
+            DataManager.instance.Data.heldObj = obj;
         }
 
+        DataManager.instance.SaveGame();
 
         // load the scene
         SceneManager.LoadScene(GoToScene);

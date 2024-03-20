@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Layouts;
 using UnityEngine.InputSystem.XR;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDataPersistance
 {
     #region Object and Component Refrences
 
@@ -177,7 +177,35 @@ public class PlayerController : MonoBehaviour
         interact.Disable();
     }
 
+    void LoadData(GameData data)
+    {
+        GameObject spawn = GameObject.Find(data.SpawnPointName);
 
+        //Debug.Log($"Carrying item: {data.heldObj}");
+
+        // check if the spawn object was found and double check to make sure it is a check point
+        if (spawn != null)
+        {
+            if (spawn.tag == "CheckPoint")
+            {
+                this.transform.position = spawn.transform.GetChild(0).position;
+
+            }
+        }
+        if (data.heldObj != null)
+        {
+            Debug.Log($"Spawning in {data.heldObj.name}");
+
+            heldObject = Instantiate(data.heldObj, this.transform.position, data.heldObj.transform.rotation);
+
+
+        }
+    }
+
+    void SaveData(ref GameData data)
+    {
+        data.heldObj = heldObject;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -213,27 +241,7 @@ public class PlayerController : MonoBehaviour
 
     private void CheckForSpawnData()
     {
-        GameObject spawn = GameObject.Find(DataManager.SpawnName);
-
-        Debug.Log($"Carrying item: {DataManager.heldObj}");
-
-        // check if the spawn object was found and double check to make sure it is a check point
-        if (spawn != null)
-        {
-            if(spawn.tag == "CheckPoint")
-            {
-                this.transform.position = spawn.transform.GetChild(0).position;
-
-            }
-        }
-        if(DataManager.heldObj != null)
-        {
-            Debug.Log($"Spawning in {DataManager.heldObj.name}");
-
-            heldObject = Instantiate(DataManager.heldObj, this.transform.position, DataManager.heldObj.transform.rotation);
-
-
-        }
+        
     }
     public void RespawnPlayer()
     {
