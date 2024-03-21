@@ -12,6 +12,9 @@ public class GameData
 
     public bool isGateOpen;
 
+    // dictionary represents all the objects in the scene and their saved locations
+    public Dictionary<GameObject, Vector3> PickupsInScene;
+
     public GameData()
     {
         CurrentScene = "Intro_House";

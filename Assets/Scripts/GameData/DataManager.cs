@@ -45,11 +45,13 @@ public class DataManager : MonoBehaviour
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         this.dataPersistances = GetAllDataObjects();
+        GetAllPickups();
         LoadGame();
     }
 
     void OnSceneUnloaded(Scene scene)
     {
+        instance.Data.PickupsInScene = new Dictionary<GameObject, Vector3>();
         SaveGame();
     }
     private void Start()
@@ -65,7 +67,7 @@ public class DataManager : MonoBehaviour
 
     public void SaveGame()
     {
-        
+        GetAllPickups();
 
         foreach(IDataPersistance obj in dataPersistances)
         {
@@ -84,6 +86,13 @@ public class DataManager : MonoBehaviour
             obj.LoadData(instance.Data);
         }
 
+        foreach(GameObject obj in Data.PickupsInScene.Keys)
+        {
+            
+
+            
+        }
+
         Debug.Log($"Data Loaded | Scene: {Data.CurrentScene} Spawn: {Data.SpawnPointName}");
     }
 
@@ -97,5 +106,18 @@ public class DataManager : MonoBehaviour
         Debug.Log($"Found {list.Count}");
 
         return list;
+    }
+
+    // gets all pickups in the scene and stores them in the dictionary with their starting location
+    private void GetAllPickups()
+    {
+        instance.Data.PickupsInScene = new Dictionary<GameObject, Vector3>();
+
+        GameObject[] objs = GameObject.FindGameObjectsWithTag("Pickup");
+
+        foreach(GameObject obj in objs)
+        {
+            instance.Data.PickupsInScene.Add(obj, obj.transform.position);
+        }
     }
 }

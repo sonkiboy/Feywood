@@ -91,6 +91,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
                 // set the rotation back to 0
                 _heldObj.transform.rotation = Quaternion.Euler(Vector3.zero);
 
+                Debug.Log($"obj collider: {collider}");
+
                 // move the object into position
                 _heldObj.transform.position = heldItemPos.position + heldItemPos.transform.TransformDirection(new Vector3(0, 0, collider.bounds.size.z / 2));
 
@@ -152,6 +154,12 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         // initialize the player actions by creating a new instance
         playerControls = new FeywoodPlayerActions();
 
+        // find the model child object
+        model = transform.Find("Model").gameObject;
+
+        // get the instance of the  object's rigidbody and save it to its variable for later use
+        rb = GetComponent<Rigidbody>();
+
         //Disable UI
         GetComponentInChildren<CanvasGroup>().alpha = 0;
     }
@@ -179,7 +187,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     public void LoadData(GameData data)
     {
-        Debug.Log("Player load hit");
+        //Debug.Log("Player load hit");
 
         GameObject spawn = GameObject.Find(data.SpawnPointName);
 
@@ -190,23 +198,29 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         {
             if (spawn.tag == "CheckPoint")
             {
-                Debug.Log($"Spawn found, sending player to {spawn.transform.GetChild(0).position}");
+                //Debug.Log($"Spawn found, sending player to {spawn.transform.GetChild(0).position}");
                 this.transform.position = spawn.transform.GetChild(0).position;
 
             }
         }
         else
         {
-            Debug.Log("Spawn not found, starting at normal scene position");
+            //Debug.Log("Spawn not found, starting at normal scene position");
         }
         if (data.heldObj != null)
         {
             Debug.Log($"Spawning in {data.heldObj.name}");
 
-            heldObject = Instantiate(data.heldObj, this.transform.position, data.heldObj.transform.rotation);
+            StartCoroutine(StartUp(data.heldObj));
 
 
         }
+    }
+
+    IEnumerator StartUp(GameObject passedObj)
+    {
+        yield return null;
+        heldObject = Instantiate(passedObj, this.transform.position, passedObj.transform.rotation);
     }
 
     public void SaveData(ref GameData data)
@@ -220,11 +234,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         
         #region Saving Object and Component Refrences
 
-        // find the model child object
-        model = transform.Find("Model").gameObject;
-
-        // get the instance of the  object's rigidbody and save it to its variable for later use
-        rb = GetComponent<Rigidbody>();
+        
 
         // ground check is a point in the object where a collision box will be drawn to see if the player is on the ground
         groundCheck = transform.Find("GroundCheck");
