@@ -9,7 +9,7 @@ public class ChangeSceneBehavior : MonoBehaviour
     [SerializeField] string GoToScene;
     [SerializeField] string SpawnPointName;
 
-    public GameObject TransitionComponent = null;
+    public ScreenTransition TransitionComponent = null;
 
     // Start is called before the first frame update
     void Start()
@@ -29,9 +29,8 @@ public class ChangeSceneBehavior : MonoBehaviour
         if (other.gameObject.tag == "Player") {
             if (GoToScene != null && SpawnPointName != null) {
                 if (TransitionComponent != null) {
-                    ScreenTransition transition = TransitionComponent.GetComponent<ScreenTransition>();
 
-                    transition.Out(() => {
+                    TransitionComponent.Out(() => {
                         TransitionScene(other.gameObject.GetComponent<PlayerController>());
                     });
                 }
