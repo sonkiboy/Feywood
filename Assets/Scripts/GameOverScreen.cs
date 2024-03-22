@@ -18,30 +18,40 @@ public class GameOverScreen : MonoBehaviour
 
     void Start()
     {
-        
+
     }
 
-    private void OnTriggerEnter(Collider other) {
-        if (other.gameObject.tag == "Player") {
-            if (!string.IsNullOrWhiteSpace(TitleText)) BlackScreenTextComponent.TitleText.text = TitleText;
-            BlackScreenTextComponent.SubText.text = "Tip:\n" + HintText;
+    //private void OnTriggerEnter(Collider other) {
+    //    if (other.gameObject.tag == "Player") {
+    //        if (!string.IsNullOrWhiteSpace(TitleText)) BlackScreenTextComponent.TitleText.text = TitleText;
+    //        BlackScreenTextComponent.SubText.text = "Tip:\n" + HintText;
 
-            playerController.currentRestriction = PlayerController.MovementRestrictions.noMovement; // this doesn't seem to be working
-            BlackScreenTextComponent.Enter();
-        }
+    //        playerController.currentRestriction = PlayerController.MovementRestrictions.noMovement; // this doesn't seem to be working
+    //        BlackScreenTextComponent.Enter();
+    //    }
+    //}
+    public void Trigger()
+    {
+        if (!string.IsNullOrWhiteSpace(TitleText)) BlackScreenTextComponent.TitleText.text = TitleText;
+        BlackScreenTextComponent.SubText.text = "Tip:\n" + HintText;
+
+        playerController.currentRestriction = PlayerController.MovementRestrictions.noMovement; // this doesn't seem to be working
+        BlackScreenTextComponent.Enter();
     }
 
-    public void Exit() { // i don't know where to put this but this is what to when you want to exit the screen; should happen after generic key/buttonpress
+    public void Exit()
+    { // i don't know where to put this but this is what to when you want to exit the screen; should happen after generic key/buttonpress
         playerController.currentRestriction = PlayerController.MovementRestrictions.None;
         // place anything you want to happen instantaneously here
-        BlackScreenTextComponent.ExitTextOnly(() => {
+        BlackScreenTextComponent.ExitTextOnly(() =>
+        {
             // place anything you want to happen once the text itself disappears, but the screen is still black, here
 
-                // if scene is specified, move to that scene
+            // if scene is specified, move to that scene
 
-                    // if both scene to go to and spawn point are specified, specify spawnpoint before moving to scene
+            // if both scene to go to and spawn point are specified, specify spawnpoint before moving to scene
 
-                // if only spawn point is specified, reset player to that location (no scene move)
+            // if only spawn point is specified, reset player to that location (no scene move)
 
             BlackScreenTextComponent.ExitScreenOnly(); // only relevant to location reset; if you move out of the scene you'll never see this. fades out of black screen
         });

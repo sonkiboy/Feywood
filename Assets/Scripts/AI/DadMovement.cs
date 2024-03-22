@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
+using DialogueUI;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
@@ -131,6 +132,8 @@ public class DadMovement : MonoBehaviour
     private void CatchPlayer()
     {
         Debug.Log("Dad caught Player!");
+
+        this.GetComponent<DialogueTrigger>().TriggerDialogue();
 
         DataManager.instance.SaveGame();
 

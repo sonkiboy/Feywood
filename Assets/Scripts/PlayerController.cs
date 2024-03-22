@@ -189,6 +189,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     {
         //Debug.Log("Player load hit");
 
+        playerState = PlayerStates.Idle;
+
         GameObject spawn = GameObject.Find(data.SpawnPointName);
 
         //Debug.Log($"Carrying item: {data.heldObj}");

@@ -42,7 +42,10 @@ namespace DialogueUI
         private void Awake()
         {
             playerControls = new FeywoodPlayerActions();
-            GetComponentInChildren<CanvasGroup>().alpha = 0;
+            if (talkable)
+            {
+                GetComponentInChildren<CanvasGroup>().alpha = 0;
+            }
         }
 
         private void OnEnable()
