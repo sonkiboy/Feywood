@@ -9,7 +9,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Layouts;
 using UnityEngine.InputSystem.XR;
 
-public class PlayerController : MonoBehaviour
+public class PlayerController : MonoBehaviour, IDataPersistance
 {
     #region Object and Component Refrences
 
@@ -91,6 +91,8 @@ public class PlayerController : MonoBehaviour
                 // set the rotation back to 0
                 _heldObj.transform.rotation = Quaternion.Euler(Vector3.zero);
 
+                Debug.Log($"obj collider: {collider}");
+
                 // move the object into position
                 _heldObj.transform.position = heldItemPos.position + heldItemPos.transform.TransformDirection(new Vector3(0, 0, collider.bounds.size.z / 2));
 
@@ -152,6 +154,12 @@ public class PlayerController : MonoBehaviour
         // initialize the player actions by creating a new instance
         playerControls = new FeywoodPlayerActions();
 
+        // find the model child object
+        model = transform.Find("Model").gameObject;
+
+        // get the instance of the  object's rigidbody and save it to its variable for later use
+        rb = GetComponent<Rigidbody>();
+
         //Disable UI
         GetComponentInChildren<CanvasGroup>().alpha = 0;
     }
@@ -177,7 +185,50 @@ public class PlayerController : MonoBehaviour
         interact.Disable();
     }
 
+    public void LoadData(GameData data)
+    {
+        //Debug.Log("Player load hit");
 
+        playerState = PlayerStates.Idle;
+
+        GameObject spawn = GameObject.Find(data.SpawnPointName);
+
+        //Debug.Log($"Carrying item: {data.heldObj}");
+
+        // check if the spawn object was found and double check to make sure it is a check point
+        if (spawn != null)
+        {
+            if (spawn.tag == "CheckPoint")
+            {
+                //Debug.Log($"Spawn found, sending player to {spawn.transform.GetChild(0).position}");
+                this.transform.position = spawn.transform.GetChild(0).position;
+
+            }
+        }
+        else
+        {
+            //Debug.Log("Spawn not found, starting at normal scene position");
+        }
+        if (data.heldObj != null)
+        {
+            Debug.Log($"Spawning in {data.heldObj.name}");
+
+            StartCoroutine(StartUp(data.heldObj));
+
+
+        }
+    }
+
+    IEnumerator StartUp(GameObject passedObj)
+    {
+        yield return null;
+        heldObject = Instantiate(passedObj, this.transform.position, passedObj.transform.rotation);
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.heldObj = heldObject;
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -185,11 +236,7 @@ public class PlayerController : MonoBehaviour
         
         #region Saving Object and Component Refrences
 
-        // find the model child object
-        model = transform.Find("Model").gameObject;
-
-        // get the instance of the  object's rigidbody and save it to its variable for later use
-        rb = GetComponent<Rigidbody>();
+        
 
         // ground check is a point in the object where a collision box will be drawn to see if the player is on the ground
         groundCheck = transform.Find("GroundCheck");
@@ -200,40 +247,19 @@ public class PlayerController : MonoBehaviour
 
         if(GameObject.Find("SneakIcon") != null)
         {
-            Debug.Log("Sneak icon found");
+            //Debug.Log("Sneak icon found");
             sneakIcon = GameObject.Find("SneakIcon").GetComponent<SneakUI>();
         }
 
         #endregion
-        CheckForSpawnData();
-        RespawnPos = transform.position; 
+        
         //gets the player's position at the start of the level. 
 
     }
 
     private void CheckForSpawnData()
     {
-        GameObject spawn = GameObject.Find(DataManager.SpawnName);
-
-        Debug.Log($"Carrying item: {DataManager.heldObj}");
-
-        // check if the spawn object was found and double check to make sure it is a check point
-        if (spawn != null)
-        {
-            if(spawn.tag == "CheckPoint")
-            {
-                this.transform.position = spawn.transform.GetChild(0).position;
-
-            }
-        }
-        if(DataManager.heldObj != null)
-        {
-            Debug.Log($"Spawning in {DataManager.heldObj.name}");
-
-            heldObject = Instantiate(DataManager.heldObj, this.transform.position, DataManager.heldObj.transform.rotation);
-
-
-        }
+        
     }
     public void RespawnPlayer()
     {

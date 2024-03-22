@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using DialogueUI;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
@@ -48,9 +49,16 @@ public class SisterMovement : MonoBehaviour
     {
         if(agentcollider.CompareTag("Player"))
         {
-            talkedTo = true;
+            this.GetComponent<DialogueTrigger>().TriggerDialogue();
+            Destroy(this.GetComponent<DialogueTrigger>());
         }
     }
+
+    public void TalkedTo()
+    {
+        talkedTo = true;
+    }
+
     void Update()
     {
         // Choose the next destination point when the agent gets
@@ -60,10 +68,6 @@ public class SisterMovement : MonoBehaviour
             GotoNextPoint();
             talkedTo = false;
         }
-            
-            
-
-
     }
 
 }

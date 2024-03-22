@@ -3,7 +3,17 @@ guid: 9e186eabed7e01d4f883ef8fde8607f6
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BedsideTable_M
+    second: {fileID: 2100000, guid: 0829ec29dea29954fbabd4204d9acc5d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BedsideTable_Nob_M
+    second: {fileID: 2100000, guid: cf003317a69404b4abe755fee6396d27, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

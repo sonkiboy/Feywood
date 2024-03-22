@@ -30,6 +30,7 @@ namespace DialogueUI
         public Dialogue dialogue;
 
         public FeywoodPlayerActions playerControls;
+        public bool talkable = false;
         private InputAction interact;
         private bool withinInteractRange;
 
@@ -41,7 +42,10 @@ namespace DialogueUI
         private void Awake()
         {
             playerControls = new FeywoodPlayerActions();
-            GetComponentInChildren<CanvasGroup>().alpha = 0;
+            if (talkable)
+            {
+                GetComponentInChildren<CanvasGroup>().alpha = 0;
+            }
         }
 
         private void OnEnable()
@@ -53,7 +57,7 @@ namespace DialogueUI
 
         private void OnTriggerEnter(Collider collision)
         {
-            if (collision.tag == "Player")
+            if (collision.tag == "Player" && talkable)
             {
                 withinInteractRange = true;
                 GetComponentInChildren<CanvasGroup>().alpha = 1;
@@ -62,7 +66,7 @@ namespace DialogueUI
 
         private void OnTriggerExit(Collider collision)
         {
-            if(collision.tag == "Player")
+            if(collision.tag == "Player" && talkable)
             {
                 withinInteractRange = false;
                 GetComponentInChildren<CanvasGroup>().alpha = 0;
@@ -71,7 +75,7 @@ namespace DialogueUI
 
         void Interact(InputAction.CallbackContext context)
         {
-            if(withinInteractRange)
+            if(withinInteractRange && talkable)
             {
                 TriggerDialogue();
             }

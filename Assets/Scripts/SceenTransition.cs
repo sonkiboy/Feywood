@@ -48,12 +48,12 @@ public class ScreenTransition : MonoBehaviour {
                 playing = false;
                 reversed ^= true;
                 onComplete();
-                onComplete = () => { return; }; // reset oncomplete function
             }
         }
     }
 
     public void In() {
+        onComplete = () => { return; };
         elapsedTime = 0f;
         material.SetColor("_Color", color);
         if (TransitionImg != null) material.SetTexture("_TransImg", TransitionImg);
@@ -65,13 +65,12 @@ public class ScreenTransition : MonoBehaviour {
     }
 
     public void In(System.Action complete) {
-        onComplete = complete;
         In();
-
-        playing = true;
+        onComplete = complete;
     }
 
     public void Out() {
+        onComplete = () => { return; };
         elapsedTime = 0f;
         material.SetColor("_Color", color);
         if (TransitionImg != null) material.SetTexture("_TransImg", TransitionImg);
@@ -82,10 +81,8 @@ public class ScreenTransition : MonoBehaviour {
         playing = true;
     }
     public void Out(System.Action complete) {
-        onComplete = complete;
         Out();
-
-        playing = true;
+        onComplete = complete;
     }
 
     public bool isDone() {
