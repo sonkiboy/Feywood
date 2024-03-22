@@ -75,13 +75,13 @@ public class DadMovement : MonoBehaviour
                 // if timer is less than the set wiat time
                 if(timer < waitTime)
                 {
-                    Debug.Log("Waiting");
+                    //Debug.Log("Waiting");
                     // add time.deltatime until no longer true
                     timer += Time.deltaTime;
                 }
                 else
                 {
-                    Debug.Log("Moving");
+                    //Debug.Log("Moving");
                     GotoNextPoint();
                     timer = 0;
                 //waitToMove= false;

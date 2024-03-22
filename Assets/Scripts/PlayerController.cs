@@ -222,7 +222,9 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     IEnumerator StartUp(GameObject passedObj)
     {
         yield return null;
-        heldObject = Instantiate(passedObj, this.transform.position, passedObj.transform.rotation);
+        Debug.Log("Player Startup initiated");
+        //heldObject = Instantiate(passedObj, this.transform.position, passedObj.transform.rotation);
+        heldObject = DataManager.instance.Data.heldObj;
     }
 
     public void SaveData(ref GameData data)
