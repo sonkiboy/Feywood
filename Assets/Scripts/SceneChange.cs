@@ -5,8 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class SceneChange : MonoBehaviour
 {
-    public int TargetSceneIndex = 3;
+    [SerializeField] string GoToScene;
+    [SerializeField] string SpawnPointName;
+
     public GameObject TransitionComponent = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -19,16 +22,53 @@ public class SceneChange : MonoBehaviour
         
     }
     private void OnTriggerEnter(Collider other) {
-        if (other.tag == "Player") {
-            if (TransitionComponent != null) {
-                ScreenTransition transition = TransitionComponent.GetComponent<ScreenTransition>();
 
-                transition.Out(() => {
-                    SceneManager.LoadScene(TargetSceneIndex);
-                });
+        Debug.Log($"Scene trigger hit, found: {other.gameObject.name}");
+
+        if (other.gameObject.tag == "Player") {
+            if (GoToScene != null && SpawnPointName != null) {
+                if (TransitionComponent != null) {
+                    ScreenTransition transition = TransitionComponent.GetComponent<ScreenTransition>();
+
+                    transition.Out(() => {
+                        TransitionScene(other.gameObject.GetComponent<PlayerController>());
+                    });
+                }
+                else {
+                    TransitionScene(other.gameObject.GetComponent<PlayerController>());
+                }
             } else {
-                SceneManager.LoadScene(TargetSceneIndex);
+                Debug.Log("Please input Scene name and Spawn name");
             }
         }
+    }
+
+    void TransitionScene(PlayerController controller) {
+        //Debug.Log($"Attemping to go to scene {GoToScene} at {SpawnPointName} with object: {controller.heldObject.name}");
+
+        // put the spawn point name into the data manager script so the player controller can use it
+        DataManager.SpawnName = SpawnPointName;
+
+        Debug.Log($"Player controller: {controller}");
+
+        // if there is an object held, bring it to the next scene
+        if (controller.heldObject != null) {
+            // save the object being held
+            GameObject obj = controller.heldObject;
+            obj.transform.parent = null;
+
+            // makes it so the object is not destroyed when going between scenes
+            DontDestroyOnLoad(obj);
+
+            // pass the held object into the data manager so it can be taken into the new scene
+            DataManager.heldObj = obj;
+        }
+
+
+        // load the scene
+        SceneManager.LoadScene(GoToScene);
+
+        //Debug.Log($"Data: held obj {DataManager.heldObj.name}");
+
     }
 }

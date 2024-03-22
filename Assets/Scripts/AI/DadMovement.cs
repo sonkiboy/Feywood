@@ -10,8 +10,8 @@ public class DadMovement : MonoBehaviour
     private int destPoint = 0;
     private NavMeshAgent agent;
     float timer = 0;
-    float waitTime = 10f;
-    bool waitToMove = false;
+    float waitTime = 3f;
+    //bool waitToMove = true;
 
 
     void Start()
@@ -48,24 +48,28 @@ public class DadMovement : MonoBehaviour
         // close to the current one.
         if (!agent.pathPending && agent.remainingDistance < 0.005f)
         {
-            if (waitToMove)
-            {
+           
                 // if timer is less than the set wiat time
                 if(timer < waitTime)
                 {
+                    Debug.Log("Waiting");
                     // add time.deltatime until no longer true
                     timer += Time.deltaTime;
                 }
                 else
                 {
-                    waitToMove= false;
+                    Debug.Log("Moving");
+                    GotoNextPoint();
+                    timer = 0;
+                //waitToMove= false;
                 }
-            }
-            else
-            {
-                GotoNextPoint();
-            }
+
+           
         }
+        //else
+        //{
             
+        //}
+
     }
 }
