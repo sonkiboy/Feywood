@@ -2289,7 +2289,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BlackScreenTextComponent: {fileID: 1091982027105424492}
-  playerController: {fileID: 0}
+  playerController: {fileID: 1731007079}
   TitleText: You beat the Demo!
   HintText: You got the key to the gate. Who knows what adventure lies beyond it?
   GoToScene: 
@@ -3122,7 +3122,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 57342163956910611, guid: 26ece06d308f5f8489221899e5c704d5, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.000099658966
+      value: 1.59
       objectReference: {fileID: 0}
     - target: {fileID: 57342163956910611, guid: 26ece06d308f5f8489221899e5c704d5, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11196,6 +11196,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+--- !u!114 &1731007079 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1510864663754906427, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+  m_PrefabInstance: {fileID: 1731007078}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a003844544fbef47b3afe070dc85fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1740070605
 PrefabInstance:
   m_ObjectHideFlags: 0
