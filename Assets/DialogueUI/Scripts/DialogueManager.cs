@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System;
+using UnityEngine.Events;
 
 
 namespace DialogueUI
@@ -79,8 +81,13 @@ namespace DialogueUI
         void EndDialogue()
         {
             isDialogueActive = false;
+
             playerController.currentRestriction = PlayerController.MovementRestrictions.None;
             GetComponent<CanvasGroup>().alpha = 0;
+
+            onDialogueEnd.Invoke();
         }
+
+        public UnityEvent onDialogueEnd;
     }
 }
