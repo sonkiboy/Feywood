@@ -8,6 +8,7 @@ public class GateKeyBehavior : PickupBehavior
 
     private void Start()
     {
+        startPos = GameObject.Find("KeySpawnPos");
     }
 
     public override void LoadData(GameData data)
