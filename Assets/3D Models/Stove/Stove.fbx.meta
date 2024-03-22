@@ -3,7 +3,17 @@ guid: 6d738403448b11d4cb8e48305443837d
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StoveBase
+    second: {fileID: -2446093939474705212, guid: e188c7b17409ae843a244fec38872255, type: 3}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StoveGrates
+    second: {fileID: -3338690871512969443, guid: 1600b252e472d4c4cbb3d787a8484e36, type: 3}
   materials:
     materialImportMode: 2
     materialName: 0
