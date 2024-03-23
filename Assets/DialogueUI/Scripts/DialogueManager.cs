@@ -25,6 +25,9 @@ namespace DialogueUI
 
         private void Start()
         {
+            playerController = GameObject.Find("Player").GetComponent<PlayerController>();
+
+
             if(Instance == null)
             {
                 Instance = this;
@@ -54,7 +57,7 @@ namespace DialogueUI
         }
         public void DisplayNextDialogueLine()
         {
-            if(lines.Count == 0)
+            if(lines.Count <= 0)
             {
                 EndDialogue();
                 return;
@@ -62,7 +65,7 @@ namespace DialogueUI
 
             DialogueLine currentLine = lines.Dequeue();
 
-            characterIcon.sprite = currentLine.character.icon;
+            //characterIcon.sprite = currentLine.character.icon;
             characterName.text = currentLine.character.name;
 
             StopAllCoroutines();

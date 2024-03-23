@@ -49,8 +49,12 @@ public class SisterMovement : MonoBehaviour
     {
         if(agentcollider.CompareTag("Player"))
         {
-            this.GetComponent<DialogueTrigger>().TriggerDialogue();
-            Destroy(this.GetComponent<DialogueTrigger>());
+            if(this.GetComponent<DialogueTrigger>() != null)
+            {
+                this.GetComponent<DialogueTrigger>().TriggerDialogue();
+                Destroy(this.GetComponent<DialogueTrigger>());
+            }
+            
         }
     }
 

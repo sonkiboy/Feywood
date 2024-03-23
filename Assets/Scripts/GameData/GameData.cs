@@ -11,6 +11,7 @@ public class GameData
     public GameObject heldObj;
 
     public bool isGateOpen;
+    public bool isSisterBackyard;
 
     // dictionary represents all the objects in the scene and their saved locations
     public Dictionary<GameObject, Vector3> PickupsInScene;
@@ -22,5 +23,6 @@ public class GameData
         heldObj = null;
 
         isGateOpen = false;
+        isSisterBackyard = false;
     }
 }

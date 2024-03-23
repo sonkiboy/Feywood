@@ -49,7 +49,7 @@ public class PauseMenu : MonoBehaviour
 
     public void Quit()
     { 
-    Application.Quit();
+        Application.Quit();
         Debug.Log("Quit game");
     
     }
