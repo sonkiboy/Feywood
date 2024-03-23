@@ -5,10 +5,10 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Harrison's Test Scene.unity
     guid: 191f5f1acc977ae4b96e1c014a22d15f
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/PreliminaryGrayBox.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
