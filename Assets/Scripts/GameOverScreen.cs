@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameOverScreen : MonoBehaviour
 {
@@ -48,10 +49,40 @@ public class GameOverScreen : MonoBehaviour
             // place anything you want to happen once the text itself disappears, but the screen is still black, here
 
             // if scene is specified, move to that scene
+            if (!string.IsNullOrEmpty(GoToScene)) {
+                DataManager.instance.Data.CurrentScene = GoToScene;
 
-            // if both scene to go to and spawn point are specified, specify spawnpoint before moving to scene
+                // if both scene to go to and spawn point are specified, specify spawnpoint before moving to scene
+                // put the spawn point name into the data manager script so the player controller can use it
+                if (!string.IsNullOrEmpty(SpawnPointName)) {
+                    DataManager.instance.Data.SpawnPointName = SpawnPointName;
+                }
+
+                Debug.Log($"Player controller: {playerController}");
+
+                // if there is an object held, bring it to the next scene
+                if (playerController.heldObject != null) {
+                    // save the object being held
+                    GameObject obj = playerController.heldObject;
+                    obj.transform.parent = null;
+
+                    // makes it so the object is not destroyed when going between scenes
+                    DontDestroyOnLoad(obj);
+
+                    // pass the held object into the data manager so it can be taken into the new scene
+                    DataManager.instance.Data.heldObj = obj;
+                }
+
+                DataManager.instance.SaveGame();
+
+                // load the scene
+                SceneManager.LoadScene(GoToScene);
+            }
+
 
             // if only spawn point is specified, reset player to that location (no scene move)
+
+
 
             BlackScreenTextComponent.ExitScreenOnly(); // only relevant to location reset; if you move out of the scene you'll never see this. fades out of black screen
         });
