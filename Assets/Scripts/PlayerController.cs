@@ -85,13 +85,13 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
                 Collider collider = _heldObj.GetComponent<Collider>();
 
+                // set the rotation back to 0
+                _heldObj.transform.rotation = heldItemPos.transform.rotation;
+
                 // set the model as the parent of the object so it moves with it
                 _heldObj.transform.parent = model.transform;
 
-                // set the rotation back to 0
-                _heldObj.transform.rotation = Quaternion.Euler(Vector3.zero);
-
-                Debug.Log($"obj collider: {collider}");
+                //Debug.Log($"obj collider: {collider}");
 
                 // move the object into position
                 _heldObj.transform.position = heldItemPos.position + heldItemPos.transform.TransformDirection(new Vector3(0, 0, collider.bounds.size.z / 2));
@@ -104,10 +104,13 @@ public class PlayerController : MonoBehaviour, IDataPersistance
             }
             else
             {
+
+                _heldObj.transform.parent = null;
+
                 // set the object back to normal values (inverse of set functions)
                 _heldObj.GetComponent<Rigidbody>().isKinematic = false;
                 //_heldObj.GetComponent<Collider>().enabled = true;
-                _heldObj.transform.parent = null;
+                
                 _heldObj = null;
 
             }
