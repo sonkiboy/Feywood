@@ -450,20 +450,24 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     void Jump(InputAction.CallbackContext context)
     {
-        //playerState = PlayerStates.Jumping;
-        //Debug.Log("Jump hit");
-        if(currentRestriction == MovementRestrictions.Climbing)
+        if(currentRestriction != MovementRestrictions.noMovement)
         {
-            playerState = PlayerStates.Idle; //Replace this. Flawed logic
-            currentRestriction = MovementRestrictions.None;
-            isGrounded = false;
-            rb.AddForce(Vector3.up * JumpForce);
+            //playerState = PlayerStates.Jumping;
+            //Debug.Log("Jump hit");
+            if (currentRestriction == MovementRestrictions.Climbing)
+            {
+                playerState = PlayerStates.Idle; //Replace this. Flawed logic
+                currentRestriction = MovementRestrictions.None;
+                isGrounded = false;
+                rb.AddForce(Vector3.up * JumpForce);
+            }
+            else if (isGrounded)
+            {
+                isGrounded = false;
+                rb.AddForce(Vector3.up * JumpForce);
+            }
         }
-        else if (isGrounded)
-        {
-            isGrounded = false;
-            rb.AddForce(Vector3.up * JumpForce);
-        }
+        
 
     }
 
@@ -517,7 +521,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
                     heldObject = itemHitbox.TargetObjects[0];
                 }
 
-                else if (targetObj.tag == "PushPull")
+                else if (targetObj.tag == "PushPull" && isGrounded)
                 {
                     playerState = PlayerStates.Pushing;
                     StartCoroutine(PushPull(targetObj));
