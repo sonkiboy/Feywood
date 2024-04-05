@@ -39,6 +39,8 @@ public class PauseMenu : MonoBehaviour
         pauseMenu.SetActive(false);
     
         isPaused = false;
+        Debug.Log("game resumed");
+
     }
     public void GoToTitleScreen()
     { 
