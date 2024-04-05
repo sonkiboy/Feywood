@@ -36,7 +36,10 @@ namespace DialogueUI
 
         public void TriggerDialogue()
         {
-            DialogueManager.Instance.StartDialogue(dialogue);
+            if(DialogueManager.Instance.isDialogueActive == false)
+            {
+                DialogueManager.Instance.StartDialogue(dialogue);
+            }
         }
 
         private void Awake()

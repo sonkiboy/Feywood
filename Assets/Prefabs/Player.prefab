@@ -317,7 +317,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b10044f443f06f4fb7c1bc0e8ce74b2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  message: Press BUTTONPROMPT to interact.
+  message: BUTTONPROMPT
   listOfTmpSpriteAssets: {fileID: 11400000, guid: c4933c2517a99cb49b03292667277ba7, type: 2}
   deviceType: 1
 --- !u!1 &4340761266987549989

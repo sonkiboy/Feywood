@@ -5091,13 +5091,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5765841894724412505, guid: 234a6915c9e29694583191a34e425444, type: 3}
-      propertyPath: typingSpeed
-      value: 0.05
-      objectReference: {fileID: 0}
-    - target: {fileID: 5765841894724412505, guid: 234a6915c9e29694583191a34e425444, type: 3}
       propertyPath: playerController
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1702291105}
     - target: {fileID: 5765841894724412505, guid: 234a6915c9e29694583191a34e425444, type: 3}
       propertyPath: onDialogueEnd.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -29732,6 +29728,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 763593022}
     m_Modifications:
+    - target: {fileID: 919132149155446097, guid: 806f2a42fb7c3404c9394eb99b58f4be, type: 3}
+      propertyPath: m_StaticEditorFlags
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: f2a578b4795b3504ca335f806bc37b3a, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.03012574
@@ -29811,10 +29811,6 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: f2a578b4795b3504ca335f806bc37b3a, type: 3}
       propertyPath: m_Name
       value: Sink
-      objectReference: {fileID: 0}
-    - target: {fileID: 919132149155446097, guid: 806f2a42fb7c3404c9394eb99b58f4be, type: 3}
-      propertyPath: m_StaticEditorFlags
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -30006,7 +30002,6 @@ GameObject:
   - component: {fileID: 1603517693}
   - component: {fileID: 1603517701}
   - component: {fileID: 1603517700}
-  - component: {fileID: 1603517702}
   - component: {fileID: 1603517703}
   m_Layer: 0
   m_Name: Sister
@@ -30034,7 +30029,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1.5, y: 2, z: 1.5}
+  m_Size: {x: 5, y: 2, z: 5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!195 &1603517694
 NavMeshAgent:
@@ -30204,25 +30199,6 @@ MonoBehaviour:
         name: Sister
         icon: {fileID: 0}
       line: Come on. Lets go play outside.
-  talkable: 0
---- !u!114 &1603517702
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1603517692}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1c0b6b66adfb574ea9bd9dc564ca8c6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogue:
-    dialogueLines:
-    - character:
-        name: Sister
-        icon: {fileID: 0}
-      line: I'll see you outside.
   talkable: 0
 --- !u!114 &1603517703
 MonoBehaviour:
@@ -32650,6 +32626,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 617340478181218913, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
   m_PrefabInstance: {fileID: 2003737970}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1702291105 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1510864663754906427, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+  m_PrefabInstance: {fileID: 2003737970}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a003844544fbef47b3afe070dc85fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1709304342
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36694,6 +36681,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 617340478181218913, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 617340478181218913, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 617340478181218913, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 617340478181218913, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
       propertyPath: m_LocalPosition.x
       value: -198.05397
       objectReference: {fileID: 0}
@@ -36733,8 +36732,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1510864663754906427, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+      propertyPath: JumpForce
+      value: 400
+      objectReference: {fileID: 0}
     - target: {fileID: 4845297462593337844, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
       propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 4845297462593337844, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+      propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
     m_RemovedComponents: []

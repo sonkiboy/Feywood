@@ -5,6 +5,7 @@ using UnityEngine.UI;
 using TMPro;
 using System;
 using UnityEngine.Events;
+using UnityEngine.InputSystem;
 
 
 namespace DialogueUI
@@ -16,6 +17,9 @@ namespace DialogueUI
         public Image characterIcon;
         public TextMeshProUGUI characterName;
         public TextMeshProUGUI dialogueArea;
+        public FeywoodPlayerActions playerControls;
+        private InputAction submit;
+
 
         private Queue<DialogueLine> lines = new Queue<DialogueLine>();
 
@@ -27,8 +31,7 @@ namespace DialogueUI
         {
             playerController = GameObject.Find("Player").GetComponent<PlayerController>();
 
-
-            if(Instance == null)
+            if (Instance == null)
             {
                 Instance = this;
             }
@@ -38,10 +41,21 @@ namespace DialogueUI
             }
 
         }
+        private void Awake()
+        {
+            playerControls = new FeywoodPlayerActions();
+        }
+        private void OnEnable()
+        {
+            submit = playerControls.UI.Submit;
+            submit.Enable();
+            submit.performed += Submit;
+        }
+
         public void StartDialogue(Dialogue dialogue)
         {
             isDialogueActive=true;
-            
+
             playerController.currentRestriction = PlayerController.MovementRestrictions.noMovement;
 
             GetComponent<CanvasGroup>().alpha = 1;
@@ -89,6 +103,15 @@ namespace DialogueUI
             GetComponent<CanvasGroup>().alpha = 0;
 
             onDialogueEnd.Invoke();
+        }
+
+        void Submit(InputAction.CallbackContext context)
+        {
+            if(isDialogueActive)
+            {
+                Debug.Log("next line");
+                this.DisplayNextDialogueLine();
+            }
         }
 
         public UnityEvent onDialogueEnd;

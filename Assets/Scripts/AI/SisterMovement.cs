@@ -35,6 +35,7 @@ public class SisterMovement : MonoBehaviour
 
     void GotoNextPoint()
     {
+        this.GetComponent<BoxCollider>().enabled = false;
         // Returns if no points have been set upw
         if (points.Length == 0)
             return;
@@ -53,6 +54,7 @@ public class SisterMovement : MonoBehaviour
             {
                 this.GetComponent<DialogueTrigger>().TriggerDialogue();
                 Destroy(this.GetComponent<DialogueTrigger>());
+                
             }
             
         }
@@ -71,6 +73,11 @@ public class SisterMovement : MonoBehaviour
         {
             GotoNextPoint();
             talkedTo = false;
+        }
+        //Check if the agent is near the desitination and re enables the collider
+        if((points[destPoint].position - this.transform.position).magnitude < 50f)
+        {
+            this.GetComponent<BoxCollider>().enabled = true;
         }
     }
 
