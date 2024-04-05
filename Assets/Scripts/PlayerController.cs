@@ -450,7 +450,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     void Jump(InputAction.CallbackContext context)
     {
-        if(currentRestriction != MovementRestrictions.noMovement)
+        if(currentRestriction == MovementRestrictions.None)
         {
             //playerState = PlayerStates.Jumping;
             //Debug.Log("Jump hit");
@@ -488,6 +488,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         }
         else if (pushingObj != null)
         {
+            isGrounded = true;
+
             playerState = PlayerStates.Idle;
 
             pushingObj.transform.parent = null;
@@ -540,6 +542,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     IEnumerator PushPull(GameObject obj)
     {
+        isGrounded = false;
+
         //Debug.Log("Hit");
         // save an instance of the pushableObject component
         PushableObject poBehavior = obj.GetComponent<PushableObject>();

@@ -7,6 +7,12 @@ public class SneakUI : MonoBehaviour
 {
 
     Image uiImage;
+    VisionEffect vingette;
+
+    [SerializeField] Color HiddenVingetteColor;
+    [SerializeField] Color CaughtVingetteColor;
+
+    [SerializeField] float VingetteIntesity;
 
     [SerializeField] Sprite[] sprites;
 
@@ -28,6 +34,31 @@ public class SneakUI : MonoBehaviour
             currentState = value;
 
             uiImage.sprite = sprites[(int)value];
+
+            switch (currentState)
+            {
+                case (SneakStates.Exposed):
+
+                    vingette.targetStrength = 0;
+
+                    break;
+
+                case (SneakStates.Hidden):
+
+                    vingette.targetStrength = 1;
+
+                    vingette.targetColor = HiddenVingetteColor;
+
+                    break;
+
+                case (SneakStates.Spotted):
+
+                    vingette.targetStrength = 1;
+
+                    vingette.targetColor = CaughtVingetteColor;
+
+                    break;
+            }
         }
     }
 
@@ -35,6 +66,7 @@ public class SneakUI : MonoBehaviour
     void Start()
     {
         uiImage = GetComponent<Image>();
+        vingette = GameObject.FindAnyObjectByType<VisionEffect>();
     }
 
     // Update is called once per frame
