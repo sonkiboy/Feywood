@@ -24,15 +24,10 @@ public class SisterMovement : MonoBehaviour
         // between points (ie, the agent doesn't slow down as it
         // approaches a destination point).
         agent.autoBraking = false;
-
-        //if (agentCollider.gameObject.CompareTag("Player"))
-        //{
-        //    //GotoNextPoint();
-        //}
-            
+          
     }
 
-
+    //has agent go to next point in the array 
     void GotoNextPoint()
     {
         this.GetComponent<BoxCollider>().enabled = false;
@@ -59,7 +54,7 @@ public class SisterMovement : MonoBehaviour
             
         }
     }
-
+    //sets talkedto to true
     public void TalkedTo()
     {
         talkedTo = true;

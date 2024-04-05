@@ -135,15 +135,18 @@ public class DadMovement : MonoBehaviour
 
         this.GetComponent<DialogueTrigger>().TriggerDialogue();
 
+        //player.GetComponent<PlayerController>().RespawnPlayer();
+    }
+
+    public void RespawnPlayer()
+    {
         DataManager.instance.SaveGame();
 
 
         DataManager.instance.Data.SpawnPointName = "HouseSpawn";
         DataManager.instance.Data.heldObj = null;
-        
+
 
         DataManager.instance.LoadGame();
-
-        //player.GetComponent<PlayerController>().RespawnPlayer();
     }
 }

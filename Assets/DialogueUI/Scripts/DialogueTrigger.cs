@@ -31,6 +31,7 @@ namespace DialogueUI
 
         public FeywoodPlayerActions playerControls;
         public bool talkable = false;
+        public bool isRespawnDialogue = false;
         private InputAction interact;
         private bool withinInteractRange;
 
@@ -38,6 +39,10 @@ namespace DialogueUI
         {
             if(DialogueManager.Instance.isDialogueActive == false)
             {
+                if(isRespawnDialogue)
+                {
+                    DialogueManager.Instance.isRespawnDialogue = true;
+                }
                 DialogueManager.Instance.StartDialogue(dialogue);
             }
         }

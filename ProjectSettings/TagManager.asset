@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - CheckPoint
   - Room
+  - NavMesh
   layers:
   - Default
   - TransparentFX
