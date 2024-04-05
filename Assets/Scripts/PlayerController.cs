@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     Vector3 groundCheckDimentions = new Vector3(.2f, .5f, .2f);
 
     Transform heldItemPos;
+    BoxCollider ghostItemCollider;
+
     Hitbox itemHitbox;
 
     SneakUI sneakIcon;
@@ -85,29 +87,83 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
                 Collider collider = _heldObj.GetComponent<Collider>();
 
+                // set the rotation back to 0
+                _heldObj.transform.rotation = heldItemPos.transform.rotation;
+
                 // set the model as the parent of the object so it moves with it
                 _heldObj.transform.parent = model.transform;
 
-                // set the rotation back to 0
-                _heldObj.transform.rotation = Quaternion.Euler(Vector3.zero);
-
-                Debug.Log($"obj collider: {collider}");
+                //Debug.Log($"obj collider: {collider}");
 
                 // move the object into position
-                _heldObj.transform.position = heldItemPos.position + heldItemPos.transform.TransformDirection(new Vector3(0, 0, collider.bounds.size.z / 2));
+                _heldObj.transform.position = heldItemPos.position + heldItemPos.transform.TransformDirection(new Vector3(0, collider.bounds.size.y/2, collider.bounds.size.z / 2));
+
+                Rigidbody itemRB = _heldObj.GetComponent<Rigidbody>();
 
                 // set to kinematic so it wont be moved by the physics system
-                _heldObj.GetComponent<Rigidbody>().isKinematic = true;
+                itemRB.isKinematic = true;
+                itemRB.detectCollisions = false;
+
+                ghostItemCollider.enabled = true;
+
+                Vector3 newSize = Vector3.zero;
+
+                if(collider is SphereCollider)
+                {
+                    SphereCollider sphereCollider = (SphereCollider)collider;
+
+                    newSize = Vector3.one * sphereCollider.radius;
+                    ghostItemCollider.center = new Vector3(0, sphereCollider.radius/2, sphereCollider.radius/2 );
+
+                }
+                else if (collider is CapsuleCollider)
+                {
+                    CapsuleCollider capsuleCollider = (CapsuleCollider)collider;
+
+                    newSize = new Vector3(capsuleCollider.radius, capsuleCollider.radius, capsuleCollider.height);
+                    ghostItemCollider.center = new Vector3(0, capsuleCollider.height/2, capsuleCollider.radius );
+                }
+                else if (collider is BoxCollider)
+                {
+                    BoxCollider boxCollider = (BoxCollider)collider;
+
+                    newSize = boxCollider.size;
+                    ghostItemCollider.center = new Vector3(0, boxCollider.size.y / 2 * _heldObj.transform.localScale.y, boxCollider.size.z / 2 * _heldObj.transform.localScale.z);
+
+                    newSize = new Vector3(newSize.x * _heldObj.transform.localScale.x, newSize.y * _heldObj.transform.localScale.y, newSize.z * _heldObj.transform.localScale.z);
+                    _heldObj.transform.position = heldItemPos.position + heldItemPos.transform.TransformDirection(new Vector3(0, boxCollider.size.y / 2 * _heldObj.transform.localScale.y, boxCollider.size.z / 2 * _heldObj.transform.localScale.z));
+
+                }
+
+                else
+                {
+                    newSize = collider.bounds.size;
+                    ghostItemCollider.center = new Vector3(0, collider.bounds.size.y/2, collider.bounds.size.z / 2);
+                }
+
+                //ghostItemCollider.transform.localScale = _heldObj.transform.localScale;
+                //ghostItemCollider.size = new Vector3(newSize.x * _heldObj.transform.localScale.x, newSize.y * _heldObj.transform.localScale.y, newSize.z * _heldObj.transform.localScale.z);
+
+
+                ghostItemCollider.size = newSize;
 
                 // disable the collider so there aren't any weird physics interactions
                 //collider.enabled = false;
             }
             else
             {
-                // set the object back to normal values (inverse of set functions)
-                _heldObj.GetComponent<Rigidbody>().isKinematic = false;
-                //_heldObj.GetComponent<Collider>().enabled = true;
+
                 _heldObj.transform.parent = null;
+
+                // set the object back to normal values (inverse of set functions)
+                Rigidbody itemRB = _heldObj.GetComponent<Rigidbody>();
+
+                ghostItemCollider.enabled = false;
+
+                // set to kinematic so it wont be moved by the physics system
+                itemRB.isKinematic = false;
+                itemRB.detectCollisions = true;
+
                 _heldObj = null;
 
             }
@@ -115,6 +171,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
             
         }
     }
+
 
     GameObject pushingObj;
 
@@ -247,6 +304,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
         heldItemPos = model.transform.Find("HeldItemPos");
 
+        ghostItemCollider = heldItemPos.gameObject.GetComponent<BoxCollider>();
+
         if(GameObject.Find("SneakIcon") != null)
         {
             //Debug.Log("Sneak icon found");
@@ -376,14 +435,17 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         else
         {
             // calculate the new position based on the move direction, speed, and delta time
-            newPos = new Vector3(moveDirection.x * Speed * Time.deltaTime, 0f, moveDirection.y * Speed * Time.deltaTime);
+            newPos = new Vector3(moveDirection.x * Speed * Time.deltaTime, rb.velocity.y, moveDirection.y * Speed * Time.deltaTime);
         }
-        
+
 
         //Debug.Log(newPos);
 
         // rb.MovePosition used to move the object while accounting for any collisions made
-        rb.MovePosition(rb.position + newPos);
+        //rb.MovePosition(rb.position + newPos);
+
+        //Debug.Log("newPos = " + newPos);
+        rb.velocity = newPos;
     }
 
     void Jump(InputAction.CallbackContext context)
