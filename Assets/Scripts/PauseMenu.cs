@@ -43,7 +43,7 @@ public class PauseMenu : MonoBehaviour
     public void GoToTitleScreen()
     { 
   
-        SceneManager.LoadScene("TitleScreen");
+        SceneManager.LoadScene("title screen");
         isPaused = false;
     }
 
