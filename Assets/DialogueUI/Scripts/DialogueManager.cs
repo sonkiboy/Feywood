@@ -25,6 +25,8 @@ namespace DialogueUI
 
         public bool isDialogueActive = false;
 
+        public bool isRespawnDialogue = false;
+
         public float typingSpeed = 0.2f;
 
         private void Start()
@@ -102,7 +104,15 @@ namespace DialogueUI
             playerController.currentRestriction = PlayerController.MovementRestrictions.None;
             GetComponent<CanvasGroup>().alpha = 0;
 
-            onDialogueEnd.Invoke();
+            if (isRespawnDialogue)
+            {
+                onRespawnDialogueEnd.Invoke();
+            }
+            else
+            {
+                onDialogueEnd.Invoke();
+            }
+            
         }
 
         void Submit(InputAction.CallbackContext context)
@@ -115,5 +125,6 @@ namespace DialogueUI
         }
 
         public UnityEvent onDialogueEnd;
+        public UnityEvent onRespawnDialogueEnd;
     }
 }
