@@ -147,6 +147,6 @@ public class DadMovement : MonoBehaviour
         DataManager.instance.Data.heldObj = null;
 
 
-        DataManager.instance.LoadGame();
+        StartCoroutine(DataManager.instance.HintLoad(1f,3f,GetComponent<GameOverScreen>()));
     }
 }

@@ -18,7 +18,9 @@ public class Gate : MonoBehaviour
             if(player.GetComponentInChildren<GateKeyBehavior>() != null)
             {
                 Debug.Log("Gate Opened!");
-                this.GetComponentInChildren<GameOverScreen>().Trigger();
+                //this.GetComponentInChildren<GameOverScreen>().PlayHint();
+
+                DataManager.instance.HintLoad(1, 3, this.GetComponentInChildren<GameOverScreen>());
             }
         }
     }

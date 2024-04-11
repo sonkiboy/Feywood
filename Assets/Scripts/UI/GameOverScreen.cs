@@ -5,8 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameOverScreen : MonoBehaviour
 {
-    public BlackScreen BlackScreenTextComponent;
-    public PlayerController playerController;
+    BlackScreen BlackScreenTextComponent;
+
 
     public string TitleText = "You failed...";
     [TextArea] public string HintText;
@@ -19,7 +19,7 @@ public class GameOverScreen : MonoBehaviour
 
     void Start()
     {
-
+        BlackScreenTextComponent = FindAnyObjectByType<BlackScreen>();
     }
 
     //private void OnTriggerEnter(Collider other) {
@@ -31,60 +31,71 @@ public class GameOverScreen : MonoBehaviour
     //        BlackScreenTextComponent.Enter();
     //    }
     //}
-    public void Trigger()
+    public IEnumerator PlayHint(float duration)
     {
         if (!string.IsNullOrWhiteSpace(TitleText)) BlackScreenTextComponent.TitleText.text = TitleText;
         BlackScreenTextComponent.SubText.text = "Tip:\n" + HintText;
 
-        playerController.currentRestriction = PlayerController.MovementRestrictions.noMovement; // this doesn't seem to be working
+        
         BlackScreenTextComponent.Enter();
+
+        yield return new WaitForSeconds(duration);
+
+        BlackScreenTextComponent.Exit();
+
     }
 
+
+    public void StopHint()
+    {
+
+    }
+
+    // H: I don't think we need this method, trying to keep it in the Data Manager script
     public void Exit()
     { // i don't know where to put this but this is what to when you want to exit the screen; should happen after generic key/buttonpress
-        playerController.currentRestriction = PlayerController.MovementRestrictions.None;
+        
         // place anything you want to happen instantaneously here
         BlackScreenTextComponent.ExitTextOnly(() =>
         {
             // place anything you want to happen once the text itself disappears, but the screen is still black, here
 
             // if scene is specified, move to that scene
-            if (!string.IsNullOrEmpty(GoToScene)) {
-                DataManager.instance.Data.CurrentScene = GoToScene;
+            //if (!string.IsNullOrEmpty(GoToScene)) {
+            //    DataManager.instance.Data.CurrentScene = GoToScene;
 
-                // if both scene to go to and spawn point are specified, specify spawnpoint before moving to scene
-                // put the spawn point name into the data manager script so the player controller can use it
-                if (!string.IsNullOrEmpty(SpawnPointName)) {
-                    DataManager.instance.Data.SpawnPointName = SpawnPointName;
-                }
+            //    // if both scene to go to and spawn point are specified, specify spawnpoint before moving to scene
+            //    // put the spawn point name into the data manager script so the player controller can use it
+            //    if (!string.IsNullOrEmpty(SpawnPointName)) {
+            //        DataManager.instance.Data.SpawnPointName = SpawnPointName;
+            //    }
 
-                Debug.Log($"Player controller: {playerController}");
 
-                // if there is an object held, bring it to the next scene
-                if (playerController.heldObject != null) {
-                    // save the object being held
-                    GameObject obj = playerController.heldObject;
-                    obj.transform.parent = null;
+            //    // if there is an object held, bring it to the next scene
+            //    if (playerController.heldObject != null) {
+            //        // save the object being held
+            //        GameObject obj = playerController.heldObject;
+            //        obj.transform.parent = null;
 
-                    // makes it so the object is not destroyed when going between scenes
-                    DontDestroyOnLoad(obj);
+            //        // makes it so the object is not destroyed when going between scenes
+            //        DontDestroyOnLoad(obj);
 
-                    // pass the held object into the data manager so it can be taken into the new scene
-                    DataManager.instance.Data.heldObj = obj;
-                }
+            //        // pass the held object into the data manager so it can be taken into the new scene
+            //        DataManager.instance.Data.heldObj = obj;
+            //    }
 
-                DataManager.instance.SaveGame();
+            //    DataManager.instance.SaveGame();
 
-                // load the scene
-                SceneManager.LoadScene(GoToScene);
-            }
+            //    // load the scene
+            //    SceneManager.LoadScene(GoToScene);
+            //}
 
 
             // if only spawn point is specified, reset player to that location (no scene move)
 
 
 
-            BlackScreenTextComponent.ExitScreenOnly(); // only relevant to location reset; if you move out of the scene you'll never see this. fades out of black screen
+            //BlackScreenTextComponent.ExitScreenOnly(); // only relevant to location reset; if you move out of the scene you'll never see this. fades out of black screen
         });
     }
 }

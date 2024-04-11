@@ -120,4 +120,79 @@ public class DataManager : MonoBehaviour
             instance.Data.PickupsInScene.Add(obj, obj.transform.position);
         }
     }
+
+    public IEnumerator FadeLoad(float fadeTime, float waitTime)
+    {
+        PlayerController player = GameObject.FindObjectOfType<PlayerController>();
+        ScreenTransition fade = GameObject.FindAnyObjectByType<ScreenTransition>();
+
+        // restrict the player movement
+        player.currentRestriction = PlayerController.MovementRestrictions.noMovement;
+
+        // fade to black
+        if(fade != null)
+        {
+            fade.Out();
+        }
+        
+
+        yield return new WaitForSeconds(fadeTime);
+
+        // Load the game
+        LoadGame();
+
+        yield return new WaitForSeconds(waitTime);
+
+        // fade back in
+        if (fade != null)
+        {
+            fade.In();
+        }
+
+        // give player movement
+        player.currentRestriction = PlayerController.MovementRestrictions.None;
+
+    }
+
+    public IEnumerator HintLoad(float fadeTime, float waitTime, GameOverScreen hintData)
+    {
+        PlayerController player = GameObject.FindObjectOfType<PlayerController>();
+        ScreenTransition fade = GameObject.FindAnyObjectByType<ScreenTransition>();
+
+        GameObject hintObj = null;
+
+        // restrict the player movement
+        player.currentRestriction = PlayerController.MovementRestrictions.noMovement;
+
+        // fade to black
+        if (fade != null)
+        {
+            //fade.Out();
+        }
+        
+
+        
+
+        StartCoroutine(hintData.PlayHint(waitTime));
+
+
+        
+
+        yield return new WaitForSeconds(waitTime/2);
+
+        // Load the game
+        LoadGame();
+
+
+
+        // fade back in
+        if (fade != null)
+        {
+            //fade.In();
+        }
+
+        // give player movement
+        player.currentRestriction = PlayerController.MovementRestrictions.None;
+
+    }
 }

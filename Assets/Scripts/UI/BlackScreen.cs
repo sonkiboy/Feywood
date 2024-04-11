@@ -6,7 +6,7 @@ using TMPro;
 
 public class BlackScreen : MonoBehaviour {
 
-    public ScreenTransition TransitionComponent;
+    ScreenTransition TransitionComponent;
     [HideInInspector] public TextMeshProUGUI TitleText;
     [HideInInspector] public TextMeshProUGUI SubText;
     [HideInInspector] public TextMeshProUGUI ExitText;
@@ -26,6 +26,9 @@ public class BlackScreen : MonoBehaviour {
 
     // Start is called before the first frame update
     void Start() {
+
+        TransitionComponent = FindAnyObjectByType<ScreenTransition>();
+
         TitleText = this.gameObject.transform.GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
         TitleText.color = new Color(1, 1, 1, 0);
         SubText = this.gameObject.transform.GetChild(1).gameObject.GetComponent<TextMeshProUGUI>();
