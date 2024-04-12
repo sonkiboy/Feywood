@@ -7,33 +7,39 @@ public class Countdown : MonoBehaviour
     [SerializeField] GameObject Sis;
     [SerializeField] Transform sisSpawn;
     PlayerController controller;
+    public ScreenTransition transition;
 
-
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
-        
+        controller = FindFirstObjectByType<PlayerController>();
     }
 
-    // Update is called once per frame
-    void Update()
+
+    private void OnTriggerEnter(Collider Counting)
     {
-        
-    }
-    private void OnCollisionEnter(Collision Counting)
-    {
-        if (Counting.gameObject.name.Equals("Player"))
+        if (Counting.gameObject.tag == "Player")
         {
             controller.currentRestriction = PlayerController.MovementRestrictions.noMovement;
-            timeElapse();
-        }
+            // timeElapse();
+            transition.Out(
+            () =>
+            {
 
+                Destroy(Sis);
+                Instantiate(Sis, sisSpawn.transform.position, Quaternion.identity);
+                transition.In();
+            }
+            );
+
+            Debug.Log("fade");
+        }
+        Debug.Log("collided");
     }
 
     IEnumerator timeElapse()
     {
-        yield return new WaitForSeconds(3);
-        Destroy(Sis);
-        Instantiate(Sis,sisSpawn.transform.position, Quaternion.identity);
+         /*new WaitForSeconds(3);*/
+        
+        yield return null;
     }
 }

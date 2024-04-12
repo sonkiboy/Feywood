@@ -81,13 +81,13 @@ public class SisterPatrol: MonoBehaviour
                 // if timer is less than the set wait time
                 if(timer < waitTime)
                 {
-                    Debug.Log("Waiting");
+                    //Debug.Log("Waiting");
                     // add time.deltatime until no longer true
                     timer += Time.deltaTime;
                 }
                 else
                 {
-                    Debug.Log("Moving");
+                    //Debug.Log("Moving");
                     GotoNextPoint();
                     timer = 0;
                 }
