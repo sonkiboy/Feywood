@@ -27,7 +27,10 @@ public class Countdown : MonoBehaviour
 
                 Destroy(Sis);
                 Instantiate(Sis, sisSpawn.transform.position, Quaternion.identity);
-                transition.In();
+                transition.In(() =>
+                {
+                    controller.currentRestriction = PlayerController.MovementRestrictions.None;
+                });
             }
             );
 
