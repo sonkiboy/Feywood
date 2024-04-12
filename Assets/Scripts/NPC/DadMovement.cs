@@ -26,9 +26,11 @@ public class DadMovement : MonoBehaviour
 
     public Transform[] points;
     private int destPoint = 0;
-    
+
     float timer = 0;
     float waitTime = 3f;
+    float lerpDuration = 1f;
+    bool isRotating = false;
     //bool waitToMove = true;
 
     private void Awake()
@@ -38,8 +40,8 @@ public class DadMovement : MonoBehaviour
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        
-        
+
+
 
         // Disabling auto-braking allows for continuous movement
         // between points (ie, the agent doesn't slow down as it
@@ -71,23 +73,36 @@ public class DadMovement : MonoBehaviour
         // close to the current one.
         if (!agent.pathPending && agent.remainingDistance < 0.005f)
         {
-           
-                // if timer is less than the set wiat time
-                if(timer < waitTime)
+            if(destPoint == 0)
+            {
+                Debug.Log("At Kitchen Table");
+                if (!isRotating)
                 {
-                    //Debug.Log("Waiting");
-                    // add time.deltatime until no longer true
-                    timer += Time.deltaTime;
+                    Debug.Log("Coroutine");
+                    StartCoroutine(RotateNPC());
                 }
-                else
-                {
-                    //Debug.Log("Moving");
-                    GotoNextPoint();
-                    timer = 0;
+            }
+            else
+            {
+                Debug.Log("Stop Rotation");
+                isRotating = false;
+            }
+            // if timer is less than the set wait time
+            if (timer < waitTime)
+            {
+                //Debug.Log("Waiting");
+                // add time.deltatime until no longer true
+                timer += Time.deltaTime;
+            }
+            else
+            {
+                //Debug.Log("Moving");
+                GotoNextPoint();
+                timer = 0;
                 //waitToMove= false;
-                }
+            }
 
-           
+
         }
         //else
         //{
@@ -98,12 +113,32 @@ public class DadMovement : MonoBehaviour
 
     }
 
+    IEnumerator RotateNPC()
+    {
+        Debug.Log("Rotating");
+        isRotating = true;
+        float timeElapsed = 0;
+        Quaternion startRotation = transform.rotation;
+        Quaternion targetRotation = transform.rotation * Quaternion.Euler(0, 110, 0);
+
+        while (timeElapsed < lerpDuration)
+        {
+            transform.rotation = Quaternion.Slerp(startRotation, targetRotation, timeElapsed / lerpDuration);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        transform.rotation = targetRotation;
+        yield return new WaitForSeconds(3f);
+        isRotating = false;
+        //this.transform.Rotate(0, 110, 0);
+    }
+
     void CheckSight()
     {
         //Debug.Log($"Vision collider: center {visionCollider.center} size: {visionCollider.size} rotation: {visionCollider.gameObject.transform.rotation}");
         Collider[] foundColliders = Physics.OverlapBox(visionCollider.bounds.center, visionCollider.size, visionCollider.gameObject.transform.rotation, visionCollider.includeLayers);
-        
-        
+
+
         //Debug.Log($"Found: {foundColliders.Length}");
         if (foundColliders.Length > 0)
         {
@@ -126,7 +161,7 @@ public class DadMovement : MonoBehaviour
 
     }
 
-    
+
 
     // called when player is caught
     private void CatchPlayer()
@@ -147,6 +182,6 @@ public class DadMovement : MonoBehaviour
         DataManager.instance.Data.heldObj = null;
 
 
-        StartCoroutine(DataManager.instance.HintLoad(3f,GetComponent<GameOverScreen>()));
+        StartCoroutine(DataManager.instance.HintLoad(3f, GetComponent<GameOverScreen>()));
     }
 }
