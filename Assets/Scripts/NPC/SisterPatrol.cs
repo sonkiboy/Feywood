@@ -7,7 +7,7 @@ using UnityEngine.AI;
 using UnityEngine.UIElements;
 using Color = UnityEngine.Color;
 
-public class SisPatrol: MonoBehaviour
+public class SisterPatrol: MonoBehaviour
 {
     #region Object and Component Refrences
 
