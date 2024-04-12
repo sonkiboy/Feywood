@@ -20,7 +20,7 @@ public class Gate : MonoBehaviour
                 Debug.Log("Gate Opened!");
                 //this.GetComponentInChildren<GameOverScreen>().PlayHint();
 
-                DataManager.instance.HintLoad(1, 3, this.GetComponentInChildren<GameOverScreen>());
+                DataManager.instance.HintLoad(3, this.GetComponentInChildren<GameOverScreen>());
             }
         }
     }

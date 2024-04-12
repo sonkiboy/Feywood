@@ -31,7 +31,7 @@ public class GameOverScreen : MonoBehaviour
     //        BlackScreenTextComponent.Enter();
     //    }
     //}
-    public IEnumerator PlayHint(float duration)
+    public void PlayHint()
     {
         if (!string.IsNullOrWhiteSpace(TitleText)) BlackScreenTextComponent.TitleText.text = TitleText;
         BlackScreenTextComponent.SubText.text = "Tip:\n" + HintText;
@@ -39,17 +39,17 @@ public class GameOverScreen : MonoBehaviour
         
         BlackScreenTextComponent.Enter();
 
-        yield return new WaitForSeconds(duration);
+      
 
+
+    }
+
+    public void StopHint()
+    {
         BlackScreenTextComponent.Exit();
 
     }
 
-
-    public void StopHint()
-    {
-
-    }
 
     // H: I don't think we need this method, trying to keep it in the Data Manager script
     public void Exit()

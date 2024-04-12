@@ -3,6 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.InputSystem;
+using System.Diagnostics.Tracing;
+using UnityEngine.InputSystem.Utilities;
+using System;
+using UnityEngine.ProBuilder;
 
 // SAVE AND LOAD SYSTEM TAKEN FROM "SHAPED BY RAIN STUDIOS" ON YOUTUBE: https://youtu.be/aUi9aijvpgs?si=zG_XG2aithbQpy7E https://youtu.be/ijVA5Z-Mbh8?si=4_8k6C5QAXMqG7HU
 public class DataManager : MonoBehaviour
@@ -11,6 +16,10 @@ public class DataManager : MonoBehaviour
     List<IDataPersistance> dataPersistances = new List<IDataPersistance>();
 
     public GameData Data;
+
+    private IDisposable ButtonListener;
+
+    GameOverScreen gameOverData;
 
     public static DataManager instance { get; private set; }
 
@@ -31,6 +40,8 @@ public class DataManager : MonoBehaviour
     {
         SceneManager.sceneLoaded += OnSceneLoaded;
         SceneManager.sceneUnloaded += OnSceneUnloaded;
+
+        
 
     }
 
@@ -154,12 +165,12 @@ public class DataManager : MonoBehaviour
 
     }
 
-    public IEnumerator HintLoad(float fadeTime, float waitTime, GameOverScreen hintData)
+    public IEnumerator HintLoad(float waitTime, GameOverScreen hintData)
     {
         PlayerController player = GameObject.FindObjectOfType<PlayerController>();
         ScreenTransition fade = GameObject.FindAnyObjectByType<ScreenTransition>();
 
-        GameObject hintObj = null;
+        gameOverData = hintData;
 
         // restrict the player movement
         player.currentRestriction = PlayerController.MovementRestrictions.noMovement;
@@ -173,26 +184,32 @@ public class DataManager : MonoBehaviour
 
         
 
-        StartCoroutine(hintData.PlayHint(waitTime));
+        hintData.PlayHint();
 
+        ButtonListener = InputSystem.onAnyButtonPress.Call(OnAnyButtonPressed);
 
         
 
-        yield return new WaitForSeconds(waitTime/2);
+        yield return new WaitForSeconds(waitTime);
 
         // Load the game
         LoadGame();
 
 
 
-        // fade back in
-        if (fade != null)
-        {
-            //fade.In();
-        }
+
+    }
+
+    void OnAnyButtonPressed(InputControl button)
+    {
+        
+
+        ButtonListener.Dispose();
+
+        gameOverData.StopHint();
+
 
         // give player movement
-        player.currentRestriction = PlayerController.MovementRestrictions.None;
-
+        GameObject.FindObjectOfType<PlayerController>().currentRestriction = PlayerController.MovementRestrictions.None;
     }
 }
