@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using DialogueUI;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UIElements;
@@ -28,8 +29,9 @@ public class SisterPatrol: MonoBehaviour
     private int destPoint = 0;
     
     float timer = 0;
-    float waitTime = 4f;
+    float waitTime = 5f;
     //bool waitToMove = true;
+    public bool doneLooking = false;
 
     private void Awake()
     {
@@ -61,7 +63,11 @@ public class SisterPatrol: MonoBehaviour
 
         // Choose the next point in the array as the destination,
         // cycling to the start if necessary.
-        destPoint = (destPoint + 1) % points.Length;
+        destPoint = (destPoint + 1);
+        if(destPoint == 5)
+        {
+            doneLooking= true;
+        }
     }
 
 
@@ -129,6 +135,6 @@ public class SisterPatrol: MonoBehaviour
 
         DataManager.instance.LoadGame();
 
-        //player.GetComponent<PlayerController>().RespawnPlayer();
+        player.GetComponent<PlayerController>().RespawnPlayer();
     }
 }
