@@ -29,7 +29,7 @@ RectTransform:
   m_GameObject: {fileID: 901045581123726282}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3294337182908771706}
@@ -117,6 +117,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   material: {fileID: 2100000, guid: 4b1a99dfcb986d24d832e18ce11dcc35, type: 2}
   Smoothing: 0.5
+  color: {r: 0, g: 0, b: 0, a: 1}
+  TransitionImg: {fileID: 0}
   FadeInDuration: 2
   FadeInStyle: 5
   FadeOutDuration: 2
