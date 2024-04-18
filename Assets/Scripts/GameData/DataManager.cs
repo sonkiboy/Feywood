@@ -114,7 +114,7 @@ public class DataManager : MonoBehaviour
 
         List<IDataPersistance> list = new List<IDataPersistance>(objs);
 
-        Debug.Log($"Found {list.Count}");
+        //Debug.Log($"Found {list.Count}");
 
         return list;
     }

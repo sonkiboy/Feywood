@@ -24,9 +24,9 @@ TagManager:
   - PlayerController
   - NavMesh
   - Post process
-  - 
-  - 
-  - 
+  - Pickup
+  - Wall
+  - Room
   - 
   - 
   - 

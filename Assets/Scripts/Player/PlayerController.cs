@@ -16,7 +16,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     GameObject model;
     Rigidbody rb;
     Transform groundCheck;
-    Vector3 groundCheckDimentions = new Vector3(.2f, .5f, .2f);
+    
 
     Transform heldItemPos;
     BoxCollider ghostItemCollider;
@@ -40,6 +40,9 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     public Vector3 RespawnPos;
 
     public string CurrentRoom;
+
+    public LayerMask GroundMask;
+    [SerializeField] Vector3 groundCheckDimentions = new Vector3(.2f, .5f, .2f);
 
     public enum PlayerStates
     {
@@ -644,17 +647,25 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     {
         //Debug.Log($"Player collision detected: {collision.gameObject.name}");
         // check if to see if the collision is with ground underneath it
-        Collider[] checkCollisions = Physics.OverlapBox(groundCheck.position, groundCheckDimentions);
-        if(checkCollisions == null)
+        Collider[] checkCollisions = Physics.OverlapBox(groundCheck.position, groundCheckDimentions, Quaternion.identity,GroundMask);
+
+        //Debug.Log($"found {checkCollisions.Length}");
+
+        if(checkCollisions.Length == 0)
         {
+            //Debug.Log("Found no ground collision, is not grounded");
             isGrounded = false;
         }
         else
         {
             //playerState = PlayerStates.Idle;
+
+            //Debug.Log($"Found {checkCollisions.Length} ground collision, is grounded on {checkCollisions[0].gameObject}");
             isGrounded = true;
         }
     }
+
+    
 
     private void OnCollisionExit(Collision collision)
     {
