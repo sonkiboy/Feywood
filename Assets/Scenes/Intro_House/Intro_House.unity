@@ -10747,6 +10747,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: bfb8a025505d36341bbc39f9f41ff3db, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 36babcf63fb6eac4aa40f16720346c31, type: 2}
     - target: {fileID: 919132149155446097, guid: bfb8a025505d36341bbc39f9f41ff3db, type: 3}
       propertyPath: m_Name
       value: Bookshelf
@@ -36054,6 +36058,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -2377570719066984362, guid: 3bda77bb06249294e8714835822ae817, type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: -2377570719066984362, guid: 3bda77bb06249294e8714835822ae817, type: 3}
+      propertyPath: m_Materials.Array.data[2]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0b8e5af1f3f96a54ca73e42e31696e56, type: 2}
+    - target: {fileID: -2377570719066984362, guid: 3bda77bb06249294e8714835822ae817, type: 3}
+      propertyPath: m_Materials.Array.data[3]
+      value: 
+      objectReference: {fileID: -2416719745063247026, guid: e527123827ba24d4fa66d4eee33144e7, type: 3}
+    - target: {fileID: -2377570719066984362, guid: 3bda77bb06249294e8714835822ae817, type: 3}
+      propertyPath: m_Materials.Array.data[4]
+      value: 
+      objectReference: {fileID: -2416719745063247026, guid: 80003bc453a48ad498036d9a5db7dfbf, type: 3}
+    - target: {fileID: -2377570719066984362, guid: 3bda77bb06249294e8714835822ae817, type: 3}
+      propertyPath: m_Materials.Array.data[5]
+      value: 
+      objectReference: {fileID: -2416719745063247026, guid: 80003bc453a48ad498036d9a5db7dfbf, type: 3}
     - target: {fileID: 919132149155446097, guid: 3bda77bb06249294e8714835822ae817, type: 3}
       propertyPath: m_Name
       value: Bed
@@ -44753,6 +44777,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 9e186eabed7e01d4f883ef8fde8607f6, type: 3}
+      propertyPath: m_Materials.Array.data[1]
+      value: 
+      objectReference: {fileID: 2100000, guid: f96276358855fc546b888137812e236c, type: 2}
     - target: {fileID: 919132149155446097, guid: 9e186eabed7e01d4f883ef8fde8607f6, type: 3}
       propertyPath: m_Name
       value: BedsideTable
