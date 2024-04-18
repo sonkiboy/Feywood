@@ -26270,6 +26270,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5495478010744653974, guid: e555eafb391e96f4196084375e7ce43a, type: 3}
+      propertyPath: CaughtVingetteColor.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495478010744653974, guid: e555eafb391e96f4196084375e7ce43a, type: 3}
+      propertyPath: CaughtVingetteColor.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5495478010744653974, guid: e555eafb391e96f4196084375e7ce43a, type: 3}
+      propertyPath: CaughtVingetteColor.r
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -44775,6 +44787,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23560dfd83981634fa0e99b700693898, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CatchDelay: 5
   points:
   - {fileID: 1123812037}
   - {fileID: 378071009}

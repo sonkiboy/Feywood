@@ -4,10 +4,11 @@ using System.Drawing;
 using DialogueUI;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.InputSystem.XR;
 using UnityEngine.UIElements;
 using Color = UnityEngine.Color;
 
-public class DadMovement : MonoBehaviour
+public class DadMovement : MonoBehaviour, IDataPersistance
 {
     #region Object and Component Refrences
 
@@ -22,7 +23,12 @@ public class DadMovement : MonoBehaviour
 
     private NavMeshAgent agent;
 
+    SneakUI sneakUI;
+
+
     #endregion
+
+    public float CatchDelay = 1;
 
     public Transform[] points;
     private int destPoint = 0;
@@ -36,6 +42,17 @@ public class DadMovement : MonoBehaviour
     private void Awake()
     {
         visionCollider = transform.Find("SightBounds").GetComponent<BoxCollider>();
+        sneakUI = GameObject.FindAnyObjectByType<SneakUI>();
+    }
+
+    public void LoadData(GameData data)
+    {
+        StartCoroutine(StartHunting());
+    }
+
+    public void SaveData(ref GameData data)
+    {
+
     }
     void Start()
     {
@@ -109,7 +126,7 @@ public class DadMovement : MonoBehaviour
 
         //}
 
-        CheckSight();
+        
 
     }
 
@@ -133,7 +150,39 @@ public class DadMovement : MonoBehaviour
         //this.transform.Rotate(0, 110, 0);
     }
 
-    void CheckSight()
+    IEnumerator StartHunting()
+    {
+        while (true)
+        {
+            int count = 0;
+            // if the player is in line of sight...
+            while (CheckSight())
+            {
+
+                sneakUI.CurrentState = SneakUI.SneakStates.Spotted;
+
+                if(count > CatchDelay * 60)
+                {
+                    CatchPlayer();
+                    break;
+                }
+
+                yield return null;
+                count++;
+            }
+
+            if(sneakUI.CurrentState == SneakUI.SneakStates.Spotted)
+            {
+                sneakUI.CurrentState = SneakUI.SneakStates.Exposed;
+            }
+            
+
+            yield return null;
+        }
+    }
+
+
+    bool CheckSight()
     {
         //Debug.Log($"Vision collider: center {visionCollider.center} size: {visionCollider.size} rotation: {visionCollider.gameObject.transform.rotation}");
         Collider[] foundColliders = Physics.OverlapBox(visionCollider.bounds.center, visionCollider.size, visionCollider.gameObject.transform.rotation, visionCollider.includeLayers);
@@ -151,13 +200,16 @@ public class DadMovement : MonoBehaviour
                 {
                     if (controller.heldObject.name == "Key" && controller.IsHidden == false && controller.CurrentRoom == "Kitchen")
                     {
-                        controller.heldObject = null;
-                        CatchPlayer();
+                        
+                        return true;
                     }
                 }
 
             }
+
         }
+       
+        return false;
 
     }
 
@@ -166,6 +218,10 @@ public class DadMovement : MonoBehaviour
     // called when player is caught
     private void CatchPlayer()
     {
+        StopCoroutine(StartHunting());
+
+        GameObject.FindAnyObjectByType<PlayerController>().heldObject = null;
+
         Debug.Log("Dad caught Player!");
 
         this.GetComponent<DialogueTrigger>().TriggerDialogue();
