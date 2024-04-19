@@ -27,6 +27,8 @@ namespace DialogueUI
 
         public bool isRespawnDialogue = false;
 
+        public bool dialogueEvent2 = false;
+
         public float typingSpeed = 0.2f;
 
         private void Start()
@@ -108,6 +110,10 @@ namespace DialogueUI
             {
                 onRespawnDialogueEnd.Invoke();
             }
+            else if(dialogueEvent2)
+            {
+                onDialogueEnd2.Invoke();
+            }
             else
             {
                 onDialogueEnd.Invoke();
@@ -125,6 +131,7 @@ namespace DialogueUI
         }
 
         public UnityEvent onDialogueEnd;
+        public UnityEvent onDialogueEnd2;
         public UnityEvent onRespawnDialogueEnd;
     }
 }

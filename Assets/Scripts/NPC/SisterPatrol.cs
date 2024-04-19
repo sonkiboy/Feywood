@@ -8,7 +8,7 @@ using UnityEngine.AI;
 using UnityEngine.UIElements;
 using Color = UnityEngine.Color;
 
-public class SisterPatrol: MonoBehaviour
+public class SisterPatrol : MonoBehaviour
 {
     #region Object and Component Refrences
 
@@ -27,7 +27,10 @@ public class SisterPatrol: MonoBehaviour
 
     public Transform[] points;
     private int destPoint = 0;
-    
+
+    public GameObject moveGO;
+    bool isRotating = false;
+    float lerpDuration = 1f;
     float timer = 0;
     float waitTime = 5f;
     //bool waitToMove = true;
@@ -39,9 +42,8 @@ public class SisterPatrol: MonoBehaviour
     }
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        
-        
+        agent = transform.parent.GetComponent<NavMeshAgent>();
+
 
         // Disabling auto-braking allows for continuous movement
         // between points (ie, the agent doesn't slow down as it
@@ -50,7 +52,6 @@ public class SisterPatrol: MonoBehaviour
 
         //GotoNextPoint();
     }
-
 
     void GotoNextPoint()
     {
@@ -64,9 +65,9 @@ public class SisterPatrol: MonoBehaviour
         // Choose the next point in the array as the destination,
         // cycling to the start if necessary.
         destPoint = (destPoint + 1);
-        if(destPoint == 5)
+        if (destPoint == 4)
         {
-            doneLooking= true;
+            doneLooking = true;
         }
     }
 
@@ -75,34 +76,69 @@ public class SisterPatrol: MonoBehaviour
     {
         // Choose the next destination point when the agent gets
         // close to the current one.
+        if (doneLooking)
+        {
+            this.enabled = false;
+            moveGO.SetActive(true);
+            this.GetComponent<DialogueTrigger>().TriggerDialogue();
+        }
         if (!agent.pathPending && agent.remainingDistance < 0.005f)
         {
-           
-                // if timer is less than the set wait time
-                if(timer < waitTime)
+            if (destPoint != 0)
+            {
+                Debug.Log("Not at start");
+                if (!isRotating)
                 {
-                    //Debug.Log("Waiting");
-                    // add time.deltatime until no longer true
-                    timer += Time.deltaTime;
+                    Debug.Log("Coroutine");
+                    StartCoroutine(RotateNPC());
                 }
-                else
-                {
-                    //Debug.Log("Moving");
-                    GotoNextPoint();
-                    timer = 0;
-                }
+            }
 
-           
+            // if timer is less than the set wait time
+            if (timer < waitTime)
+            {
+                //Debug.Log("Waiting");
+                // add time.deltatime until no longer true
+                timer += Time.deltaTime;
+            }
+            else
+            {
+                Debug.Log("Moving");
+                GotoNextPoint();
+                timer = 0;
+            }
+
+
         }
         CheckSight();
+    }
+
+    IEnumerator RotateNPC()
+    {
+        Debug.Log("Rotating");
+        isRotating = true;
+        float timeElapsed = 0;
+        Quaternion startRotation = transform.parent.rotation;
+        Quaternion targetRotation = transform.parent.rotation * Quaternion.Euler(0, 110, 0);
+
+        while (timeElapsed < lerpDuration)
+        {
+            transform.parent.rotation = Quaternion.Slerp(startRotation, targetRotation, timeElapsed / lerpDuration);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
+        transform.parent.rotation = targetRotation;
+        yield return new WaitForSeconds(1.5f);
+        isRotating = false;
+        //this.transform.Rotate(0, 110, 0);
     }
 
     void CheckSight()
     {
         //Debug.Log($"Vision collider: center {visionCollider.center} size: {visionCollider.size} rotation: {visionCollider.gameObject.transform.rotation}");
         Collider[] foundColliders = Physics.OverlapBox(visionCollider.bounds.center, visionCollider.size, visionCollider.gameObject.transform.rotation, visionCollider.includeLayers);
-        
-        
+
+
         //Debug.Log($"Found: {foundColliders.Length}");
         if (foundColliders.Length > 0)
         {
@@ -117,7 +153,7 @@ public class SisterPatrol: MonoBehaviour
 
     }
 
-    
+
 
     // called when player is caught
     private void CatchPlayer()
@@ -131,7 +167,7 @@ public class SisterPatrol: MonoBehaviour
 
         DataManager.instance.Data.SpawnPointName = "H&Spawn";
         DataManager.instance.Data.heldObj = null;
-        
+
 
         DataManager.instance.LoadGame();
 
