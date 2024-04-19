@@ -17,8 +17,8 @@ public class SisterMovement : MonoBehaviour
 
     void Start()
     {
-        agent = GetComponent<NavMeshAgent>();
-        
+        agent = transform.parent.GetComponent<NavMeshAgent>();
+        gameObject.SetActive(false);
 
         // Disabling auto-braking allows for continuous movement
         // between points (ie, the agent doesn't slow down as it

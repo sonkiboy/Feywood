@@ -763,7 +763,7 @@ GameObject:
   - component: {fileID: 326015735}
   - component: {fileID: 326015740}
   - component: {fileID: 326015741}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Can Pickup
   m_TagString: Pickup
   m_Icon: {fileID: 0}
@@ -1134,7 +1134,7 @@ GameObject:
   - component: {fileID: 502918659}
   - component: {fileID: 502918658}
   - component: {fileID: 502918657}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube Pickup
   m_TagString: Pickup
   m_Icon: {fileID: 0}
@@ -1576,6 +1576,10 @@ PrefabInstance:
       value: froggy
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 80003bc453a48ad498036d9a5db7dfbf, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 80003bc453a48ad498036d9a5db7dfbf, type: 3}
       propertyPath: m_TagString
       value: Pickup
       objectReference: {fileID: 0}
@@ -1744,7 +1748,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 617340478181218913, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.8
+      value: 2.3
       objectReference: {fileID: 0}
     - target: {fileID: 617340478181218913, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1781,6 +1785,26 @@ PrefabInstance:
     - target: {fileID: 1510864663754906427, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
       propertyPath: Speed
       value: 150
+      objectReference: {fileID: 0}
+    - target: {fileID: 1510864663754906427, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+      propertyPath: GroundMask.m_Bits
+      value: 321
+      objectReference: {fileID: 0}
+    - target: {fileID: 1510864663754906427, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+      propertyPath: climbingMask.m_Bits
+      value: 64
+      objectReference: {fileID: 0}
+    - target: {fileID: 1510864663754906427, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+      propertyPath: groundCheckDimentions.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1510864663754906427, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+      propertyPath: groundCheckDimentions.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1510864663754906427, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
+      propertyPath: groundCheckDimentions.z
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 4845297462593337844, guid: 1448eea39cb7b2b478c4d0f08f7d9815, type: 3}
       propertyPath: m_Name

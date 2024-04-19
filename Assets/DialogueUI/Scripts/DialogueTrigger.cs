@@ -32,6 +32,8 @@ namespace DialogueUI
         public FeywoodPlayerActions playerControls;
         public bool talkable = false;
         public bool isRespawnDialogue = false;
+        public bool useDialogueEnd2 = false;
+        public bool destroyOnFinish = false;
         private InputAction interact;
         private bool withinInteractRange;
 
@@ -43,7 +45,20 @@ namespace DialogueUI
                 {
                     DialogueManager.Instance.isRespawnDialogue = true;
                 }
+                else if (useDialogueEnd2)
+                {
+                    DialogueManager.Instance.dialogueEvent2 = true;
+                }
                 DialogueManager.Instance.StartDialogue(dialogue);
+            }
+            if (destroyOnFinish)
+            {
+                if(talkable)
+                {
+                    withinInteractRange = false;
+                    GetComponentInChildren<CanvasGroup>().alpha = 0;
+                }
+                Destroy(this);
             }
         }
 
@@ -65,7 +80,7 @@ namespace DialogueUI
 
         private void OnTriggerEnter(Collider collision)
         {
-            if (collision.tag == "Player" && talkable)
+            if (collision.tag == "Player" && talkable && this.enabled)
             {
                 withinInteractRange = true;
                 GetComponentInChildren<CanvasGroup>().alpha = 1;
@@ -74,7 +89,7 @@ namespace DialogueUI
 
         private void OnTriggerExit(Collider collision)
         {
-            if(collision.tag == "Player" && talkable)
+            if(collision.tag == "Player" && talkable && this.enabled)
             {
                 withinInteractRange = false;
                 GetComponentInChildren<CanvasGroup>().alpha = 0;
