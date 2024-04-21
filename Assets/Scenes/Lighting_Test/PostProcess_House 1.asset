@@ -32,7 +32,7 @@ MonoBehaviour:
     m_Value: 1
   overlayColor:
     m_OverrideState: 1
-    m_Value: {r: 0.7735849, g: 0.687127, b: 0.63857245, a: 1}
+    m_Value: {r: 0.7264151, g: 0.64462155, b: 0.5996351, a: 1}
     hdr: 0
   start:
     m_OverrideState: 1

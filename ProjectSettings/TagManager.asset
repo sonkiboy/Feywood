@@ -12,6 +12,7 @@ TagManager:
   - Enemy
   - CheckPoint
   - Room
+  - NavMesh
   layers:
   - Default
   - TransparentFX
@@ -23,9 +24,9 @@ TagManager:
   - PlayerController
   - NavMesh
   - Post process
-  - 
-  - 
-  - 
+  - Pickup
+  - Wall
+  - Room
   - 
   - 
   - 
