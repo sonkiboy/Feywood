@@ -16,6 +16,22 @@ using UnityEngine;
 public class Outline : MonoBehaviour {
   private static HashSet<Mesh> registeredMeshes = new HashSet<Mesh>();
 
+  public enum Mode {
+    OutlineAll,
+    OutlineVisible,
+    OutlineHidden,
+    OutlineAndSilhouette,
+    SilhouetteOnly
+  }
+
+  public Mode OutlineMode {
+    get { return outlineMode; }
+    set {
+      outlineMode = value;
+      needsUpdate = true;
+    }
+  }
+
   public Color OutlineColor {
     get { return outlineColor; }
     set {
@@ -24,26 +40,41 @@ public class Outline : MonoBehaviour {
     }
   }
 
-  public float DitherStrength {
-    get { return ditherStrength; }
+  public float OutlineWidth {
+    get { return outlineWidth; }
     set {
-      ditherStrength = value;
+      outlineWidth = value;
       needsUpdate = true;
     }
   }
 
-  [Serializable]
+
+
+    public float DitherStrength {
+        get { return ditherStrength; }
+        set {
+            ditherStrength = value;
+            needsUpdate = true;
+        }
+    }
+
+    [Serializable]
   private class ListVector3 {
     public List<Vector3> data;
   }
 
   [SerializeField]
+  private Mode outlineMode;
+
+  [SerializeField]
   private Color outlineColor = Color.white;
+
+  [SerializeField, Range(0f, 10f)]
+  private float outlineWidth = 2f;
+
 
   [SerializeField, Range(0.0f, 1.0f)]
   private float ditherStrength = 0.5f;
-
-  [Header("Optional")]
 
   [SerializeField, Tooltip("Precompute enabled: Per-vertex calculations are performed in the editor and serialized with the object. "
   + "Precompute disabled: Per-vertex calculations are performed at runtime in Awake(). This may cause a pause for large meshes.")]
@@ -254,9 +285,39 @@ public class Outline : MonoBehaviour {
 
     // Apply properties according to mode
     outlineFillMaterial.SetColor("_OutlineColor", outlineColor);
-    
-    outlineMaskMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.LessEqual);
-    outlineFillMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Greater);
-    outlineFillMaterial.SetFloat("_DitherStrength", ditherStrength);
-  }
+
+    switch (outlineMode) {
+      case Mode.OutlineAll:
+        outlineMaskMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
+        outlineFillMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
+        outlineFillMaterial.SetFloat("_OutlineWidth", outlineWidth);
+        break;
+
+      case Mode.OutlineVisible:
+        outlineMaskMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
+        outlineFillMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.LessEqual);
+        outlineFillMaterial.SetFloat("_OutlineWidth", outlineWidth);
+        break;
+
+      case Mode.OutlineHidden:
+        outlineMaskMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
+        outlineFillMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Greater);
+        outlineFillMaterial.SetFloat("_OutlineWidth", outlineWidth);
+        break;
+
+      case Mode.OutlineAndSilhouette:
+        outlineMaskMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.LessEqual);
+        outlineFillMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Always);
+        outlineFillMaterial.SetFloat("_OutlineWidth", outlineWidth);
+        break;
+
+      case Mode.SilhouetteOnly:
+        outlineMaskMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.LessEqual);
+        outlineFillMaterial.SetFloat("_ZTest", (float)UnityEngine.Rendering.CompareFunction.Greater);
+        outlineFillMaterial.SetFloat("_OutlineWidth", 0f);
+        break;
+    }
+
+        outlineFillMaterial.SetFloat("_DitherStrength", ditherStrength);
+    }
 }
