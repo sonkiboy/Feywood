@@ -15,7 +15,7 @@ ModelImporter:
     resampleCurves: 1
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
-    motionNodeName: <Root Transform>
+    motionNodeName: 
     rigImportErrors: 
     rigImportWarnings: "Copied Avatar Rig Configuration mis-match. Bone length in
       copied configuration does not match position in animation file:\n\t'mixamorig:LeftUpLeg'
@@ -44,7 +44,7 @@ ModelImporter:
       lastFrame: 180
       wrapMode: 0
       orientationOffsetY: 0
-      level: 0
+      level: 11.26
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
