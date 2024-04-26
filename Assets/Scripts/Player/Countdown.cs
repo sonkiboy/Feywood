@@ -12,7 +12,8 @@ public class Countdown : MonoBehaviour
     public ScreenTransition transition;
     private GameObject sisClone;
     private GameObject enableThis;
-
+    private Vector3 lookDir = new Vector3(1, 0, 0);
+    private Vector3 lookDir2 = new Vector3(0, 0, 0);
     private void Start()
     {
         controller = FindFirstObjectByType<PlayerController>();
@@ -33,7 +34,7 @@ public class Countdown : MonoBehaviour
                 Sis.GetComponent<DialogueTrigger>().enabled = true;
                 
                 Sis.transform.GetChild(0).GetComponent<SisterMovement>().enabled = true;
-                sisClone=Instantiate(Sis, sisSpawn.transform.position, Quaternion.identity);
+                sisClone=Instantiate(Sis, sisSpawn.transform.position, Quaternion.LookRotation(lookDir,lookDir2));
                 //enableThis = transform.Find("HideAndSeekPart3").gameObject;
                 Destroy(Sis);
                 transition.In(() =>
