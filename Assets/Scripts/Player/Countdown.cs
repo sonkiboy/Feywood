@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using DialogueUI;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Countdown : MonoBehaviour
@@ -8,6 +10,8 @@ public class Countdown : MonoBehaviour
     [SerializeField] Transform sisSpawn;
     PlayerController controller;
     public ScreenTransition transition;
+    private GameObject sisClone;
+    private GameObject enableThis;
 
     private void Start()
     {
@@ -17,6 +21,7 @@ public class Countdown : MonoBehaviour
 
     private void OnTriggerEnter(Collider Counting)
     {
+        
         if (Counting.gameObject.tag == "Player")
         {
             controller.currentRestriction = PlayerController.MovementRestrictions.noMovement;
@@ -24,9 +29,13 @@ public class Countdown : MonoBehaviour
             transition.Out(
             () =>
             {
-
+                
+                Sis.GetComponent<DialogueTrigger>().enabled = true;
+                
+                Sis.transform.GetChild(0).GetComponent<SisterMovement>().enabled = true;
+                sisClone=Instantiate(Sis, sisSpawn.transform.position, Quaternion.identity);
+                //enableThis = transform.Find("HideAndSeekPart3").gameObject;
                 Destroy(Sis);
-                Instantiate(Sis, sisSpawn.transform.position, Quaternion.identity);
                 transition.In(() =>
                 {
                     controller.currentRestriction = PlayerController.MovementRestrictions.None;

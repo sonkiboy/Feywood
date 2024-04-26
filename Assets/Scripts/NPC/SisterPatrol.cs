@@ -21,6 +21,9 @@ public class SisterPatrol : MonoBehaviour
     // dad's rigidbody
     Rigidbody rb;
 
+    public float CatchDelay = 1;
+    SneakUI sneakUI;
+
     private NavMeshAgent agent;
 
     #endregion
@@ -36,9 +39,27 @@ public class SisterPatrol : MonoBehaviour
     //bool waitToMove = true;
     public bool doneLooking = false;
 
+    
+
     private void Awake()
     {
         visionCollider = transform.Find("SightBounds").GetComponent<BoxCollider>();
+        sneakUI = GameObject.FindAnyObjectByType<SneakUI>();
+    }
+
+    private void OnEnable()
+    {
+        StartCoroutine(StartHunting());
+    }
+
+    public void LoadData(GameData data)
+    {
+
+    }
+
+    public void SaveData(ref GameData data)
+    {
+
     }
     void Start()
     {
@@ -78,6 +99,7 @@ public class SisterPatrol : MonoBehaviour
         // close to the current one.
         if (doneLooking)
         {
+            StopAllCoroutines();
             this.enabled = false;
             moveGO.SetActive(true);
             this.GetComponent<DialogueTrigger>().TriggerDialogue();
@@ -110,7 +132,6 @@ public class SisterPatrol : MonoBehaviour
 
 
         }
-        CheckSight();
     }
 
     IEnumerator RotateNPC()
@@ -133,7 +154,40 @@ public class SisterPatrol : MonoBehaviour
         //this.transform.Rotate(0, 110, 0);
     }
 
-    void CheckSight()
+    IEnumerator StartHunting()
+    {
+        yield return new WaitForSeconds(5f);
+        while (true)
+        {
+            int count = 0;
+            // if the player is in line of sight...
+            while (CheckSight())
+            {
+                Debug.Log(count);
+                sneakUI.CurrentState = SneakUI.SneakStates.Spotted;
+
+                if (count > CatchDelay * 60)
+                {
+                    CatchPlayer();
+                    break;
+                }
+
+                yield return null;
+                count++;
+            }
+
+            if (sneakUI.CurrentState == SneakUI.SneakStates.Spotted)
+            {
+                sneakUI.CurrentState = SneakUI.SneakStates.Exposed;
+            }
+
+
+            yield return null;
+        }
+    }
+
+
+    bool CheckSight()
     {
         //Debug.Log($"Vision collider: center {visionCollider.center} size: {visionCollider.size} rotation: {visionCollider.gameObject.transform.rotation}");
         Collider[] foundColliders = Physics.OverlapBox(visionCollider.bounds.center, visionCollider.size, visionCollider.gameObject.transform.rotation, visionCollider.includeLayers);
@@ -146,21 +200,27 @@ public class SisterPatrol : MonoBehaviour
             {
                 Debug.Log($"Player in Sister's sight");
                 PlayerController controller = foundColliders[0].gameObject.GetComponent<PlayerController>();
-                CatchPlayer();
+                if (controller.IsHidden == false)
+                {
 
+                    return true;
+                }
             }
+
         }
 
+        return false;
+
     }
-
-
 
     // called when player is caught
     private void CatchPlayer()
     {
         Debug.Log("Sister caught Player!");
 
-        this.GetComponent<DialogueTrigger>().TriggerDialogue();
+        StopCoroutine(StartHunting());
+
+        transform.Find("SightBounds").GetComponent<DialogueTrigger>().TriggerDialogue();
 
         DataManager.instance.SaveGame();
 
