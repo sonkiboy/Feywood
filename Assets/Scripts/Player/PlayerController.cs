@@ -372,15 +372,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     {
         Debug.DrawRay(this.transform.position, model.transform.TransformDirection(Vector3.forward), Color.blue);
 
-        if (isGrounded && moveDirection != Vector2.zero)
-        {
-            animator.SetTrigger("Run");
-        }
-        else if (isGrounded && moveDirection == Vector2.zero)
-        {
-            animator.SetTrigger("Idle");
-
-        }
+        // updates the animation
+        AnimationUpdate();
 
 
         switch (currentRestriction)
@@ -496,11 +489,50 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         rb.velocity = newPos;
     }
 
+    private void AnimationUpdate()
+    {
+        if (isGrounded)
+        {
+            if (moveDirection == Vector2.zero && !animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            {
+                // idle
+                Debug.Log("Animating Idle");
+
+                animator.SetTrigger("Idle");
+            }
+            else if (moveDirection != Vector2.zero && !animator.GetCurrentAnimatorStateInfo(0).IsName("Slow Run"))
+            {
+                // run
+
+                Debug.Log("Animating Run");
+
+
+                animator.SetTrigger("Run");
+            }
+        }
+        else
+        {
+            if(rb.velocity.y < 0f && !animator.GetCurrentAnimatorStateInfo(0).IsName("Falling"))
+            {
+                Debug.Log("Animating Falling");
+
+                animator.SetTrigger("Falling");
+            }
+        }
+
+    }
     void Jump(InputAction.CallbackContext context)
     {
-        animator.SetTrigger("Jump");
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jumping"))
+        {
+            Debug.Log("Animating Jump");
 
-        if(currentRestriction == MovementRestrictions.None)
+
+            animator.SetTrigger("Jump");
+        }
+        
+
+        if (currentRestriction == MovementRestrictions.None)
         {
             //playerState = PlayerStates.Jumping;
             //Debug.Log("Jump hit");
