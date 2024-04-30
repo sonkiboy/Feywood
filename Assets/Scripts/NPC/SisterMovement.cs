@@ -8,6 +8,7 @@ using UnityEngine.AI;
 public class SisterMovement : MonoBehaviour
 {
     public Transform[] points;
+    [SerializeField] bool setActiveOnAwake = false;
     private int destPoint = 0;
     private NavMeshAgent agent;
     [SerializeField] Collider agentCollider;
@@ -18,8 +19,14 @@ public class SisterMovement : MonoBehaviour
     void Start()
     {
         agent = transform.parent.GetComponent<NavMeshAgent>();
-        gameObject.SetActive(false);
-
+        if(setActiveOnAwake)
+        {
+            gameObject.SetActive(true);
+        }
+        else
+        {
+            gameObject.SetActive(false);
+        }
         // Disabling auto-braking allows for continuous movement
         // between points (ie, the agent doesn't slow down as it
         // approaches a destination point).
@@ -30,6 +37,7 @@ public class SisterMovement : MonoBehaviour
     //has agent go to next point in the array 
     void GotoNextPoint()
     {
+        Debug.Log("Moving to Next Point");
         this.GetComponent<BoxCollider>().enabled = false;
         // Returns if no points have been set upw
         if (points.Length == 0)
