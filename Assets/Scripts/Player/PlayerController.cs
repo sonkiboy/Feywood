@@ -25,6 +25,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     SneakUI sneakIcon;
 
+    Animator animator;
+
     #endregion
 
     public FeywoodPlayerActions playerControls;
@@ -68,7 +70,37 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     [SerializeField] public MovementRestrictions currentRestriction = MovementRestrictions.None;
 
-    PlayerStates playerState = PlayerStates.Idle;
+    PlayerStates _currentState = PlayerStates.Idle;
+
+    PlayerStates playerState
+    {
+        get
+        {
+            return _currentState;
+        }
+
+        set
+        {
+            _currentState = value;
+
+            switch (_currentState)
+            {
+                case (PlayerStates.Idle):
+
+                    break;
+
+                case (PlayerStates.Walking):
+
+                    break;
+
+                case PlayerStates.Running:
+
+                    break;
+            }
+
+                
+        }
+    }
 
     Vector2 restrictedDirection;
 
@@ -312,8 +344,10 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         if(GameObject.Find("SneakIcon") != null)
         {
             //Debug.Log("Sneak icon found");
-            sneakIcon = GameObject.Find("SneakIcon").GetComponent<SneakUI>();
+            sneakIcon = GameObject.FindAnyObjectByType<SneakUI>();
         }
+
+        animator = model.GetComponent<Animator>();
 
         #endregion
         
@@ -336,7 +370,11 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     // Update is called once per frame
     void Update()
     {
-        Debug.DrawRay(this.transform.position, model.transform.TransformDirection(Vector3.forward),Color.blue);
+        Debug.DrawRay(this.transform.position, model.transform.TransformDirection(Vector3.forward), Color.blue);
+
+        // updates the animation
+        AnimationUpdate();
+
 
         switch (currentRestriction)
         {
@@ -451,9 +489,50 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         rb.velocity = newPos;
     }
 
+    private void AnimationUpdate()
+    {
+        if (isGrounded)
+        {
+            if (moveDirection == Vector2.zero && !animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            {
+                // idle
+                Debug.Log("Animating Idle");
+
+                animator.SetTrigger("Idle");
+            }
+            else if (moveDirection != Vector2.zero && !animator.GetCurrentAnimatorStateInfo(0).IsName("Slow Run"))
+            {
+                // run
+
+                Debug.Log("Animating Run");
+
+
+                animator.SetTrigger("Run");
+            }
+        }
+        else
+        {
+            if(rb.velocity.y < 0f && !animator.GetCurrentAnimatorStateInfo(0).IsName("Falling"))
+            {
+                Debug.Log("Animating Falling");
+
+                animator.SetTrigger("Falling");
+            }
+        }
+
+    }
     void Jump(InputAction.CallbackContext context)
     {
-        if(currentRestriction == MovementRestrictions.None)
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jumping"))
+        {
+            Debug.Log("Animating Jump");
+
+
+            animator.SetTrigger("Jump");
+        }
+        
+
+        if (currentRestriction == MovementRestrictions.None)
         {
             //playerState = PlayerStates.Jumping;
             //Debug.Log("Jump hit");
