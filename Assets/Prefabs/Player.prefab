@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6513165966864670803}
+  - component: {fileID: 3477340920767371144}
   m_Layer: 3
   m_Name: Model
   m_TagString: Untagged
@@ -34,6 +35,27 @@ Transform:
   - {fileID: 8107937923941470762}
   m_Father: {fileID: 617340478181218913}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!95 &3477340920767371144
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921721874405695909}
+  m_Enabled: 1
+  m_Avatar: {fileID: 9000000, guid: 493d1d82f202df84394df28b541a7ae7, type: 3}
+  m_Controller: {fileID: 9100000, guid: 508aedbe0792b4500b21b8a5b4bef69a, type: 2}
+  m_CullingMode: 1
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &4113450315932506132
 GameObject:
   m_ObjectHideFlags: 0
@@ -272,7 +294,7 @@ MonoBehaviour:
     m_Bits: 321
   groundCheckDimentions: {x: 0.2, y: 0.5, z: 0.2}
   currentRestriction: 0
-  Speed: 175
+  Speed: 150
   JumpForce: 300
   climbingMask:
     serializedVersion: 2
@@ -305,7 +327,7 @@ Rigidbody:
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
-  m_CollisionDetection: 0
+  m_CollisionDetection: 2
 --- !u!136 &8459022282917449246
 CapsuleCollider:
   m_ObjectHideFlags: 0
