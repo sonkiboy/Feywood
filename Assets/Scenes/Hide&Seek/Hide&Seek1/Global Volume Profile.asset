@@ -18,7 +18,7 @@ MonoBehaviour:
     m_Value: 1
   overlayColor:
     m_OverrideState: 1
-    m_Value: {r: 0.8113208, g: 0.72330016, b: 0.73710614, a: 1}
+    m_Value: {r: 0.50677735, g: 0.40205592, b: 0.6132076, a: 1}
     hdr: 0
   start:
     m_OverrideState: 1
@@ -56,13 +56,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.42235172, y: 0.42816275, z: 1, w: 0}
+    m_Value: {x: 0.5985165, y: 0.5342035, z: 1, w: 0}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.8360292, z: 0.77116346, w: 0}
+    m_Value: {x: 0.5160444, y: 0.7186307, z: 1, w: 0}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 1, y: 0.9844314, z: 0.69403166, w: 0}
+    m_Value: {x: 1, y: 0.79018134, z: 0.34445524, w: 0}
   shadowsStart:
     m_OverrideState: 0
     m_Value: 0
