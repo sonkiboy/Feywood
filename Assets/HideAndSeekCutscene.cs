@@ -12,6 +12,7 @@ public class HideAndSeekCutscene : MonoBehaviour
     private Transform startPosition;
 
     bool startSequence = false;
+    bool endSequence = false;
     GameObject sister;
     GameObject hand;
     PlayerController controller;
@@ -34,11 +35,12 @@ public class HideAndSeekCutscene : MonoBehaviour
             Debug.Log("Moving Hand");
             hand.transform.position = Vector3.MoveTowards(hand.transform.position, grabPosition.position, speed * Time.deltaTime);
         }
-        if((hand.transform.position - grabPosition.position).magnitude < 5f)
+        if((hand.transform.position - grabPosition.position).magnitude < 1f && !endSequence)
         {
+            endSequence = true;
             Debug.Log("Demo Over");
             startSequence = false;
-            StartCoroutine(DataManager.instance.HintLoad(3f, this.GetComponent<GameOverScreen>()));
+            StartCoroutine(DataManager.instance.HintLoad(3f, GetComponent<GameOverScreen>()));
         }
     }
 
