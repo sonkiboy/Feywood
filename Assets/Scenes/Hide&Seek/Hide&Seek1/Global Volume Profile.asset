@@ -1,5 +1,31 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2737872101440176453
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e0ede770ec247d49bcb5e1feccd8d03, type: 3}
+  m_Name: ScreenGradient
+  m_EditorClassIdentifier: 
+  active: 1
+  intensity:
+    m_OverrideState: 1
+    m_Value: 1
+  overlayColor:
+    m_OverrideState: 1
+    m_Value: {r: 0.8113208, g: 0.72330016, b: 0.73710614, a: 1}
+    hdr: 0
+  start:
+    m_OverrideState: 1
+    m_Value: 0.5
+  end:
+    m_OverrideState: 1
+    m_Value: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14,6 +40,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   components:
   - {fileID: 3954471207579275478}
+  - {fileID: -2737872101440176453}
 --- !u!114 &3954471207579275478
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -29,13 +56,13 @@ MonoBehaviour:
   active: 1
   shadows:
     m_OverrideState: 1
-    m_Value: {x: 0.6197922, y: 0.640025, z: 1, w: 0}
+    m_Value: {x: 0.42235172, y: 0.42816275, z: 1, w: 0}
   midtones:
     m_OverrideState: 1
-    m_Value: {x: 0.69820505, y: 0.97155833, z: 1, w: 0}
+    m_Value: {x: 1, y: 0.8360292, z: 0.77116346, w: 0}
   highlights:
     m_OverrideState: 1
-    m_Value: {x: 0.9449374, y: 1, z: 0.7749334, w: 0}
+    m_Value: {x: 1, y: 0.9844314, z: 0.69403166, w: 0}
   shadowsStart:
     m_OverrideState: 0
     m_Value: 0
