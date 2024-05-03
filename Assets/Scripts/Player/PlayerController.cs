@@ -491,6 +491,11 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     private void AnimationUpdate()
     {
+        Vector2 modelDirection = new Vector2(model.transform.TransformDirection(Vector3.forward).x, model.transform.TransformDirection(Vector3.forward).z);
+        //Debug.Log($"Setting speed to {Vector2.Dot(modelDirection, moveDirection)}. Move Direction: {moveDirection} | Model Direction: {modelDirection}");
+
+        animator.SetFloat("Speed", Vector2.Dot(modelDirection, moveDirection));
+
         if (isGrounded)
         {
             if (moveDirection == Vector2.zero && !animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
@@ -523,7 +528,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     }
     void Jump(InputAction.CallbackContext context)
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jumping"))
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jumping") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Falling"))
         {
             Debug.Log("Animating Jump");
 
