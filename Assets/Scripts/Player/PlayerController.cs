@@ -495,33 +495,35 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         //Debug.Log($"Setting speed to {Vector2.Dot(modelDirection, moveDirection)}. Move Direction: {moveDirection} | Model Direction: {modelDirection}");
 
         animator.SetFloat("Speed", Vector2.Dot(modelDirection, moveDirection));
-
-        if (isGrounded)
+        if (pushingObj == null)
         {
-            if (moveDirection == Vector2.zero && !animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+            if (isGrounded)
             {
-                // idle
-                Debug.Log("Animating Idle");
+                if (moveDirection == Vector2.zero && !animator.GetCurrentAnimatorStateInfo(0).IsName("Idle"))
+                {
+                    // idle
+                    Debug.Log("Animating Idle");
 
-                animator.SetTrigger("Idle");
+                    animator.SetTrigger("Idle");
+                }
+                else if (moveDirection != Vector2.zero && !animator.GetCurrentAnimatorStateInfo(0).IsName("Slow Run"))
+                {
+                    // run
+
+                    Debug.Log("Animating Run");
+
+
+                    animator.SetTrigger("Run");
+                }
             }
-            else if (moveDirection != Vector2.zero && !animator.GetCurrentAnimatorStateInfo(0).IsName("Slow Run"))
+            else
             {
-                // run
+                if (rb.velocity.y < 0f && !animator.GetCurrentAnimatorStateInfo(0).IsName("Falling"))
+                {
+                    Debug.Log("Animating Falling");
 
-                Debug.Log("Animating Run");
-
-
-                animator.SetTrigger("Run");
-            }
-        }
-        else
-        {
-            if(rb.velocity.y < 0f && !animator.GetCurrentAnimatorStateInfo(0).IsName("Falling"))
-            {
-                Debug.Log("Animating Falling");
-
-                animator.SetTrigger("Falling");
+                    animator.SetTrigger("Falling");
+                }
             }
         }
 
@@ -629,6 +631,14 @@ public class PlayerController : MonoBehaviour, IDataPersistance
 
     IEnumerator PushPull(GameObject obj)
     {
+        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Pull") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Push"))
+        {
+            Debug.Log("Animating Jump");
+
+
+            animator.SetTrigger("Push");
+        }
+
         isGrounded = false;
 
         //Debug.Log("Hit");

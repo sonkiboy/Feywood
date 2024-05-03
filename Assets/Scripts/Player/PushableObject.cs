@@ -8,7 +8,7 @@ public class PushableObject : MonoBehaviour
 
     Collider _collider;
     Vector3 colliderSize;
-    [SerializeField] float pointOffset = .3f; 
+    [SerializeField] float pointOffset = .9f; 
 
     #endregion
 
