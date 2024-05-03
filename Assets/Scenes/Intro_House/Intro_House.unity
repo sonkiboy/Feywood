@@ -27204,6 +27204,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -303754501849678794, guid: d3f8fe17be0dec542bb3c33f01522675, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f29033f462abd0646a4a3cb4375edb5d, type: 2}
     - target: {fileID: 919132149155446097, guid: d3f8fe17be0dec542bb3c33f01522675, type: 3}
       propertyPath: m_Name
       value: SisterT-Pose
