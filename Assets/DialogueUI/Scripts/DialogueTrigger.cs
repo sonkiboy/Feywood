@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.InputSystem;
 
 namespace DialogueUI
@@ -34,6 +35,7 @@ namespace DialogueUI
         public bool isRespawnDialogue = false;
         public bool useDialogueEnd2 = false;
         public bool destroyOnFinish = false;
+        public bool addEvent = false;
         private InputAction interact;
         private bool withinInteractRange;
 
@@ -76,6 +78,10 @@ namespace DialogueUI
             interact = playerControls.Player.Interact;
             interact.Enable();
             interact.performed += Interact;
+            if(addEvent)
+            {
+
+            }
         }
 
         private void OnTriggerEnter(Collider collision)

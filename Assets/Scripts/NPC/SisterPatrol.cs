@@ -218,7 +218,11 @@ public class SisterPatrol : MonoBehaviour
     {
         Debug.Log("Sister caught Player!");
 
+        
         StopCoroutine(StartHunting());
+        Destroy(this.GetComponent<DialogueTrigger>());
+        destPoint = 3;
+        GotoNextPoint();
 
         transform.Find("SightBounds").GetComponent<DialogueTrigger>().TriggerDialogue();
 

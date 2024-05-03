@@ -35,7 +35,6 @@ public class SisterMovement : MonoBehaviour
         // between points (ie, the agent doesn't slow down as it
         // approaches a destination point).
         agent.autoBraking = false;
-          
     }
 
     //has agent go to next point in the array 

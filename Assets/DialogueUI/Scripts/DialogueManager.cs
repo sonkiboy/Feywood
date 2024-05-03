@@ -6,6 +6,7 @@ using TMPro;
 using System;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
+using Unity.Burst;
 
 
 namespace DialogueUI
@@ -29,6 +30,8 @@ namespace DialogueUI
 
         public bool dialogueEvent2 = false;
 
+        public bool dialogueDelegate = false;
+
         public float typingSpeed = 0.2f;
 
         private void Start()
@@ -39,7 +42,7 @@ namespace DialogueUI
             {
                 Instance = this;
             }
-            if(!isDialogueActive )
+            if (!isDialogueActive)
             {
                 GetComponent<CanvasGroup>().alpha = 0;
             }
@@ -58,7 +61,7 @@ namespace DialogueUI
 
         public void StartDialogue(Dialogue dialogue)
         {
-            isDialogueActive=true;
+            isDialogueActive = true;
 
             playerController.currentRestriction = PlayerController.MovementRestrictions.noMovement;
 
@@ -66,7 +69,7 @@ namespace DialogueUI
 
             lines.Clear();
 
-            foreach(DialogueLine dialogueLine in dialogue.dialogueLines)
+            foreach (DialogueLine dialogueLine in dialogue.dialogueLines)
             {
                 lines.Enqueue(dialogueLine);
             }
@@ -75,7 +78,7 @@ namespace DialogueUI
         }
         public void DisplayNextDialogueLine()
         {
-            if(lines.Count <= 0)
+            if (lines.Count <= 0)
             {
                 EndDialogue();
                 return;
@@ -110,7 +113,7 @@ namespace DialogueUI
             {
                 onRespawnDialogueEnd.Invoke();
             }
-            else if(dialogueEvent2)
+            else if (dialogueEvent2)
             {
                 onDialogueEnd2.Invoke();
             }
@@ -118,12 +121,12 @@ namespace DialogueUI
             {
                 onDialogueEnd.Invoke();
             }
-            
+
         }
 
         void Submit(InputAction.CallbackContext context)
         {
-            if(isDialogueActive)
+            if (isDialogueActive)
             {
                 Debug.Log("next line");
                 this.DisplayNextDialogueLine();

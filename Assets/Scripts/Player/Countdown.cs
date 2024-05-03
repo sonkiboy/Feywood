@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using DialogueUI;
 using Unity.VisualScripting;
+using UnityEditor.Events;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Countdown : MonoBehaviour
 {
@@ -35,6 +37,11 @@ public class Countdown : MonoBehaviour
                 
                 Sis.transform.GetChild(0).GetComponent<SisterMovement>().enabled = true;
                 sisClone=Instantiate(Sis, sisSpawn.transform.position, Quaternion.LookRotation(lookDir,lookDir2));
+                DialogueManager script = FindFirstObjectByType<DialogueManager>();
+                SisterMovement sisterMovement = sisClone.GetComponentInChildren<SisterMovement>();
+                script.onDialogueEnd2 = new UnityEvent();
+                UnityAction methodDelegate = System.Delegate.CreateDelegate(typeof(UnityAction), sisterMovement, "TalkedTo") as UnityAction;
+                UnityEventTools.AddPersistentListener(script.onDialogueEnd2, methodDelegate);
                 //enableThis = transform.Find("HideAndSeekPart3").gameObject;
                 Destroy(Sis);
                 transition.In(() =>
