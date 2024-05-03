@@ -18747,7 +18747,6 @@ Transform:
   - {fileID: 346643414}
   - {fileID: 482066206}
   - {fileID: 310654768}
-  - {fileID: 1843457507}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1353711205
@@ -61197,7 +61196,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1843457507}
+    m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d3f8fe17be0dec542bb3c33f01522675, type: 3}
       propertyPath: m_LocalPosition.x
@@ -61389,8 +61388,8 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
-  - {fileID: 2100000, guid: 8a4fff0242c09444c95bb01d61733d02, type: 2}
+  - {fileID: 2100000, guid: 3286866a4a122434a92fe8d716b837ba, type: 2}
+  - {fileID: 2100000, guid: 3286866a4a122434a92fe8d716b837ba, type: 2}
   - {fileID: 2100000, guid: f7b1094125eaa2d4da9f9b69f974cb85, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
@@ -69532,3 +69531,4 @@ SceneRoots:
   - {fileID: 482908295}
   - {fileID: 1826024867}
   - {fileID: 363912515}
+  - {fileID: 2003878085}
