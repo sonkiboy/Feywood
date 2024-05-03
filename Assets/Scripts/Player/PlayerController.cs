@@ -676,6 +676,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         // move the player to the new position
         transform.position = newPos;
 
+        yield return null;
         // make the player character look at the object
 
         model.transform.rotation = Quaternion.LookRotation(new Vector3(-restrictedDirection.x, 0, -restrictedDirection.y));
