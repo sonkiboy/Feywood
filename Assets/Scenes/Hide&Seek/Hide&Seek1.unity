@@ -21965,7 +21965,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cfaa536631c5cc4b868c47ea8020044, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TitleText: You Finished the Demo
+  TitleText: You Finished the Demo!
   HintText: Thanks for playing!
   GoToScene: 
   SpawnPointName: 
