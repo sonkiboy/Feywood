@@ -92,16 +92,16 @@ public class DadMovement : MonoBehaviour, IDataPersistance
         {
             if(destPoint == 0)
             {
-                Debug.Log("At Kitchen Table");
+                //Debug.Log("At Kitchen Table");
                 if (!isRotating)
                 {
-                    Debug.Log("Coroutine");
+                    //Debug.Log("Coroutine");
                     StartCoroutine(RotateNPC());
                 }
             }
             else
             {
-                Debug.Log("Stop Rotation");
+                //Debug.Log("Stop Rotation");
                 isRotating = false;
             }
             // if timer is less than the set wait time

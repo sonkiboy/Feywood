@@ -7,6 +7,10 @@ using UnityEngine.AI;
 
 public class SisterMovement : MonoBehaviour
 {
+    
+
+    public Rigidbody Rb;
+
     public Transform[] points;
     [SerializeField] bool setActiveOnAwake = false;
     private int destPoint = 0;
@@ -70,6 +74,8 @@ public class SisterMovement : MonoBehaviour
 
     void Update()
     {
+        
+
         // Choose the next destination point when the agent gets
         // close to the current one.
         if (talkedTo)
@@ -83,6 +89,8 @@ public class SisterMovement : MonoBehaviour
             this.GetComponent<BoxCollider>().enabled = true;
         }
     }
+
+    
 
 }
 
