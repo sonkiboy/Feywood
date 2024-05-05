@@ -679,7 +679,10 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         yield return null;
         // make the player character look at the object
 
-        model.transform.rotation = Quaternion.LookRotation(new Vector3(-restrictedDirection.x, 0, -restrictedDirection.y));
+        Vector3 lookDirection = -(this.transform.position - obj.transform.position).normalized;
+        lookDirection = new Vector3(lookDirection.x,this.transform.position.y, lookDirection.z);
+
+        model.transform.rotation = Quaternion.LookRotation(lookDirection,Vector3.up);
 
         // wait a frame
         yield return null;

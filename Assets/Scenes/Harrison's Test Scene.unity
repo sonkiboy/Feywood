@@ -1133,41 +1133,14 @@ GameObject:
   - component: {fileID: 502918660}
   - component: {fileID: 502918659}
   - component: {fileID: 502918658}
-  - component: {fileID: 502918657}
+  - component: {fileID: 502918662}
   m_Layer: 10
   m_Name: Cube Pickup
-  m_TagString: Pickup
+  m_TagString: PushPull
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!54 &502918657
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 502918656}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!65 &502918658
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1248,12 +1221,26 @@ Transform:
   m_GameObject: {fileID: 502918656}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.584, y: 0.71, z: -1.91}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 28.45, y: 1.33, z: -1.91}
+  m_LocalScale: {x: 2.05, y: 2.05, z: 2.05}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &502918662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 502918656}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c32a028086b1a8d4487c3ecca66693b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointOffset: 0.9
+  facePoints: []
 --- !u!1 &588148389
 GameObject:
   m_ObjectHideFlags: 0
@@ -1684,7 +1671,7 @@ Transform:
   m_GameObject: {fileID: 769930895}
   serializedVersion: 2
   m_LocalRotation: {x: 0.23274446, y: 0.00000079007214, z: 0.000009624463, w: 0.972538}
-  m_LocalPosition: {x: 24.86, y: 6.0940475, z: -6.991276}
+  m_LocalPosition: {x: 34.75, y: 6.0940475, z: -13.47}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
