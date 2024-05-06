@@ -530,33 +530,37 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     }
     void Jump(InputAction.CallbackContext context)
     {
-        if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jumping") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Falling"))
+        if (pushingObj == null)
         {
-            Debug.Log("Animating Jump");
 
 
-            animator.SetTrigger("Jump");
-        }
-        
-
-        if (currentRestriction == MovementRestrictions.None)
-        {
-            //playerState = PlayerStates.Jumping;
-            //Debug.Log("Jump hit");
-            if (currentRestriction == MovementRestrictions.Climbing)
+            if (!animator.GetCurrentAnimatorStateInfo(0).IsName("Jumping") && !animator.GetCurrentAnimatorStateInfo(0).IsName("Falling"))
             {
-                playerState = PlayerStates.Idle; //Replace this. Flawed logic
-                currentRestriction = MovementRestrictions.None;
-                isGrounded = false;
-                rb.AddForce(Vector3.up * JumpForce);
+                Debug.Log("Animating Jump");
+
+
+                animator.SetTrigger("Jump");
             }
-            else if (isGrounded)
+
+
+            if (currentRestriction == MovementRestrictions.None)
             {
-                isGrounded = false;
-                rb.AddForce(Vector3.up * JumpForce);
+                //playerState = PlayerStates.Jumping;
+                //Debug.Log("Jump hit");
+                if (currentRestriction == MovementRestrictions.Climbing)
+                {
+                    playerState = PlayerStates.Idle; //Replace this. Flawed logic
+                    currentRestriction = MovementRestrictions.None;
+                    isGrounded = false;
+                    rb.AddForce(Vector3.up * JumpForce);
+                }
+                else if (isGrounded)
+                {
+                    isGrounded = false;
+                    rb.AddForce(Vector3.up * JumpForce);
+                }
             }
         }
-        
 
     }
 
