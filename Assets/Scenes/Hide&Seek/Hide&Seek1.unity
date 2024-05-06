@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.29532093, g: 0.012511161, b: 0.24491511, a: 1}
+  m_IndirectSpecularColor: {r: 0.2926493, g: 0.012405061, b: 0.2424346, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -14345,27 +14345,27 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1348586112745741102, guid: c3932a929b5ba2241962f04a2fec6186, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.60224
+      value: 0.7725535
       objectReference: {fileID: 0}
     - target: {fileID: 1348586112745741102, guid: c3932a929b5ba2241962f04a2fec6186, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.60224
+      value: 0.7725535
       objectReference: {fileID: 0}
     - target: {fileID: 1348586112745741102, guid: c3932a929b5ba2241962f04a2fec6186, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.60224
+      value: 0.7725535
       objectReference: {fileID: 0}
     - target: {fileID: 1348586112745741102, guid: c3932a929b5ba2241962f04a2fec6186, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -163.86334
+      value: -163.66
       objectReference: {fileID: 0}
     - target: {fileID: 1348586112745741102, guid: c3932a929b5ba2241962f04a2fec6186, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.823372
+      value: -4.8496
       objectReference: {fileID: 0}
     - target: {fileID: 1348586112745741102, guid: c3932a929b5ba2241962f04a2fec6186, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 27.950089
+      value: 27.756
       objectReference: {fileID: 0}
     - target: {fileID: 1348586112745741102, guid: c3932a929b5ba2241962f04a2fec6186, type: 3}
       propertyPath: m_LocalRotation.w
@@ -21088,7 +21088,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1348586112745741102, guid: c3932a929b5ba2241962f04a2fec6186, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 29.050087
+      value: 30.39
       objectReference: {fileID: 0}
     - target: {fileID: 1348586112745741102, guid: c3932a929b5ba2241962f04a2fec6186, type: 3}
       propertyPath: m_LocalRotation.w
@@ -22479,7 +22479,7 @@ MonoBehaviour:
     - character:
         name: Sister
         icon: {fileID: 0}
-      line: Ok! 1 more round. Come on this way.
+      line: Ok! 1 more round. Come on, this way.
   talkable: 1
   isRespawnDialogue: 0
   useDialogueEnd2: 0

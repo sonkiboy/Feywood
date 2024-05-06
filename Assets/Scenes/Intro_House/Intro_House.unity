@@ -8406,7 +8406,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4321026226760780, guid: 7e9db585073230b438ac03f1ddea8b07, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.145
+      value: 4.02
       objectReference: {fileID: 0}
     - target: {fileID: 4321026226760780, guid: 7e9db585073230b438ac03f1ddea8b07, type: 3}
       propertyPath: m_LocalPosition.z
@@ -16050,7 +16050,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e186eabed7e01d4f883ef8fde8607f6, type: 3}
       propertyPath: m_LocalScale.y
-      value: 48.239212
+      value: 65.00562
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e186eabed7e01d4f883ef8fde8607f6, type: 3}
       propertyPath: m_LocalScale.z
@@ -16062,7 +16062,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e186eabed7e01d4f883ef8fde8607f6, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.52
+      value: 1.91
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 9e186eabed7e01d4f883ef8fde8607f6, type: 3}
       propertyPath: m_LocalPosition.z
@@ -19094,7 +19094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2748040355479645032, guid: aaea4f4bdb1fcce478ff2a13af904c2b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.4464526
+      value: 4.39
       objectReference: {fileID: 0}
     - target: {fileID: 2748040355479645032, guid: aaea4f4bdb1fcce478ff2a13af904c2b, type: 3}
       propertyPath: m_LocalPosition.z
@@ -27134,7 +27134,7 @@ Transform:
   m_GameObject: {fileID: 1276710761}
   serializedVersion: 2
   m_LocalRotation: {x: 0.6211477, y: 0, z: 0, w: 0.78369355}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: -0.197, z: 0.046}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -30647,7 +30647,7 @@ MonoBehaviour:
     - character:
         name: Sister
         icon: {fileID: 0}
-      line: Hey your finally awake!
+      line: Hey you're finally awake!
     - character:
         name: Sister
         icon: {fileID: 0}
@@ -37462,7 +37462,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4029276965778842, guid: eded3844e29c2ec40bc278e2cbd31279, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.0788012
+      value: 3.46
       objectReference: {fileID: 0}
     - target: {fileID: 4029276965778842, guid: eded3844e29c2ec40bc278e2cbd31279, type: 3}
       propertyPath: m_LocalPosition.z
@@ -37498,7 +37498,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 65224149489693858, guid: eded3844e29c2ec40bc278e2cbd31279, type: 3}
       propertyPath: m_Size.y
-      value: 0.5057636
+      value: 0.4974723
       objectReference: {fileID: 0}
     - target: {fileID: 65224149489693858, guid: eded3844e29c2ec40bc278e2cbd31279, type: 3}
       propertyPath: m_Size.z
@@ -37510,7 +37510,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 65224149489693858, guid: eded3844e29c2ec40bc278e2cbd31279, type: 3}
       propertyPath: m_Center.y
-      value: -0.23788172
+      value: -0.43928647
       objectReference: {fileID: 0}
     - target: {fileID: 65224149489693858, guid: eded3844e29c2ec40bc278e2cbd31279, type: 3}
       propertyPath: m_Center.z

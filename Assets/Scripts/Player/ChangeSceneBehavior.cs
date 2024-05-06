@@ -10,6 +10,7 @@ public class ChangeSceneBehavior : MonoBehaviour
     [SerializeField] string SpawnPointName;
 
     public ScreenTransition TransitionComponent = null;
+    
 
     // Start is called before the first frame update
     void Start()
@@ -44,8 +45,8 @@ public class ChangeSceneBehavior : MonoBehaviour
     }
 
     void TransitionScene(PlayerController controller) {
-
-        
+        //disables player movement script, testing for now 
+       // GameObject.Find("Player").GetComponent<PlayerController>().enabled = false;
 
         DataManager.instance.Data.CurrentScene = GoToScene;
 
@@ -68,7 +69,7 @@ public class ChangeSceneBehavior : MonoBehaviour
         }
 
         DataManager.instance.SaveGame();
-
+       
         // load the scene
         SceneManager.LoadScene(GoToScene);
 
