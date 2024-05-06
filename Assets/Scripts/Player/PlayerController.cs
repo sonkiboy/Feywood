@@ -564,65 +564,69 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     {
         //Debug.Log("Interact hit");
 
-        // if there is an object being held, drop it
-        if(heldObject != null)
+
+        if (currentRestriction != MovementRestrictions.noMovement)
         {
-            Debug.Log($"Dropping {heldObject.name}");
-
-            playerState = PlayerStates.Idle;
-
-            heldObject = null;
-            
-           
-        }
-        else if (pushingObj != null)
-        {
-            isGrounded = true;
-
-            playerState = PlayerStates.Idle;
-
-            pushingObj.transform.parent = null;
-
-            pushingObj = null;
-
-            currentRestriction = MovementRestrictions.None;
-
-        }
-        
-        else if(currentRestriction == MovementRestrictions.Climbing)
-        {
-            playerState = PlayerStates.Idle;
-
-            currentRestriction = MovementRestrictions.None;
-        }
-
-
-        // if there is no current object being held and no object being pushed, check if there is an object in the item hitbox
-        else
-        {
-            if (itemHitbox.TargetObjects.Count != 0)
+            // if there is an object being held, drop it
+            if (heldObject != null)
             {
-                // save the instance of the target object for easy use
-                GameObject targetObj = itemHitbox.TargetObjects[0];
+                Debug.Log($"Dropping {heldObject.name}");
 
-                // if the target object is a Pickup, then set that to the heldObject
-                if (targetObj.tag == "Pickup")
-                {
-                    playerState = PlayerStates.Holding;
-                    heldObject = itemHitbox.TargetObjects[0];
-                }
+                playerState = PlayerStates.Idle;
 
-                else if (targetObj.tag == "PushPull" && isGrounded)
-                {
-                    playerState = PlayerStates.Pushing;
-                    StartCoroutine(PushPull(targetObj));
-                }
+                heldObject = null;
 
-                else if(targetObj.tag == "Climbable")
+
+            }
+            else if (pushingObj != null)
+            {
+                isGrounded = true;
+
+                playerState = PlayerStates.Idle;
+
+                pushingObj.transform.parent = null;
+
+                pushingObj = null;
+
+                currentRestriction = MovementRestrictions.None;
+
+            }
+
+            else if (currentRestriction == MovementRestrictions.Climbing)
+            {
+                playerState = PlayerStates.Idle;
+
+                currentRestriction = MovementRestrictions.None;
+            }
+
+
+            // if there is no current object being held and no object being pushed, check if there is an object in the item hitbox
+            else
+            {
+                if (itemHitbox.TargetObjects.Count != 0)
                 {
-                    playerState = PlayerStates.Climbing;
-                    currentRestriction = MovementRestrictions.Climbing;
-                    StartCoroutine(Climbing(targetObj));
+                    // save the instance of the target object for easy use
+                    GameObject targetObj = itemHitbox.TargetObjects[0];
+
+                    // if the target object is a Pickup, then set that to the heldObject
+                    if (targetObj.tag == "Pickup")
+                    {
+                        playerState = PlayerStates.Holding;
+                        heldObject = itemHitbox.TargetObjects[0];
+                    }
+
+                    else if (targetObj.tag == "PushPull" && isGrounded)
+                    {
+                        playerState = PlayerStates.Pushing;
+                        StartCoroutine(PushPull(targetObj));
+                    }
+
+                    else if (targetObj.tag == "Climbable")
+                    {
+                        playerState = PlayerStates.Climbing;
+                        currentRestriction = MovementRestrictions.Climbing;
+                        StartCoroutine(Climbing(targetObj));
+                    }
                 }
             }
         }
