@@ -76,7 +76,6 @@ public class SisterMovement : MonoBehaviour
 
     void Update()
     {
-        
         // Choose the next destination point when the agent gets
         // close to the current one.
         if (talkedTo)
@@ -85,10 +84,16 @@ public class SisterMovement : MonoBehaviour
             talkedTo = false;
         }
         //Check if the agent is near the desitination and re enables the collider
-        if((points[destPoint-1].position - agent.transform.position).magnitude < 5f && destPoint-1 <= 0)
+        Debug.Log(destPoint - 1);
+        if ((destPoint - 1 )<= 0)
         {
-            this.GetComponent<BoxCollider>().enabled = true;
+            Debug.Log(destPoint - 1);
+            if ((points[destPoint - 1].position - agent.transform.position).magnitude < 5f)
+            {
+                this.GetComponent<BoxCollider>().enabled = true;
+            }
         }
+        
     }
 }
 

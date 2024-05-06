@@ -33,6 +33,7 @@ public class SisterPatrol : MonoBehaviour
 
     public GameObject moveGO;
     bool isRotating = false;
+    bool caught = false;
     float lerpDuration = 1f;
     float timer = 0;
     float waitTime = 5f;
@@ -102,7 +103,10 @@ public class SisterPatrol : MonoBehaviour
             StopAllCoroutines();
             this.enabled = false;
             moveGO.SetActive(true);
-            this.GetComponent<DialogueTrigger>().TriggerDialogue();
+            if (!caught)
+            {
+                this.GetComponent<DialogueTrigger>().TriggerDialogue();
+            }
         }
         if (!agent.pathPending && agent.remainingDistance < 0.005f)
         {
@@ -218,7 +222,7 @@ public class SisterPatrol : MonoBehaviour
     {
         Debug.Log("Sister caught Player!");
 
-        
+        caught = true;
         StopCoroutine(StartHunting());
         Destroy(this.GetComponent<DialogueTrigger>());
         destPoint = 3;
