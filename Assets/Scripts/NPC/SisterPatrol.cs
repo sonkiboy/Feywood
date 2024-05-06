@@ -64,7 +64,7 @@ public class SisterPatrol : MonoBehaviour
     void Start()
     {
         agent = transform.parent.GetComponent<NavMeshAgent>();
-
+        player = GameObject.FindWithTag("Player");
 
         // Disabling auto-braking allows for continuous movement
         // between points (ie, the agent doesn't slow down as it

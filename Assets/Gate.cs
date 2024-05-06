@@ -18,6 +18,12 @@ public class Gate : MonoBehaviour
             if(player.GetComponentInChildren<GateKeyBehavior>() != null)
             {
                 Debug.Log("Gate Opened!");
+                PlayerController controller = player.GetComponent<PlayerController>();
+                Destroy(controller.heldObject);
+                controller.heldObject = null;
+
+                Destroy(this.gameObject);
+
                 //this.GetComponentInChildren<GameOverScreen>().PlayHint();
 
                 DataManager.instance.HintLoad(3, this.GetComponentInChildren<GameOverScreen>());
