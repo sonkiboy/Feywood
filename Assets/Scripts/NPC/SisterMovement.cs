@@ -41,15 +41,18 @@ public class SisterMovement : MonoBehaviour
     void GotoNextPoint()
     {
         Debug.Log("Moving to Next Point");
-        this.GetComponent<BoxCollider>().enabled = false;
+        GetComponent<BoxCollider>().enabled = false;
         // Returns if no points have been set upw
         if (points.Length == 0)
             return;
         if (destPoint < points.Length)
+        {
             agent.destination = points[destPoint].position;
+            destPoint++;
+        }
         else
             return;
-        destPoint++;
+        
     }
 
     void OnTriggerEnter(Collider agentcollider)
@@ -74,7 +77,6 @@ public class SisterMovement : MonoBehaviour
     void Update()
     {
         
-
         // Choose the next destination point when the agent gets
         // close to the current one.
         if (talkedTo)
@@ -83,14 +85,11 @@ public class SisterMovement : MonoBehaviour
             talkedTo = false;
         }
         //Check if the agent is near the desitination and re enables the collider
-        if((points[destPoint].position - this.transform.position).magnitude < 50f)
+        if((points[destPoint-1].position - agent.transform.position).magnitude < 5f && destPoint-1 <= 0)
         {
             this.GetComponent<BoxCollider>().enabled = true;
         }
     }
-
-    
-
 }
 
 
