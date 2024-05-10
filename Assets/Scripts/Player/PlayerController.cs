@@ -46,6 +46,8 @@ public class PlayerController : MonoBehaviour, IDataPersistance
     public LayerMask GroundMask;
     [SerializeField] Vector3 groundCheckDimentions = new Vector3(.2f, .5f, .2f);
 
+    GameObject interactText;
+
     public enum PlayerStates
     {
         Idle,
@@ -253,6 +255,7 @@ public class PlayerController : MonoBehaviour, IDataPersistance
         rb = GetComponent<Rigidbody>();
 
         //Disable UI
+        interactText = GameObject.Find("UIContext");
         GetComponentInChildren<CanvasGroup>().alpha = 0;
     }
     private void OnEnable()
@@ -437,21 +440,21 @@ public class PlayerController : MonoBehaviour, IDataPersistance
             GetComponentInChildren<CanvasGroup>().alpha = 1;
             // save the instance of the target object for easy use
             GameObject targetObj = itemHitbox.TargetObjects[0];
-
+            Debug.Log("UI Check");
             // if the target object is a Pickup, then change text to appropiate context
             if (targetObj.tag == "Pickup")
             {
-                GetComponentInChildren<TextMeshProUGUI>().text = "Pickup";
+                interactText.GetComponent<TextMeshProUGUI>().text = "Pickup";
             }
 
             else if (targetObj.tag == "PushPull")
             {
-                GetComponentInChildren<TextMeshProUGUI>().text = "Push/Pull";
+                interactText.GetComponent<TextMeshProUGUI>().text = "Push/Pull";
             }
 
             else if (targetObj.tag == "Climbable")
             {
-                GetComponentInChildren<TextMeshProUGUI>().text = "Climb";
+                interactText.GetComponent<TextMeshProUGUI>().text = "Climb";
             }
         }
         else
