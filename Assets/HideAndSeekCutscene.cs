@@ -9,11 +9,11 @@ public class HideAndSeekCutscene : MonoBehaviour
 {
     CinemachineVirtualCamera cutsceneCamera;
     public Transform grabPosition;
+    public GameObject sister;
     private Transform startPosition;
 
     bool startSequence = false;
     bool endSequence = false;
-    GameObject sister;
     GameObject hand;
     PlayerController controller;
 
@@ -55,7 +55,6 @@ public class HideAndSeekCutscene : MonoBehaviour
     private void startCutscene()
     {
         controller.currentRestriction = PlayerController.MovementRestrictions.noMovement;
-        sister = GameObject.Find("Sister(Clone)");
         cutsceneCamera.Follow = sister.transform;
         cutsceneCamera.LookAt = sister.transform;
         startSequence = true;

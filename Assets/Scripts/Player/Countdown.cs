@@ -1,10 +1,10 @@
-#if UNITY_EDITOR
 using System.Collections;
 using System.Collections.Generic;
 using DialogueUI;
 using Unity.VisualScripting;
-using UnityEditor.Events;
+
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.Events;
 
 public class Countdown : MonoBehaviour
@@ -25,7 +25,7 @@ public class Countdown : MonoBehaviour
 
     private void OnTriggerEnter(Collider Counting)
     {
-        
+        GameObject hideAndSeek = GameObject.Find("HideAndSeekPart3");
         if (Counting.gameObject.tag == "Player")
         {
             controller.currentRestriction = PlayerController.MovementRestrictions.noMovement;
@@ -33,28 +33,32 @@ public class Countdown : MonoBehaviour
             transition.Out(
             () =>
             {
+                //Sis.GetComponent<NavMeshAgent>().enabled = false;
+                //Sis.GetComponent<DialogueTrigger>().enabled = true;
+                //Sis.transform.position = sisSpawn.position;
+                //Debug.Log(Sis.transform.position);
+                //Debug.Log(sisSpawn.position);
                 
-                Sis.GetComponent<DialogueTrigger>().enabled = true;
-                
-                Sis.transform.GetChild(0).GetComponent<SisterMovement>().enabled = true;
-                sisClone=Instantiate(Sis, sisSpawn.transform.position, Quaternion.LookRotation(lookDir,lookDir2));
-                DialogueManager script = FindFirstObjectByType<DialogueManager>();
-                SisterMovement sisterMovement = sisClone.GetComponentInChildren<SisterMovement>();
-                script.onDialogueEnd2 = new UnityEvent();
-                UnityAction methodDelegate = System.Delegate.CreateDelegate(typeof(UnityAction), sisterMovement, "TalkedTo") as UnityAction;
-                UnityEventTools.AddPersistentListener(script.onDialogueEnd2, methodDelegate);
+                //sisClone=Instantiate(Sis, sisSpawn.transform.position, Quaternion.LookRotation(lookDir,lookDir2));
+                //DialogueManager script = FindFirstObjectByType<DialogueManager>();
+                //SisterMovement sisterMovement = sisClone.GetComponentInChildren<SisterMovement>();
+                //script.onDialogueEnd2 = new UnityEvent();
+                //UnityAction methodDelegate = System.Delegate.CreateDelegate(typeof(UnityAction), sisterMovement, "TalkedTo") as UnityAction;
+                //UnityEventTools.AddPersistentListener(script.onDialogueEnd2, methodDelegate);
                 //enableThis = transform.Find("HideAndSeekPart3").gameObject;
                 Destroy(Sis);
                 transition.In(() =>
                 {
                     controller.currentRestriction = PlayerController.MovementRestrictions.None;
                 });
+                
             }
             );
-
             Debug.Log("fade");
         }
         Debug.Log("collided");
+        //hideAndSeek.GetComponent<SisterMovement>().enabled = true;
+        //Sis.GetComponent<NavMeshAgent>().enabled = true;
     }
 
     IEnumerator timeElapse()
@@ -64,4 +68,3 @@ public class Countdown : MonoBehaviour
         yield return null;
     }
 }
-#endif
